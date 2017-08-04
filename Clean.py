@@ -5,7 +5,6 @@ __author__ = "Remigius Kalimba"
 from os import path, mkdir, listdir, rename
 from getpass import getuser
 import time
-from time import sleep
 
 class Project21():
     def __init__(self):
