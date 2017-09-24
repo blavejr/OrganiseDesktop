@@ -66,6 +66,7 @@ class Project21():
         
         executable_extentions = [".exe", ".msi", ".action", ".apk", ".app", ".bin", ".osx", ".out", ".prg", ".run", ".scr", ".eham", ".ham", ".pex", ".plx", ".upx"]
        
+
         #zip extensions source: http://bit.ly/2fnWz4D
         zip_extentions = [".cdz", ".zip", ".pup", ".pkg", ".rar", ".deb", ".sit", ".a02", ".c01", ".cbt", ".cbz", ".comppkg.hauptwerk.rar", 
                           ".dar", ".ecs", ".gca", ".gzip", ".hbc", ".lemon", ".lqr", ".lzm", ".lzo", ".mint", ".mpkg", ".pf", ".qda", ".r00",
@@ -93,7 +94,7 @@ class Project21():
                              ".j2c", ".fpx", ".pcd", ".webp", ".svg", ".ai", ".eps" ]
         
         #common music extensions
-        music_extentions = [".mp3", ".wav", ".aiff", ".aac", ".ogg", ".wma", .flac", ".alac"]
+        music_extentions = [".mp3", ".wav", ".aiff", ".aac", ".ogg", ".wma", ".flac", ".alac"]
         
         #movie extensions source: http://bit.ly/2wvYjyr
         movie_extensions = [".cdz", ".264", ".3g2", ".3gp", ".3gp2", ".3gpp", ".3gpp2", ".3mm", ".3p2", ".60d", ".787", ".890", ".aaf", ".aec", 
@@ -155,7 +156,8 @@ class Project21():
                            ".wps", ".wps", ".wpt", ".wpt", ".wpw", ".wri", ".wsd", ".wtt", ".wtx", ".xbdoc", ".xbplate", ".xdl", ".xdl", ".xwp", ".xwp", ".xwp", ".xy", ".xy3", 
                            ".xyp", ".xyw", ".zabw", ".zrtf", ".zw" ]
         
-        D3_work = [".ma", ".fbx", ".mb"]
+        D3_work = [".ma", ".fbx", ".mb", ".apj", ".aws", ".blk", ".dbt", ".dwg", ".dwk", ".dw2l", ".dws", ".dwt", ".dwz", ".dxe", ".dxf", ".dxx", ".gpw", ".hdi", ".lli",
+                   ".mnx", ".mvi", ".pwt", ".shp", ".shx", ".slb", ".sld"]
 
         try:
 
