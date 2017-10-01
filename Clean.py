@@ -88,7 +88,7 @@ class Project21():
                           ".zsplit", ".egg", ".ha", ".kz", ".dist", ".paq6", ".snappy", ".y", ".mou", ".tar.gz2", ".tar.z", ".bza", ".ish", ".paq8f",
                           ".paq8p", ".pim", ".shk", ".spt", ".wot"]
 
-        #common image extensions
+        #image extensions source: https://fileinfo.com/filetypes/raster_image, https://fileinfo.com/filetypes/vector_image, and https://fileinfo.com/filetypes/camera_raw
         images_extentions = [".jpg-large", ".ico", ".jif", ".jfif", ".jp2", ".jpx", ".j2k", ".j2c", ".fpx", ".pcd", ".eps", ".psd", ".jpg",
                              ".png", ".gif", ".jpeg", ".tga", ".webp", ".xcf", ".awd", ".ct", ".exr", ".i3d", ".iwi", ".jbig2", ".lip", ".pcx",
                              ".picnc", ".pspbrush", ".tbn", ".dds", ".hdr", ".piskel", ".pic", ".sprite2", ".ppf", ".spr", ".tn3", ".arr", ".pxd",
