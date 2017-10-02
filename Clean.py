@@ -106,7 +106,7 @@ class Project21():
                             ".mui", ".abm", ".pla", ".vag", ".act", ".wav", ".bun", ".gsm", ".midi", ".m3u", ".mmm", ".pkf", ".sng", ".m4r", ".mpga",
                             ".omf", ".rx2", ".flm", ".gp5", ".sdt", ".ac3", ".mid", ".xspf", ".nkm", ".nsa", ".ply", ".sbg", ".sdat", ".toc", ".tg",
                             ".ogg", ".wma", ".amr", ".m3u8", ".5xe", ".aif", ".frg", ".minigsf", ".pcast", ".vyf"]
-
+        
         #movie extensions source: http://bit.ly/2wvYjyr
         movie_extensions = [".cdz", ".264", ".3g2", ".3gp", ".3gp2", ".3gpp", ".3gpp2", ".3mm", ".3p2", ".60d", ".787", ".890", ".aaf", ".aec",
                             ".aecap", ".aegraphic", ".aep", ".aepx", ".aet", ".aetx", ".ajp", ".ale", ".am", ".amc", ".amv", ".amx", ".anim",
@@ -166,9 +166,10 @@ class Project21():
                            ".utf8", ".utxt", ".vct", ".vnt", ".vw", ".webdoc", ".wn", ".wp", ".wp4", ".wp5", ".wp6", ".wp7", ".wpa", ".wpd", ".wpl",
                            ".wps", ".wpt", ".wpw", ".wri", ".wsd", ".wtt", ".wtx", ".xbdoc", ".xbplate", ".xdl", ".xwp", ".xy", ".xy3",
                            ".xyp", ".xyw", ".zabw", ".zrtf", ".zw" ]
-
-        D3_work = [".ma", ".fbx", ".mb"]
-
+        
+        D3_work = [".ma", ".fbx", ".mb", ".apj", ".aws", ".blk", ".dbt", ".dwg", ".dwk", ".dw2l", ".dws", ".dwt", ".dwz", ".dxe", ".dxf", ".dxx", ".gpw", ".hdi", ".lli",
+                   ".mnx", ".mvi", ".pwt", ".shp", ".shx", ".slb", ".sld"]
+        
         try:
 
             '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
