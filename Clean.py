@@ -21,7 +21,7 @@ class Project21():
         self.Alldesktopdir = 'C:\\Users\\Public\\Desktop'
 
         '''list of folders to be created'''
-        self.folder_names = ["Folders", "Shortcuts", "Zips", "Executables", "Pictures", "Music", "Movies", "Docs"]
+        self.folder_names = ["Folders", "Shortcuts", "Zips", "Executables", "Pictures", "Music", "Movies", "Docs", "Code"]
         self.special_folders = []
 
     def makdir(self):
@@ -135,7 +135,7 @@ class Project21():
         
                             #text extensions source: http://bit.ly/2wwcfZs
         text_extensions = [ ".pdf", ".xlsx",".log" ".pub", ".pptx", ".ptt", ".accdb", ".jnt", ".csv", ".css",
-                           ".html", ".arff", ".wbk", ".pub", ".c", ".cpp", ".ini", ".cdz", ".1st", ".abw", ".act", ".adoc", ".aim", ".ans", ".apkg", 
+                           ".html", ".arff", ".wbk", ".pub", ".ini", ".cdz", ".1st", ".abw", ".act", ".adoc", ".aim", ".ans", ".apkg", 
                            ".apt", ".asc", ".asc", ".ascii", ".ase", ".aty", ".awp", ".awt", ".aww", ".bad", ".bbs", ".bdp", ".bdr", ".bean", ".bib", ".bib", 
                            ".bibtex", ".bml", ".bna", ".boc", ".brx", ".btd", ".bzabw", ".calca", ".charset", ".chart", ".chord", ".cnm", ".cod", ".crwl", ".cws",
                            ".cyi", ".dca", ".dfti", ".dgs", ".diz", ".dne", ".doc", ".doc", ".docm", ".docx", ".docxml", ".docz", ".dox", ".dropbox", ".dsc", ".dvi",
@@ -158,6 +158,57 @@ class Project21():
         
         D3_work = [".ma", ".fbx", ".mb", ".apj", ".aws", ".blk", ".dbt", ".dwg", ".dwk", ".dw2l", ".dws", ".dwt", ".dwz", ".dxe", ".dxf", ".dxx", ".gpw", ".hdi", ".lli",
                    ".mnx", ".mvi", ".pwt", ".shp", ".shx", ".slb", ".sld"]
+
+        programming_languages_extensions = [".4db", ".4th", ".a", ".a2w", ".abc", ".acd", ".addin", ".ads", ".agi", ".aia", ".aidl", ".alb", 
+                 ".am4", ".am5", ".am6", ".am7", ".ane", ".ap_", ".apa", ".appx", ".appxupload", ".aps", ".arsc", ".artproj", 
+                 ".as", ".as2proj", ".as3proj", ".asc", ".asi", ".asm", ".asm", ".asvf", ".au3", ".autoplay", ".awk", 
+                 ".b", ".bas", ".bb", ".bbc", ".bbproject", ".bbprojectd", ".bcp", ".bdsproj", ".bet", ".bluej", ".bpg", ".bpl",
+                 ".brx", ".bs2", ".bsc",
+                 ".c", ".c", ".caf", ".caproj", ".capx", ".cbl", ".cbp", ".cc", ".ccgame", ".ccn", ".ccp", ".ccs", ".cd", ".cdf",
+                 ".cfc", ".class", ".clips", ".cls", ".clw", ".cob", ".cod", ".config", ".cp", ".cp", ".cpp", ".cs", ".csi", ".csi",
+                 ".csn", ".csp", ".csproj", ".csx", ".ctl", ".ctp", ".ctxt", ".cu", ".cvsrc", ".cxp", ".cxx", 
+                 ".d", ".dba", ".dba", ".dbml", ".dbo", ".dbpro", ".dbproj", ".dcp", ".dcproj", ".dcu", ".dcuil", ".dec", ".def",
+                 ".deviceids", ".dex", ".df1", ".dfm", ".dgml", ".dgsl", ".diff", ".dm1", ".dmd", ".dob", ".dox", ".dpk", ".dpkw",
+                 ".dpl", ".dpr", ".dproj", ".dsgm", ".dsp", ".dtd",
+                 ".edml", ".edmx", ".ent", ".entitlements", ".eql", ".erb", ".erl", ".ex", ".exp", ".exw",
+                 ".f", ".f90", ".fbp", ".fbz7", ".fgl", ".fla", ".for", ".forth", ".fpm", ".framework", ".frx", ".fs", ".fsi", 
+                 ".fsproj", ".fsproj", ".fsscript", ".fsx", ".ftl", ".ftn", ".fxc", ".fxcproj", ".fxl", ".fxml", ".fxpl", 
+                 ".gameproj", ".gch", ".ged", ".gem", ".gemspec", ".gfar", ".gitattributes", ".gitignore", ".gld", 
+                 ".gm6", ".gm81", ".gmd", ".gmk", ".gmo", ".gmx", ".gorm", ".greenfoot", ".groovy", ".groupproj", ".gs", ".gs3", ".gszip", 
+                 ".h", ".hal", ".haml", ".has", ".hbs", ".hh", ".hpf", ".hpp", ".hs", ".hxx", 
+                 ".i", ".iconset", ".idb", ".idl", ".idt", ".ilk", ".iml", ".inc", ".inl", ".ino", ".ipch", ".ipr",
+                 ".ipr", ".ise", ".ism", ".ist", ".iwb", ".iws", 
+                 ".java", ".jcp", ".jic", ".jpr", ".jpx", ".jsfl", ".jspf",
+                 ".kdevelop", ".kdevprj", ".kpl",
+                 ".l", ".lbi", ".lbs", ".lds", ".lgo", ".lhs", ".licenses", ".licx", ".lisp", ".lit", ".livecode", 
+                 ".lnt", ".lproj", ".lsproj", ".ltb", ".lua", ".luc", ".lucidsnippet", ".lxsproj",
+                 ".m", ".m", ".m4", ".magik", ".mak", ".markdown", ".mcp", ".md", ".mdzip", ".mer", ".mf", ".mfa", ".mk", 
+                 ".ml", ".mm", ".mo", ".mod", ".mom", ".mpr", ".mrt", ".msha", ".mshc", ".mshi", ".msl", ".msp", ".mss", ".mv", 
+                 ".mxml", ".myapp",
+                 ".nbc", ".ncb", ".ned", ".nfm", ".nib", ".nk", ".nls", ".nqc", ".nsh", ".nsi", ".nupkg", ".nuspec", ".nvv",
+                 ".nw", ".nxc",
+                 ".o", ".oca", ".octest", ".ocx", ".odl", ".omo", ".owl",
+                 ".p", ".p3d", ".pas", ".pas", ".patch", ".pb", ".pbg", ".pbj", ".pbk", ".pbxbtree", ".pbxproj",
+                 ".pbxuser", ".pch", ".pcp", ".pde", ".pdm", ".ph", ".pika", ".pjx", ".pkgdef", ".pkgundef", ".pl", 
+                 ".pl", ".pl1", ".playground", ".plc", ".ple", ".pli", ".pm", ".po", ".pod", ".pot", ".ppc", ".prg", ".prg",
+                 ".pri", ".pri", ".pro", ".proto", ".psc", ".psm1", ".ptl", ".pwn", ".pxd", ".py", ".pyd", ".pyw", ".pyx", 
+                 ".qpr", ".r", ".r", ".r", ".rav", ".rb", ".rbc", ".rbp", ".rbw", ".rc", ".rc2", ".rdlc", ".refresh",
+                 ".res", ".res", ".resjson", ".resources", ".resw", ".resx", ".rexx", ".rise", ".rkt", ".rnc", ".rodl", ".rpy", 
+                 ".rsrc", ".rss", ".rul", 
+                 ".s", ".s19", ".sas", ".sb", ".sb2", ".sbproj", ".sc", ".scc", ".scriptsuite", ".scriptterminology", 
+                 ".sdef", ".sh", ".sln", ".slogo", ".sltng", ".sma", ".smali", ".snippet", ".so", ".spec", ".sqlproj", 
+                 ".src", ".src", ".ss", ".ssc", ".ssi", ".storyboard", ".sud", ".suo", ".sup", ".svn", ".swc", ".swd",
+                 ".swift", ".sym",
+                 ".t", ".targets", ".tcl", ".tds", ".testrunconfig", ".testsettings", ".textfactory", ".tk", ".tld",
+                 ".tlh", ".tli", ".tmlanguage", ".tmproj", ".tns", ".tpu", ".trx", ".tt", ".tu", ".tur", ".twig",
+                 ".ui", ".uml", ".v", ".v", ".v11", ".v12", ".vb", ".vbg", ".vbp", ".vbproj", ".vbx", ".vbz", ".vc", ".vcp",
+                 ".vcproj", ".vcxproj", ".vdm", ".vdp", ".vdproj", ".vgc", ".vhd", ".vm", ".vsmacros", ".vsmdi", ".vsmproj", ".vsp",
+                 ".vsps", ".vspscc", ".vspx", ".vssscc", ".vsz", ".vtm", ".vtml", ".vtv",
+                 ".w", ".w32", ".wdgt", ".wdgtproj", ".wdl", ".wdp", ".wdw", ".wiq", ".wixlib", ".wixmsp", ".wixmst", ".wixobj", 
+                 ".wixout", ".wixpdb", ".wixproj", ".workspace", ".wpw", ".wsc", ".wsp", ".wxi", ".wxl", ".wxs",
+                 ".xaml", ".xamlx", ".xap", ".xcappdata", ".xcarchive", ".xcconfig", ".xcdatamodeld", ".xcodeproj", 
+                 ".xcsnapshots", ".xcworkspace", ".xib", ".xojo_binary_project", ".xojo_menu", ".xojo_project", ".xojo_xml_project",
+                 ".xoml", ".xpp", ".xq", ".xql", ".xqm", ".xquery", ".xsd", ".xt", ".y", ".yaml", ".yml", ".ymp", ".ypr"]
 
         try:
 
@@ -194,6 +245,10 @@ class Project21():
                 for b in text_extensions:
                     if str(map[a].lower()).endswith(b):
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[7]+"\\"+map[a])
+
+                for b in programming_languages_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
 
                 '''This weird part looks for the ".", if its not there this must be a folder'''
                 if "." not in str(map[a]) and map[a] not in self.folder_names:
