@@ -1,0 +1,9 @@
+sc = True
+exes = True
+img = True
+zips = True
+audio = True
+mov = True
+txt = True
+programming = True
+cad = True
