@@ -39,7 +39,7 @@ class Project21():
         '''
         try:
             '''For all the folders in the folder_name list, if that folder is not(False) on the main_desktop
-               than create that folder.
+               then create that folder.
             '''
             for nam in range(0, len(self.folder_names)):
                 if path.isdir(self.desktopdir+'\\'+self.folder_names[nam]) == False:
@@ -165,7 +165,7 @@ class Project21():
 
         programming_languages_extensions = [".4db",".4th",".a",".a2w",".abc",".acd",".addin",".ads",".agi",".aia",".aidl",".alb",".am4",".am5",".am6",".am7",".ane",".ap_",
                                             ".apa",".appx",".appxupload",".aps",".arsc",".artproj",".as",".as2proj",".as3proj",".asc",".asi",".asm",".asm",".asvf",".au3",
-                                            ".autoplay",".awk",".b",".bas",".bb",".bbc",".bbproject",".bbprojectd",".bcp",".bdsproj",".bet",".bluej",".bpg",".bpl",".brx",
+                                            ".autoplay",".awk",".b",".bas",".bb",".bbc",".bbproject",".bbprojectd",".bcp",".bdsproj",".bet",".bf",".bluej",".bpg",".bpl",".brx",
                                             ".bs2",".bsc",".c",".c",".caf",".caproj",".capx",".cbl",".cbp",".cc",".ccgame",".ccn",".ccp",".ccs",".cd",".cdf",".cfc",".class",
                                             ".clips",".cls",".clw",".cob",".cod",".config",".cp",".cp",".cpp",".cs",".csi",".csi",".csn",".csp",".csproj",".csx",".ctl",".ctp",
                                             ".ctxt",".cu",".cvsrc",".cxp",".cxx",".d",".dba",".dba",".dbml",".dbo",".dbpro",".dbproj",".dcp",".dcproj",".dcu",".dcuil",".dec",
@@ -181,7 +181,7 @@ class Project21():
                                             ".mfa",".mk",".ml",".mm",".mo",".mod",".mom",".mpr",".mrt",".msha",".mshc",".mshi",".msl",".msp",".mss",".mv",".mxml",
                                             ".myapp",".nbc",".ncb",".ned",".nfm",".nib",".nk",".nls",".nqc",".nsh",".nsi",".nupkg",".nuspec",".nvv",".nw",".nxc",
                                             ".o",".oca",".octest",".ocx",".odl",".omo",".owl",".p",".p3d",".pas",".pas",".patch",".pb",".pbg",".pbj",".pbk",".pbxbtree",
-                                            ".pbxproj",".pbxuser",".pch",".pcp",".pde",".pdm",".ph",".pika",".pjx",".pkgdef",".pkgundef",".pl",".pl",".pl1",".playground",
+                                            ".pbxproj",".pbxuser",".pch",".pcp",".pde",".pdm",".ph",".pika",".pjx",".pkgdef",".pkgundef",".pl",".pl1",".playground",
                                             ".plc",".ple",".pli",".pm",".po",".pod",".pot",".ppc",".prg",".prg",".pri",".pri",".pro",".proto",".psc",".psm1",".ptl",".pwn",
                                             ".pxd",".py",".pyd",".pyw",".pyx",".qpr",".r",".r",".r",".rav",".rb",".rbc",".rbp",".rbw",".rc",".rc2",".rdlc",".refresh",".res",
                                             ".res",".resjson",".resources",".resw",".resx",".rexx",".rise",".rkt",".rnc",".rodl",".rpy",".rsrc",".rss",".rul",".s",".s19",
