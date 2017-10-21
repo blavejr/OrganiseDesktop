@@ -160,7 +160,7 @@ class Project21():
                            ".upd",".utf8",".utxt",".vct",".vnt",".vw",".wbk",".webdoc",".wn",".wp",".wp4",".wp5",".wp6",".wp7",".wpa",".wpd",".wpl",".wps",
                            ".wpt",".wpw",".wri",".wsd",".wtt",".wtx",".xbdoc",".xbplate",".xdl",".xlsx",".xwp",".xy",".xy3",".xyp",".xyw",".zabw",".zrtf",".zw"]
         
-        D3_work = [".apj",".aws",".blk",".dbt",".dw2l",".dwg",".dwk",".dws",".dwt",".dwz",".dxe",".dxf",".dxx",".fbx",".gpw",".hdi",".lli",".ma",".mb",".mnx",
+        d3_work_extensions = [".apj",".aws",".blk",".dbt",".dw2l",".dwg",".dwk",".dws",".dwt",".dwz",".dxe",".dxf",".dxx",".fbx",".gpw",".hdi",".lli",".ma",".mb",".mnx",
                    ".mvi",".pwt",".shp",".shx",".slb",".sld"]
 
         programming_languages_extensions = [".4db",".4th",".a",".a2w",".abc",".acd",".addin",".ads",".agi",".aia",".aidl",".alb",".am4",".am5",".am6",".am7",".ane",".ap_",
@@ -230,6 +230,10 @@ class Project21():
                 for b in text_extensions:
                     if str(map[a].lower()).endswith(b):
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[7]+"\\"+map[a])
+                        
+                for b in d3_work_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
 
                 for b in programming_languages_extensions:
                     if str(map[a].lower()).endswith(b):
