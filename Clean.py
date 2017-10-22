@@ -291,4 +291,3 @@ def main():
     projectOB.writter(maps)
 
 main()
-run_at_time()
