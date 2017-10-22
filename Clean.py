@@ -144,7 +144,7 @@ class Project21():
         '''
         try:
             '''For all the folders in the folder_name list, if that folder is not(False) on the main_desktop
-               than create that folder.
+               then create that folder.
             '''
             for nam in range(0, len(self.folder_names)):
                 if path.isdir(self.desktopdir+'\\'+self.folder_names[nam]) == False:
@@ -177,12 +177,12 @@ class Project21():
         '''
         Extension Lists
         '''
-        shorcuts_extentions = [".kys",".lnk",".mat",".pif",".shb",".url","xnk"]
+        shorcuts_extensions = [".kys",".lnk",".mat",".pif",".shb",".url","xnk"]
 
-        executable_extentions = [".action",".apk",".app",".bin",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"]
+        executable_extensions = [".action",".apk",".app",".bin",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"]
 
         #zip extensions source: http://bit.ly/2fnWz4D
-        zip_extentions = [".0",".000",".7z",".7z.001",".7z.002",".a00",".a01",".a02",".ace",".agg",".ain",".alz",".apz",".ar",".arc",".archiver",".arduboy",".arh",
+        zip_extensions = [".0",".000",".7z",".7z.001",".7z.002",".a00",".a01",".a02",".ace",".agg",".ain",".alz",".apz",".ar",".arc",".archiver",".arduboy",".arh",
                           ".ari",".arj",".ark",".asr",".b1",".b64",".ba",".bdoc",".bh",".bndl",".boo",".bundle",".bz",".bz2",".bza",".bzip",".bzip2",".c00",".c01",
                           ".c02",".c10",".car",".cb7",".cba",".cbr",".cbt",".cbz",".cdz",".comppkg.hauptwerk.rar",".comppkg_hauptwerk_rar",".cp9",".cpgz",".cpt",
                           ".cxarchive",".czip",".dar",".dd",".deb",".dgc",".dist",".dl_",".dz",".ecs",".edz",".efw",".egg",".epi",".f",".fdp",".fp8",".fzbz",".fzpz",
@@ -199,7 +199,7 @@ class Project21():
                           ".zi",".zip",".zipx",".zix",".zl",".zoo",".zpi",".zsplit",".zw",".zz"]
 
         #image extensions source: https://fileinfo.com/filetypes/raster_image, https://fileinfo.com/filetypes/vector_image, and https://fileinfo.com/filetypes/camera_raw
-        images_extentions = [".3fr",".ai",".ari",".arr",".arw",".avatar",".awd",".bmp",".bpg",".cdmz",".cdr",".cr2",".crw",".ct",".dcr",".dds",
+        images_extensions = [".3fr",".ai",".ari",".arr",".arw",".avatar",".awd",".bmp",".bpg",".cdmz",".cdr",".cr2",".crw",".ct",".dcr",".dds",
                              ".ded",".djvu",".dng",".eip",".eps",".exr",".fff",".fpx",".gif",".hdr",".hpgl",".i3d",".ico",".icon",".itc2",".iwi",
                              ".j2c",".j2k",".jbig2",".jfif",".jif",".jp2",".jpc",".jpe",".jpeg",".jpg",".jpg-large",".jpx",".jxr",".k25",".kdc",
                              ".lip",".mfw",".mos",".msp",".nef",".nrw",".orf",".ota",".pat",".pcd",".pcx",".pdn",".pi2",".pic",".picnc",".piskel",
@@ -207,7 +207,7 @@ class Project21():
                              ".sprite2",".srf",".sumo",".svg",".tbn",".tga",".tif",".tiff",".tn",".tn3",".ufo",".vsdx",".webp",".x3f",".xcf",".xpm"]
 
         #music extensions source: https://fileinfo.com/filetypes/audio
-        music_extentions = [".aiff", ".aac", ".alac", ".flp", ".mp3", ".aimppl", ".aup", ".ang", ".mscz", ".vdj", ".ram", ".sf2", ".sfk", ".xfs",
+        music_extensions = [".aiff", ".aac", ".alac", ".flp", ".mp3", ".aimppl", ".aup", ".ang", ".mscz", ".vdj", ".ram", ".sf2", ".sfk", ".xfs",
                             ".dff", ".als", ".bidule", ".bnk", ".bww", ".cgrp", ".csh", ".cwb", ".dfc", ".dig", ".dm", ".dmsa", ".dmse", ".dsf",
                             ".dsm", ".dtm", ".f4a", ".fev", ".h5b", ".h5s", ".ins", ".isma", ".krz", ".kt3", ".mbr", ".mmlp", ".mtp", ".nbs", ".omg",
                             ".ovw", ".pca", ".pcg", ".ptxt", ".qcp", ".r1m", ".rip", ".rns", ".rol", ".rso", ".saf", ".sbi", ".sfpack", ".sgp", ".slp",
@@ -320,6 +320,42 @@ class Project21():
                  ".xcsnapshots", ".xcworkspace", ".xib", ".xojo_binary_project", ".xojo_menu", ".xojo_project", ".xojo_xml_project",
                  ".xoml", ".xpp", ".xq", ".xql", ".xqm", ".xquery", ".xsd", ".xt", ".y", ".yaml", ".yml", ".ymp", ".ypr"]
 
+        d3_work_extensions = [".apj",".aws",".blk",".dbt",".dw2l",".dwg",".dwk",".dws",".dwt",".dwz",".dxe",".dxf",".dxx",".fbx",".gpw",".hdi",".lli",".ma",".mb",".mnx",
+                   ".mvi",".pwt",".shp",".shx",".slb",".sld"]
+
+        programming_languages_extensions = [".4db",".4th",".a",".a2w",".abc",".acd",".addin",".ads",".agi",".aia",".aidl",".alb",".am4",".am5",".am6",".am7",".ane",".ap_",
+                                            ".apa",".appx",".appxupload",".aps",".arsc",".artproj",".as",".as2proj",".as3proj",".asc",".asi",".asm",".asm",".asvf",".au3",
+                                            ".autoplay",".awk",".b",".bas",".bb",".bbc",".bbproject",".bbprojectd",".bcp",".bdsproj",".bet",".bf",".bluej",".bpg",".bpl",".brx",
+                                            ".bs2",".bsc",".c",".c",".caf",".caproj",".capx",".cbl",".cbp",".cc",".ccgame",".ccn",".ccp",".ccs",".cd",".cdf",".cfc",".class",
+                                            ".clips",".cls",".clw",".cob",".cod",".config",".cp",".cp",".cpp",".cs",".csi",".csi",".csn",".csp",".csproj",".csx",".ctl",".ctp",
+                                            ".ctxt",".cu",".cvsrc",".cxp",".cxx",".d",".dba",".dba",".dbml",".dbo",".dbpro",".dbproj",".dcp",".dcproj",".dcu",".dcuil",".dec",
+                                            ".def",".deviceids",".dex",".df1",".dfm",".dgml",".dgsl",".diff",".dm1",".dmd",".dob",".dox",".dpk",".dpkw",".dpl",".dpr",".dproj",
+                                            ".dsgm",".dsp",".dtd",".edml",".edmx",".ent",".entitlements",".eql",".erb",".erl",".ex",".exp",".exw",".f",".f90",".fbp",".fbz7",
+                                            ".fgl",".fla",".for",".forth",".fpm",".framework",".frx",".fs",".fsi",".fsproj",".fsproj",".fsscript",".fsx",".ftl",".ftn",".fxc",
+                                            ".fxcproj",".fxl",".fxml",".fxpl",".gameproj",".gch",".ged",".gem",".gemspec",".gfar",".gitattributes",".gitignore",".gld",".gm6",
+                                            ".gm81",".gmd",".gmk",".gmo",".gmx",".gorm",".greenfoot",".groovy",".groupproj",".gs",".gs3",".gszip",".h",".hal",".haml",".has",
+                                            ".hbs",".hh",".hpf",".hpp",".hs",".hxx",".i",".iconset",".idb",".idl",".idt",".ilk",".iml",".inc",".inl",".ino",".ipch",".ipr",
+                                            ".ipr",".ise",".ism",".ist",".iwb",".iws",".java",".jcp",".jic",".jpr",".jpx",".jsfl",".jspf",".kdevelop",".kdevprj",".kpl",
+                                            ".l",".lbi",".lbs",".lds",".lgo",".lhs",".licenses",".licx",".lisp",".lit",".livecode",".lnt",".lproj",".lsproj",".ltb",
+                                            ".lua",".luc",".lucidsnippet",".lxsproj",".m",".m",".m4",".magik",".mak",".markdown",".mcp",".md",".mdzip",".mer",".mf",
+                                            ".mfa",".mk",".ml",".mm",".mo",".mod",".mom",".mpr",".mrt",".msha",".mshc",".mshi",".msl",".msp",".mss",".mv",".mxml",
+                                            ".myapp",".nbc",".ncb",".ned",".nfm",".nib",".nk",".nls",".nqc",".nsh",".nsi",".nupkg",".nuspec",".nvv",".nw",".nxc",
+                                            ".o",".oca",".octest",".ocx",".odl",".omo",".owl",".p",".p3d",".pas",".pas",".patch",".pb",".pbg",".pbj",".pbk",".pbxbtree",
+                                            ".pbxproj",".pbxuser",".pch",".pcp",".pde",".pdm",".ph",".pika",".pjx",".pkgdef",".pkgundef",".pl",".pl1",".playground",
+                                            ".plc",".ple",".pli",".pm",".po",".pod",".pot",".ppc",".prg",".prg",".pri",".pri",".pro",".proto",".psc",".psm1",".ptl",".pwn",
+                                            ".pxd",".py",".pyd",".pyw",".pyx",".qpr",".r",".r",".r",".rav",".rb",".rbc",".rbp",".rbw",".rc",".rc2",".rdlc",".refresh",".res",
+                                            ".res",".resjson",".resources",".resw",".resx",".rexx",".rise",".rkt",".rnc",".rodl",".rpy",".rsrc",".rss",".rul",".s",".s19",
+                                            ".sas",".sb",".sb2",".sbproj",".sc",".scc",".scriptsuite",".scriptterminology",".sdef",".sh",".sln",".slogo",".sltng",".sma",
+                                            ".smali",".snippet",".so",".spec",".sqlproj",".src",".src",".ss",".ssc",".ssi",".storyboard",".sud",".suo",".sup",".svn",".swc",
+                                            ".swd",".swift",".sym",".t",".targets",".tcl",".tds",".testrunconfig",".testsettings",".textfactory",".tk",".tld",".tlh",".tli",
+                                            ".tmlanguage",".tmproj",".tns",".tpu",".trx",".tt",".tu",".tur",".twig",".ui",".uml",".v",".v",".v11",".v12",".vb",".vbg",".vbp",
+                                            ".vbproj",".vbx",".vbz",".vc",".vcp",".vcproj",".vcxproj",".vdm",".vdp",".vdproj",".vgc",".vhd",".vm",".vsmacros",".vsmdi",".vsmproj",
+                                            ".vsp",".vsps",".vspscc",".vspx",".vssscc",".vsz",".vtm",".vtml",".vtv",".w",".w32",".wdgt",".wdgtproj",".wdl",".wdp",".wdw",".wiq",
+                                            ".wixlib",".wixmsp",".wixmst",".wixobj",".wixout",".wixpdb",".wixproj",".workspace",".wpw",".wsc",".wsp",".wxi",".wxl",".wxs",".xaml"
+                                            ,".xamlx",".xap",".xcappdata",".xcarchive",".xcconfig",".xcdatamodeld",".xcodeproj",".xcsnapshots",".xcworkspace",".xib",".xojo_binary_project",
+                                            ".xojo_menu",".xojo_project",".xojo_xml_project",".xoml",".xpp",".xq",".xql",".xqm",".xquery",".xsd",".xt",".y",".yaml",".yml",".ymp",".ypr"]
+
+
         try:
 
             '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
@@ -328,6 +364,7 @@ class Project21():
                 rename(self.Alldesktopdir+'\\'+item, self.desktopdir+"\\"+self.folder_names[1]+"\\"+item)
 
             for a in range(0, len(map)):
+
                 if Globals.sc:
                     for b in shorcuts_extentions:
                         if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
@@ -367,6 +404,43 @@ class Project21():
                     for b in programming_languages_extensions:
                         if str(map[a].lower()).endswith(b):
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
+
+                for b in shorcuts_extensions:
+                    if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
+
+                for b in executable_extensions:
+                    if str(map[a].lower()).endswith(b) and str(map[a].lower()) != "Clean.exe":
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[3]+"\\"+map[a])
+
+                for b in zip_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[2]+"\\"+map[a])
+
+                for b in images_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[4]+"\\"+map[a])
+
+                for b in music_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[5]+"\\"+map[a])
+
+                for b in movie_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[6]+"\\"+map[a])
+
+                for b in text_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[7]+"\\"+map[a])
+                        
+                for b in d3_work_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
+
+                for b in programming_languages_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
+
 
                 '''This weird part looks for the ".", if its not there this must be a folder'''
                 if "." not in str(map[a]) and map[a] not in self.folder_names:
@@ -420,8 +494,10 @@ def main():
     projectOB.writter(maps)
     tkMessageBox.showinfo("Complete", "Desktop clean finished.")
 
+
 root = Tk()
 app = App(root)
 app.mainloop()
 root.destroy()
 run_at_time()
+main()
