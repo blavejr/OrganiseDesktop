@@ -71,12 +71,12 @@ class Project21():
         '''
         Extension Lists
         '''
-        shorcuts_extentions = [".kys",".lnk",".mat",".pif",".shb",".url","xnk"]
+        shorcuts_extensions = [".kys",".lnk",".mat",".pif",".shb",".url","xnk"]
 
-        executable_extentions = [".action",".apk",".app",".bin",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"]
+        executable_extensions = [".action",".apk",".app",".bin",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"]
 
         #zip extensions source: http://bit.ly/2fnWz4D
-        zip_extentions = [".0",".000",".7z",".7z.001",".7z.002",".a00",".a01",".a02",".ace",".agg",".ain",".alz",".apz",".ar",".arc",".archiver",".arduboy",".arh",
+        zip_extensions = [".0",".000",".7z",".7z.001",".7z.002",".a00",".a01",".a02",".ace",".agg",".ain",".alz",".apz",".ar",".arc",".archiver",".arduboy",".arh",
                           ".ari",".arj",".ark",".asr",".b1",".b64",".ba",".bdoc",".bh",".bndl",".boo",".bundle",".bz",".bz2",".bza",".bzip",".bzip2",".c00",".c01",
                           ".c02",".c10",".car",".cb7",".cba",".cbr",".cbt",".cbz",".cdz",".comppkg.hauptwerk.rar",".comppkg_hauptwerk_rar",".cp9",".cpgz",".cpt",
                           ".cxarchive",".czip",".dar",".dd",".deb",".dgc",".dist",".dl_",".dz",".ecs",".edz",".efw",".egg",".epi",".f",".fdp",".fp8",".fzbz",".fzpz",
@@ -93,7 +93,7 @@ class Project21():
                           ".zi",".zip",".zipx",".zix",".zl",".zoo",".zpi",".zsplit",".zw",".zz"]
 
         #image extensions source: https://fileinfo.com/filetypes/raster_image, https://fileinfo.com/filetypes/vector_image, and https://fileinfo.com/filetypes/camera_raw
-        images_extentions = [".3fr",".ai",".ari",".arr",".arw",".avatar",".awd",".bmp",".bpg",".cdmz",".cdr",".cr2",".crw",".ct",".dcr",".dds",
+        images_extensions = [".3fr",".ai",".ari",".arr",".arw",".avatar",".awd",".bmp",".bpg",".cdmz",".cdr",".cr2",".crw",".ct",".dcr",".dds",
                              ".ded",".djvu",".dng",".eip",".eps",".exr",".fff",".fpx",".gif",".hdr",".hpgl",".i3d",".ico",".icon",".itc2",".iwi",
                              ".j2c",".j2k",".jbig2",".jfif",".jif",".jp2",".jpc",".jpe",".jpeg",".jpg",".jpg-large",".jpx",".jxr",".k25",".kdc",
                              ".lip",".mfw",".mos",".msp",".nef",".nrw",".orf",".ota",".pat",".pcd",".pcx",".pdn",".pi2",".pic",".picnc",".piskel",
@@ -101,7 +101,7 @@ class Project21():
                              ".sprite2",".srf",".sumo",".svg",".tbn",".tga",".tif",".tiff",".tn",".tn3",".ufo",".vsdx",".webp",".x3f",".xcf",".xpm"]
 
         #music extensions source: https://fileinfo.com/filetypes/audio
-        music_extentions = [".aiff", ".aac", ".alac", ".flp", ".mp3", ".aimppl", ".aup", ".ang", ".mscz", ".vdj", ".ram", ".sf2", ".sfk", ".xfs",
+        music_extensions = [".aiff", ".aac", ".alac", ".flp", ".mp3", ".aimppl", ".aup", ".ang", ".mscz", ".vdj", ".ram", ".sf2", ".sfk", ".xfs",
                             ".dff", ".als", ".bidule", ".bnk", ".bww", ".cgrp", ".csh", ".cwb", ".dfc", ".dig", ".dm", ".dmsa", ".dmse", ".dsf",
                             ".dsm", ".dtm", ".f4a", ".fev", ".h5b", ".h5s", ".ins", ".isma", ".krz", ".kt3", ".mbr", ".mmlp", ".mtp", ".nbs", ".omg",
                             ".ovw", ".pca", ".pcg", ".ptxt", ".qcp", ".r1m", ".rip", ".rns", ".rol", ".rso", ".saf", ".sbi", ".sfpack", ".sgp", ".slp",
@@ -160,7 +160,7 @@ class Project21():
                            ".upd",".utf8",".utxt",".vct",".vnt",".vw",".wbk",".webdoc",".wn",".wp",".wp4",".wp5",".wp6",".wp7",".wpa",".wpd",".wpl",".wps",
                            ".wpt",".wpw",".wri",".wsd",".wtt",".wtx",".xbdoc",".xbplate",".xdl",".xlsx",".xwp",".xy",".xy3",".xyp",".xyw",".zabw",".zrtf",".zw"]
         
-        D3_work = [".apj",".aws",".blk",".dbt",".dw2l",".dwg",".dwk",".dws",".dwt",".dwz",".dxe",".dxf",".dxx",".fbx",".gpw",".hdi",".lli",".ma",".mb",".mnx",
+        d3_work_extensions = [".apj",".aws",".blk",".dbt",".dw2l",".dwg",".dwk",".dws",".dwt",".dwz",".dxe",".dxf",".dxx",".fbx",".gpw",".hdi",".lli",".ma",".mb",".mnx",
                    ".mvi",".pwt",".shp",".shx",".slb",".sld"]
 
         programming_languages_extensions = [".4db",".4th",".a",".a2w",".abc",".acd",".addin",".ads",".agi",".aia",".aidl",".alb",".am4",".am5",".am6",".am7",".ane",".ap_",
@@ -203,23 +203,23 @@ class Project21():
                 rename(self.Alldesktopdir+'\\'+item, self.desktopdir+"\\"+self.folder_names[1]+"\\"+item)
 
             for a in range(0, len(map)):
-                for b in shorcuts_extentions:
+                for b in shorcuts_extensions:
                     if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
 
-                for b in executable_extentions:
+                for b in executable_extensions:
                     if str(map[a].lower()).endswith(b) and str(map[a].lower()) != "Clean.exe":
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[3]+"\\"+map[a])
 
-                for b in zip_extentions:
+                for b in zip_extensions:
                     if str(map[a].lower()).endswith(b):
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[2]+"\\"+map[a])
 
-                for b in images_extentions:
+                for b in images_extensions:
                     if str(map[a].lower()).endswith(b):
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[4]+"\\"+map[a])
 
-                for b in music_extentions:
+                for b in music_extensions:
                     if str(map[a].lower()).endswith(b):
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[5]+"\\"+map[a])
 
@@ -230,6 +230,10 @@ class Project21():
                 for b in text_extensions:
                     if str(map[a].lower()).endswith(b):
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[7]+"\\"+map[a])
+                        
+                for b in d3_work_extensions:
+                    if str(map[a].lower()).endswith(b):
+                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
 
                 for b in programming_languages_extensions:
                     if str(map[a].lower()).endswith(b):
