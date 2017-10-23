@@ -11,7 +11,17 @@ Takes all the files on your desktop and put them in folders according to extensi
 **Navigate to the OrganiseDesktop folder**
 
 
-**Now run setup.py file.**
+**Now run Clean.py file.**
 
-`$ python setup.py install`
+The setup file isn't ready yet but running the script directly should work, provided you have all the needed packages.
 
+**Needed packages**
+os
+getpass
+time
+sys
+tkinter
+
+We will work on the setup file as soon as possible.
+
+Enjoy and if you would like to help, send us a PR :)
