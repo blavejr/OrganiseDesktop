@@ -1,11 +1,116 @@
 __author__ = "Remigius Kalimba"
 '''Add a timer so it does this automatically everyday at a set time'''
 
-
 from os import path, mkdir, listdir, rename, environ
 from getpass import getuser
 import time
 from sys import getwindowsversion
+
+from Tkinter import *
+import tkMessageBox
+
+import Globals
+
+class App(Frame):
+    def clean(self):
+        main()
+
+    def quit_all(self):
+        quit()
+        sys.exit(0)
+
+    def check(self, item):
+        if item == 0:
+            Globals.sc = not Globals.sc
+        elif item == 1:
+            Globals.zips = not Globals.zips
+        elif item == 2:
+            Globals.audio = not Globals.audio
+        elif item == 3:
+            Globals.img = not Globals.img
+        elif item == 4:
+            Globals.exes = not Globals.exes
+        elif item == 5:
+            Globals.mov = not Globals.mov
+        elif item == 6:
+            Globals.txt = not Globals.txt
+        elif item == 7:
+            Globals.cad = not Globals.cad
+        elif item == 8:
+            Globals.programming = not Globals.programming
+
+    def create(self):
+        self.winfo_toplevel().title("Desktop Cleaner")
+
+        self.shortcuts = Checkbutton(self)
+        self.shortcuts["text"] = "Shortcuts"
+        self.shortcuts.select()
+        self.shortcuts["command"] = lambda: self.check(0)
+        self.shortcuts.pack({"side":"top"})
+
+        self.zip = Checkbutton(self)
+        self.zip["text"] = "Archives"
+        self.zip.select()
+        self.zip["command"] = lambda: self.check(1)
+        self.zip.pack({"side": "top"})
+
+        self.music = Checkbutton(self)
+        self.music["text"] = "Music"
+        self.music.select()
+        self.music["command"] = lambda: self.check(2)
+        self.music.pack({"side": "top"})
+
+        self.images = Checkbutton(self)
+        self.images["text"] = "Images"
+        self.images.select()
+        self.images["command"] = lambda: self.check(3)
+        self.images.pack({"side": "top"})
+
+        self.exe = Checkbutton(self)
+        self.exe["text"] = "Executables"
+        self.exe.select()
+        self.exe["command"] = lambda: self.check(4)
+        self.exe.pack({"side": "top"})
+
+        self.movies = Checkbutton(self)
+        self.movies["text"] = "Movies"
+        self.movies.select()
+        self.movies["command"] = lambda: self.check(5)
+        self.movies.pack({"side": "top"})
+
+        self.text = Checkbutton(self)
+        self.text["text"] = "Text"
+        self.text.select()
+        self.text["command"] = lambda: self.check(6)
+        self.text.pack({"side": "top"})
+
+        self.d3 = Checkbutton(self)
+        self.d3["text"] = "CAD Files"
+        self.d3.select()
+        self.d3["command"] = lambda: self.check(7)
+        self.d3.pack({"side": "top"})
+
+        self.code = Checkbutton(self)
+        self.code["text"] = "Code"
+        self.code.select()
+        self.code["command"] = lambda: self.check(8)
+        self.code.pack({"side": "top"})
+
+        self.clean_button = Button(self)
+        self.clean_button["text"] = "Clean"
+        self.clean_button["command"] = self.clean
+        self.clean_button.pack({"side": "left"})
+
+        self.quit_button = Button(self)
+        self.quit_button["text"] = "Exit"
+        self.quit_button["command"] = self.quit_all
+        self.quit_button.pack({"side":"left"})
+
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        self.pack()
+        self.create()
+
 
 class Project21():
     def __init__(self):
@@ -68,6 +173,7 @@ class Project21():
         '''
         map = map
         map2 = map2
+
         '''
         Extension Lists
         '''
@@ -160,6 +266,60 @@ class Project21():
                            ".upd",".utf8",".utxt",".vct",".vnt",".vw",".wbk",".webdoc",".wn",".wp",".wp4",".wp5",".wp6",".wp7",".wpa",".wpd",".wpl",".wps",
                            ".wpt",".wpw",".wri",".wsd",".wtt",".wtx",".xbdoc",".xbplate",".xdl",".xlsx",".xwp",".xy",".xy3",".xyp",".xyw",".zabw",".zrtf",".zw"]
         
+        D3_work = [".ma", ".fbx", ".mb", ".apj", ".aws", ".blk", ".dbt", ".dwg", ".dwk", ".dw2l", ".dws", ".dwt", ".dwz", ".dxe", ".dxf", ".dxx", ".gpw", ".hdi", ".lli",
+                   ".mnx", ".mvi", ".pwt", ".schematic", ".shp", ".shx", ".slb", ".sld", ".blend"]
+
+        programming_languages_extensions = [".4db", ".4th", ".a", ".a2w", ".abc", ".acd", ".addin", ".ads", ".agi", ".ahk", ".aia", ".aidl", ".alb",
+                 ".am4", ".am5", ".am6", ".am7", ".ane", ".ap_", ".apa", ".appx", ".appxupload", ".aps", ".arsc", ".artproj", 
+                 ".as", ".as2proj", ".as3proj", ".asc", ".asi", ".asm", ".asm", ".asvf", ".au3", ".autoplay", ".awk", 
+                 ".b", ".bas", ".bb", ".bbc", ".bbproject", ".bbprojectd", ".bcp", ".bdsproj", ".bet", ".bluej", ".bpg", ".bpl",
+                 ".brx", ".bs2", ".bsc",
+                 ".c", ".c", ".caf", ".caproj", ".capx", ".cbl", ".cbp", ".cc", ".ccgame", ".ccn", ".ccp", ".ccs", ".cd", ".cdf",
+                 ".cfc", ".class", ".clips", ".cls", ".clw", ".cob", ".cod", ".config", ".cp", ".cp", ".cpp", ".cs", ".csi", ".csi",
+                 ".csn", ".csp", ".csproj", ".csx", ".ctl", ".ctp", ".ctxt", ".cu", ".cvsrc", ".cxp", ".cxx", 
+                 ".d", ".dba", ".dba", ".dbml", ".dbo", ".dbpro", ".dbproj", ".dcp", ".dcproj", ".dcu", ".dcuil", ".dec", ".def",
+                 ".deviceids", ".dex", ".df1", ".dfm", ".dgml", ".dgsl", ".diff", ".dm1", ".dmd", ".dob", ".dox", ".dpk", ".dpkw",
+                 ".dpl", ".dpr", ".dproj", ".dsgm", ".dsp", ".dtd",
+                 ".edml", ".edmx", ".ent", ".entitlements", ".eql", ".erb", ".erl", ".ex", ".exp", ".exw",
+                 ".f", ".f90", ".fbp", ".fbz7", ".fgl", ".fla", ".for", ".forth", ".fpm", ".framework", ".frx", ".fs", ".fsi", 
+                 ".fsproj", ".fsproj", ".fsscript", ".fsx", ".ftl", ".ftn", ".fxc", ".fxcproj", ".fxl", ".fxml", ".fxpl", 
+                 ".gameproj", ".gch", ".ged", ".gem", ".gemspec", ".gfar", ".gitattributes", ".gitignore", ".gld", 
+                 ".gm6", ".gm81", ".gmd", ".gmk", ".gmo", ".gmx", ".gorm", ".greenfoot", ".groovy", ".groupproj", ".gs", ".gs3", ".gszip", 
+                 ".h", ".hal", ".haml", ".has", ".hbs", ".hh", ".hpf", ".hpp", ".hs", ".hxx", 
+                 ".i", ".iconset", ".idb", ".idl", ".idt", ".ilk", ".iml", ".inc", ".inl", ".ino", ".ipch", ".ipr",
+                 ".ipr", ".ise", ".ism", ".ist", ".iwb", ".iws", 
+                 ".java", ".jcp", ".jic", ".jpr", ".jpx", ".jsfl", ".jspf",
+                 ".kdevelop", ".kdevprj", ".kpl",
+                 ".l", ".lbi", ".lbs", ".lds", ".lgo", ".lhs", ".licenses", ".licx", ".lisp", ".lit", ".livecode", 
+                 ".lnt", ".lproj", ".lsproj", ".ltb", ".lua", ".luc", ".lucidsnippet", ".lxsproj",
+                 ".m", ".m", ".m4", ".magik", ".mak", ".markdown", ".mcp", ".md", ".mdzip", ".mer", ".mf", ".mfa", ".mk", 
+                 ".ml", ".mm", ".mo", ".mod", ".mom", ".mpr", ".mrt", ".msha", ".mshc", ".mshi", ".msl", ".msp", ".mss", ".mv", 
+                 ".mxml", ".myapp",
+                 ".nbc", ".ncb", ".ned", ".nfm", ".nib", ".nk", ".nls", ".nqc", ".nsh", ".nsi", ".nupkg", ".nuspec", ".nvv",
+                 ".nw", ".nxc",
+                 ".o", ".oca", ".octest", ".ocx", ".odl", ".omo", ".owl",
+                 ".p", ".p3d", ".pas", ".pas", ".patch", ".pb", ".pbg", ".pbj", ".pbk", ".pbxbtree", ".pbxproj",
+                 ".pbxuser", ".pch", ".pcp", ".pde", ".pdm", ".ph", ".pika", ".pjx", ".pkgdef", ".pkgundef", ".pl", 
+                 ".pl", ".pl1", ".playground", ".plc", ".ple", ".pli", ".pm", ".po", ".pod", ".pot", ".ppc", ".prg", ".prg",
+                 ".pri", ".pri", ".pro", ".proto", ".psc", ".psm1", ".ptl", ".pwn", ".pxd", ".py", ".pyd", ".pyw", ".pyx", 
+                 ".qpr", ".r", ".r", ".r", ".rav", ".rb", ".rbc", ".rbp", ".rbw", ".rc", ".rc2", ".rdlc", ".refresh",
+                 ".res", ".res", ".resjson", ".resources", ".resw", ".resx", ".rexx", ".rise", ".rkt", ".rnc", ".rodl", ".rpy", 
+                 ".rsrc", ".rss", ".rul", 
+                 ".s", ".s19", ".sas", ".sb", ".sb2", ".sbproj", ".sc", ".scc", ".scriptsuite", ".scriptterminology", 
+                 ".sdef", ".sh", ".sln", ".slogo", ".sltng", ".sma", ".smali", ".snippet", ".so", ".spec", ".sqlproj", 
+                 ".src", ".src", ".ss", ".ssc", ".ssi", ".storyboard", ".sud", ".suo", ".sup", ".svn", ".swc", ".swd",
+                 ".swift", ".sym",
+                 ".t", ".targets", ".tcl", ".tds", ".testrunconfig", ".testsettings", ".textfactory", ".tk", ".tld",
+                 ".tlh", ".tli", ".tmlanguage", ".tmproj", ".tns", ".tpu", ".trx", ".tt", ".tu", ".tur", ".twig",
+                 ".ui", ".uml", ".v", ".v", ".v11", ".v12", ".vb", ".vbg", ".vbp", ".vbproj", ".vbx", ".vbz", ".vc", ".vcp",
+                 ".vcproj", ".vcxproj", ".vdm", ".vdp", ".vdproj", ".vgc", ".vhd", ".vm", ".vsmacros", ".vsmdi", ".vsmproj", ".vsp",
+                 ".vsps", ".vspscc", ".vspx", ".vssscc", ".vsz", ".vtm", ".vtml", ".vtv",
+                 ".w", ".w32", ".wdgt", ".wdgtproj", ".wdl", ".wdp", ".wdw", ".wiq", ".wixlib", ".wixmsp", ".wixmst", ".wixobj", 
+                 ".wixout", ".wixpdb", ".wixproj", ".workspace", ".wpw", ".wsc", ".wsp", ".wxi", ".wxl", ".wxs",
+                 ".xaml", ".xamlx", ".xap", ".xcappdata", ".xcarchive", ".xcconfig", ".xcdatamodeld", ".xcodeproj", 
+                 ".xcsnapshots", ".xcworkspace", ".xib", ".xojo_binary_project", ".xojo_menu", ".xojo_project", ".xojo_xml_project",
+                 ".xoml", ".xpp", ".xq", ".xql", ".xqm", ".xquery", ".xsd", ".xt", ".y", ".yaml", ".yml", ".ymp", ".ypr"]
+
         d3_work_extensions = [".apj",".aws",".blk",".dbt",".dw2l",".dwg",".dwk",".dws",".dwt",".dwz",".dxe",".dxf",".dxx",".fbx",".gpw",".hdi",".lli",".ma",".mb",".mnx",
                    ".mvi",".pwt",".shp",".shx",".slb",".sld"]
 
@@ -195,6 +355,7 @@ class Project21():
                                             ,".xamlx",".xap",".xcappdata",".xcarchive",".xcconfig",".xcdatamodeld",".xcodeproj",".xcsnapshots",".xcworkspace",".xib",".xojo_binary_project",
                                             ".xojo_menu",".xojo_project",".xojo_xml_project",".xoml",".xpp",".xq",".xql",".xqm",".xquery",".xsd",".xt",".y",".yaml",".yml",".ymp",".ypr"]
 
+
         try:
 
             '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
@@ -203,6 +364,47 @@ class Project21():
                 rename(self.Alldesktopdir+'\\'+item, self.desktopdir+"\\"+self.folder_names[1]+"\\"+item)
 
             for a in range(0, len(map)):
+
+                if Globals.sc:
+                    for b in shorcuts_extentions:
+                        if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
+                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
+
+                if Globals.exes:
+                    for b in executable_extentions:
+                        if str(map[a].lower()).endswith(b) and str(map[a].lower()) != "Clean.exe":
+                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[3]+"\\"+map[a])
+
+                if Globals.zips:
+                    for b in zip_extentions:
+                        if str(map[a].lower()).endswith(b):
+                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[2]+"\\"+map[a])
+
+                if Globals.img:
+                    for b in images_extentions:
+                        if str(map[a].lower()).endswith(b):
+                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[4]+"\\"+map[a])
+
+                if Globals.audio:
+                    for b in music_extentions:
+                        if str(map[a].lower()).endswith(b):
+                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[5]+"\\"+map[a])
+
+                if Globals.mov:
+                    for b in movie_extensions:
+                        if str(map[a].lower()).endswith(b):
+                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[6]+"\\"+map[a])
+
+                if Globals.txt:
+                    for b in text_extensions:
+                        if str(map[a].lower()).endswith(b):
+                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[7]+"\\"+map[a])
+
+                if Globals.programming:
+                    for b in programming_languages_extensions:
+                        if str(map[a].lower()).endswith(b):
+                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
+
                 for b in shorcuts_extensions:
                     if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
@@ -238,6 +440,7 @@ class Project21():
                 for b in programming_languages_extensions:
                     if str(map[a].lower()).endswith(b):
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
+
 
                 '''This weird part looks for the ".", if its not there this must be a folder'''
                 if "." not in str(map[a]) and map[a] not in self.folder_names:
@@ -289,5 +492,12 @@ def main():
     maps = projectOB.mapper()
     projectOB.mover(maps[0], maps[1])
     projectOB.writter(maps)
+    tkMessageBox.showinfo("Complete", "Desktop clean finished.")
 
+
+root = Tk()
+app = App(root)
+app.mainloop()
+root.destroy()
+run_at_time()
 main()
