@@ -379,22 +379,22 @@ class Project21():
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
 
                 if Globals.exes:
-                    for b in executable_extentions:
+                    for b in executable_extensions:
                         if str(map[a].lower()).endswith(b) and str(map[a].lower()) != "Clean.exe":
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[3]+"\\"+map[a])
 
                 if Globals.zips:
-                    for b in zip_extentions:
+                    for b in zip_extensions:
                         if str(map[a].lower()).endswith(b):
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[2]+"\\"+map[a])
 
                 if Globals.img:
-                    for b in images_extentions:
+                    for b in images_extensions:
                         if str(map[a].lower()).endswith(b):
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[4]+"\\"+map[a])
 
                 if Globals.audio:
-                    for b in music_extentions:
+                    for b in music_extensions:
                         if str(map[a].lower()).endswith(b):
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[5]+"\\"+map[a])
 
