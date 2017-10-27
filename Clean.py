@@ -4,10 +4,14 @@ __author__ = "Remigius Kalimba"
 from os import path, mkdir, listdir, rename, environ
 from getpass import getuser
 import time
-from sys import getwindowsversion
+import sys
 
-from Tkinter import *
-import tkMessageBox
+if sys.version_info >= (3,):
+    from tkinter import *
+    from tkinter import messagebox as tkMessageBox
+else:
+    from Tkinter import *
+    import tkMessageBox
 
 import Globals
 
@@ -126,17 +130,21 @@ class Project21():
         #               https://en.wikipedia.org/wiki/Windows_NT#Releases
         #
         #
-        self.desktopdir = path.join(environ['USERPROFILE'],'Desktop')
+        if sys.platform == 'win32':
+            self.desktopdir = path.join(environ['USERPROFILE'],'Desktop')
 
-        # Determine Windows version; check if this is XP; accordingly, read target folders
-        if getwindowsversion().major < 6:
-            self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'],'Desktop')
+            # Determine Windows version; check if this is XP; accordingly, read target folders
+            if sys.getwindowsversion().major < 6:
+                self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'],'Desktop')
+            else:
+                self.Alldesktopdir = path.join(environ['PUBLIC'],'Desktop')
+
+            '''list of folders to be created'''
+            self.folder_names = ["Folders", "Shortcuts", "Zips", "Executables", "Pictures", "Music", "Movies", "Docs", "Code"]
+            self.special_folders = []
         else:
-            self.Alldesktopdir = path.join(environ['PUBLIC'],'Desktop')
-
-        '''list of folders to be created'''
-        self.folder_names = ["Folders", "Shortcuts", "Zips", "Executables", "Pictures", "Music", "Movies", "Docs", "Code"]
-        self.special_folders = []
+            print("{} version not implemented".format(sys.platform))
+            raise NotImplementedError
 
     def makdir(self):
         '''
@@ -177,7 +185,7 @@ class Project21():
         '''
         Extension Lists
         '''
-        shorcuts_extensions = [".kys",".lnk",".mat",".pif",".shb",".url","xnk"]
+        shortcuts_extensions = [".kys",".lnk",".mat",".pif",".shb",".url","xnk"]
 
         executable_extensions = [".action",".apk",".app",".bin",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"]
 
@@ -366,27 +374,27 @@ class Project21():
             for a in range(0, len(map)):
 
                 if Globals.sc:
-                    for b in shorcuts_extentions:
+                    for b in shortcuts_extensions:
                         if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
 
                 if Globals.exes:
-                    for b in executable_extentions:
+                    for b in executable_extensions:
                         if str(map[a].lower()).endswith(b) and str(map[a].lower()) != "Clean.exe":
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[3]+"\\"+map[a])
 
                 if Globals.zips:
-                    for b in zip_extentions:
+                    for b in zip_extensions:
                         if str(map[a].lower()).endswith(b):
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[2]+"\\"+map[a])
 
                 if Globals.img:
-                    for b in images_extentions:
+                    for b in images_extensions:
                         if str(map[a].lower()).endswith(b):
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[4]+"\\"+map[a])
 
                 if Globals.audio:
-                    for b in music_extentions:
+                    for b in music_extensions:
                         if str(map[a].lower()).endswith(b):
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[5]+"\\"+map[a])
 
@@ -405,7 +413,7 @@ class Project21():
                         if str(map[a].lower()).endswith(b):
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
 
-                for b in shorcuts_extensions:
+                for b in shortcuts_extensions:
                     if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
 
