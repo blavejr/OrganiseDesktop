@@ -413,7 +413,7 @@ class Project21():
                         if str(map[a].lower()).endswith(b):
                             rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
 
-                for b in shorcuts_extensions:
+                for b in shortcuts_extensions:
                     if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
                         rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
 
