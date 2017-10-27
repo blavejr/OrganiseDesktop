@@ -185,7 +185,7 @@ class Project21():
         '''
         Extension Lists
         '''
-        shorcuts_extensions = [".kys",".lnk",".mat",".pif",".shb",".url","xnk"]
+        shortcuts_extensions = [".kys",".lnk",".mat",".pif",".shb",".url","xnk"]
 
         executable_extensions = [".action",".apk",".app",".bin",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"]
 
