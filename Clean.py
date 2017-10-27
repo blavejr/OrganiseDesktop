@@ -6,8 +6,12 @@ from getpass import getuser
 import time
 import sys
 
-from Tkinter import *
-import tkMessageBox
+if sys.version_info >= (3,):
+    from tkinter import *
+    from tkinter import messagebox as tkMessageBox
+else:
+    from Tkinter import *
+    import tkMessageBox
 
 import Globals
 
@@ -141,6 +145,7 @@ class Project21():
         else:
             print("{} version not implemented".format(sys.platform))
             raise NotImplementedError
+
     def makdir(self):
         '''
         This function makes the needed folders if they are not already found.
