@@ -13,12 +13,13 @@
 
 # OrganiseDesktop
 
-Takes all the files on your desktop and put them in folders according to extensions. NO MORE MESSY DESKTOPS! atleast not on the outside :)
+Takes all the files on your desktop and put them in folders according to extensions. NO MORE MESSY DESKTOPS! 
+At least not on the outside :)
 
 # Getting Started
 
-The setup file isn't yet setup up properly (work in progress), to run the program download
-the repo and install the required packages than run the Clean.py file.
+The setup file isn't yet setup up properly (work in progress). To run the program download
+the repo and install the required packages then run the Clean.py file.
 
 # Prerequisites
 
