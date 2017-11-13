@@ -483,9 +483,12 @@ class Project21():
         writeOB.close()
 
 def automate():
-    '''This function keeps the program running and scans the desktop and cleans it after a set time'''
-    '''Link explains the syntax https://technet.microsoft.com/en-us/library/cc725744(v=ws.11).aspx'''
-    os.system(SchTasks /Create /SC DAILY /TN “My Task” /TR “C:RunMe.bat” /ST 09:00)
+    '''
+    * This function keeps the program running and scans the desktop and cleans it after a set time
+    * Link explains the syntax https://technet.microsoft.com/en-us/library/cc725744(v=ws.11).aspx
+    Something isnt right here
+    '''
+    # os.system(SchTasks /Create /SC DAILY /TN “My Task” /TR “C:RunMe.bat” /ST 09:00)
 
 def run_at_time():
     while True:
