@@ -16,7 +16,7 @@ with open('README.rst') as f:
 setup(
     name='OrganiseDesktop',
     include_package_data=True,
-    packages=["os", "getpass", "time","sys","tkinter"],
+    packages=["os", "getpass", "time","sys","tkinter", "json"],
     data_files=[('OrganiseDesktop', ['OrganiseDesktop/user_agents.txt'])],
     entry_points = {"console_scripts": ['socli = socli.socli:main']},
     install_requires=['BeautifulSoup4','requests','colorama','Py-stackExchange', 'urwid'],
