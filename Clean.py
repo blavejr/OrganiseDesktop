@@ -6,6 +6,7 @@ from getpass import getuser
 import time
 import sys
 import json
+import os
 
 if sys.version_info >= (3,):
     from tkinter import *
@@ -145,6 +146,10 @@ class OrganiseDesktop():
             '''list of folders to be created'''
             self.folder_names = ["Folders", "Shortcuts", "Zips", "Executables", "Pictures", "Music", "Movies", "Docs", "Code"]
             self.special_folders = []
+        elif sys.platform == 'linux':
+            self.desktopdir = path.join(environ['HOME'],'Desktop')
+            self.Alldesktopdir = path.join(environ['HOME'],'Desktop')
+            self.folder_names = ["Folders", "Shortcuts", "Zips", "Executables", "Pictures", "Music", "Movies", "Docs", "Code"]
         else:
             print("{} version not implemented".format(sys.platform))
             raise NotImplementedError
@@ -157,12 +162,20 @@ class OrganiseDesktop():
             '''For all the folders in the folder_name list, if that folder is not(False) on the main_desktop
                then create that folder.
             '''
-            for nam in range(0, len(self.folder_names)):
-                if path.isdir(self.desktopdir+'\\'+self.folder_names[nam]) == False:
-                    mkdir(self.desktopdir+"\\"+self.folder_names[nam])
-                    print(self.folder_names[nam]+" has been created!")
-                else:
-                    print("Folder already exists!")
+            if sys.platform == 'win32':
+                for nam in range(0, len(self.folder_names)):
+                    if path.isdir(self.desktopdir+'\\'+self.folder_names[nam]) == False:
+                        mkdir(self.desktopdir+"\\"+self.folder_names[nam])
+                        print(self.folder_names[nam]+" has been created!")
+                    else:
+                        print("Folder already exists!")
+            elif sys.platform == 'linux':
+                for nam in range(0, len(self.folder_names)):
+                    if path.isdir(self.desktopdir+'/'+self.folder_names[nam]) == False:
+                        mkdir(self.desktopdir+"/"+self.folder_names[nam])
+                        print(self.folder_names[nam]+" has been created!")
+                    else:
+                        print("Folder already exists!")
         except Exception as e:
             print(e)
 
@@ -177,7 +190,7 @@ class OrganiseDesktop():
         maps = [map, map2]
         return maps
 
-    def mover(self, map, map2):
+    def mover(self, map, map2, separator):
         '''
         This function gets two lists with all the things on the desktops
         and copies them into their respective folders, using a forloop and if statements
@@ -210,97 +223,133 @@ class OrganiseDesktop():
         try:
 
             '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
-            for item in map2:
-                '''This is a cmd command to move items from one folder to the other'''
-                rename(self.Alldesktopdir+'\\'+item, self.desktopdir+"\\"+self.folder_names[1]+"\\"+item)
+            if separator != '/':
+                for item in map2:
+                    '''This is a cmd command to move items from one folder to the other'''
+                    rename(self.Alldesktopdir + separator + item, self.desktopdir + separator + self.folder_names[1] + separator + item)
 
             for a in range(0, len(map)):
-
                 if Globals.sc:
                     for b in shortcuts_extensions:
                         if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
-                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
+                            rename(self.desktopdir + separator + map[a],
+                                   self.desktopdir + separator + self.folder_names[1] + separator + map[a])
+                            if separator == '/': os.system('cd ..')
 
                 if Globals.exes:
                     for b in executable_extensions:
                         if str(map[a].lower()).endswith(b) and str(map[a].lower()) != "Clean.exe":
-                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[3]+"\\"+map[a])
+                            rename(self.desktopdir + separator + map[a],
+                                   self.desktopdir + separator + self.folder_names[3] + separator + map[a])
+                            if separator == '/': os.system('cd ..')
 
                 if Globals.zips:
                     for b in zip_extensions:
                         if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[2]+"\\"+map[a])
+                            rename(self.desktopdir + separator + map[a],
+                                   self.desktopdir + separator + self.folder_names[2] + separator + map[a])
+                            if separator == '/': os.system('cd ..')
 
                 if Globals.img:
                     for b in images_extensions:
                         if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[4]+"\\"+map[a])
+                            rename(self.desktopdir + separator + map[a],
+                                   self.desktopdir + separator + self.folder_names[4] + separator + map[a])
+                            if separator == '/': os.system('cd ..')
 
                 if Globals.audio:
                     for b in music_extensions:
                         if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[5]+"\\"+map[a])
+                            rename(self.desktopdir + separator + map[a],
+                                   self.desktopdir + separator + self.folder_names[5] + separator + map[a])
+                            if separator == '/': os.system('cd ..')
 
                 if Globals.mov:
                     for b in movie_extensions:
                         if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[6]+"\\"+map[a])
+                            rename(self.desktopdir + separator + map[a],
+                                   self.desktopdir + separator + self.folder_names[6] + separator + map[a])
+                            if separator == '/': os.system('cd ..')
 
                 if Globals.txt:
                     for b in text_extensions:
                         if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[7]+"\\"+map[a])
+                            rename(self.desktopdir + separator + map[a],
+                                   self.desktopdir + separator + self.folder_names[7] + separator + map[a])
+                            if separator == '/': os.system('cd ..')
 
                 if Globals.programming:
                     for b in programming_languages_extensions:
                         if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
+                            rename(self.desktopdir + separator + map[a],
+                                   self.desktopdir + separator + self.folder_names[8] + separator + map[a])
+                            if separator == '/': os.system('cd ..')
 
                 for b in shortcuts_extensions:
                     if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
-                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[1]+"\\"+map[a])
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[1] + separator + map[a])
+                        if separator == '/': os.system('cd ..')
 
                 for b in executable_extensions:
                     if str(map[a].lower()).endswith(b) and str(map[a].lower()) != "Clean.exe":
-                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[3]+"\\"+map[a])
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[3] + separator + map[a])
+                        if separator == '/': os.system('cd ..')
 
                 for b in zip_extensions:
                     if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[2]+"\\"+map[a])
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[2] + separator + map[a])
+                        if separator == '/': os.system('cd ..')
 
                 for b in images_extensions:
                     if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[4]+"\\"+map[a])
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[4] + separator + map[a])
+                        if separator == '/': os.system('cd ..')
 
                 for b in music_extensions:
                     if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[5]+"\\"+map[a])
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[5] + separator + map[a])
+                        print(os.pwd())
+                        if separator == '/': os.system('cd ..')
 
                 for b in movie_extensions:
                     if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[6]+"\\"+map[a])
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[6] + separator + map[a])
+                        if separator == '/': os.system('cd ..')
 
                 for b in text_extensions:
                     if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[7]+"\\"+map[a])
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[7] + separator + map[a])
+                        if separator == '/': os.system('cd ..')
 
                 for b in D3_work:
                     if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[8] + separator + map[a])
+                        if separator == '/': os.system('cd ..')
 
                 for b in programming_languages_extensions:
                     if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[8]+"\\"+map[a])
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[8] + separator + map[a])
+                        if separator == '/': os.system('cd ..')
 
 
                 '''This weird part looks for the ".", if its not there this must be a folder'''
-                if "." not in str(map[a]) and map[a] not in self.folder_names:
-                    rename(self.desktopdir+"\\"+map[a], self.desktopdir+"\\"+self.folder_names[0]+"\\"+map[a])
-                else:
-                    '''Just some error handling here'''
-                    if map[a].lower() not in self.folder_names:
-                        print("I do not know what to do with "+map[a]+" please update me!")
-                    pass
+                if sys.platform != 'linux':
+                    if "." not in str(map[a]) and map[a] not in self.folder_names:
+                        rename(self.desktopdir + separator + map[a],
+                               self.desktopdir + separator + self.folder_names[0] + separator + map[a])
+                    else:
+                        '''Just some error handling here'''
+                        if map[a].lower() not in self.folder_names:
+                            print("I do not know what to do with "+map[a]+" please update me!")
         except Exception as e:
             print(e)
 
@@ -346,7 +395,10 @@ def main():
     projectOB = OrganiseDesktop()
     projectOB.makdir()
     maps = projectOB.mapper()
-    projectOB.mover(maps[0], maps[1])
+    if sys.platform == 'win32':
+        projectOB.mover(maps[0], maps[1], separator='\\')
+    elif sys.platform == 'linux':
+        projectOB.mover(maps[0], maps[1], separator='/')
     projectOB.writter(maps)
     tkMessageBox.showinfo("Complete", "Desktop clean finished.")
 
