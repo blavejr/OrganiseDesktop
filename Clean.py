@@ -18,10 +18,7 @@ else:
 
 Extensions = json.load(open('Extension.json'))
 
-
 folders = {x: True for x in Extensions}
-print(folders)
-
 
 class App(Frame):
     def clean(self):
@@ -200,25 +197,12 @@ class OrganiseDesktop():
         '''
         Extension Lists
         '''
-        # shortcuts_extensions = Extensions['shortcut']
-        # executable_extensions = Extensions['executable']
-        #
-        # # zip extensions source: http://bit.ly/2fnWz4D
-        # zip_extensions = Extensions['zip']
-        #
-        # # image extensions source: https://fileinfo.com/filetypes/raster_image, https://fileinfo.com/filetypes/vector_image, and https://fileinfo.com/filetypes/camera_raw
-        # images_extensions = Extensions['image']
-        #
+        # # image extensions source: https://fileinfo.com/filetypes/raster_image,
+        #                            https://fileinfo.com/filetypes/vector_image, and
+        #                            https://fileinfo.com/filetypes/camera_raw
         # # music extensions source: https://fileinfo.com/filetypes/audio
-        # music_extensions = Extensions['music']
-        #
         # # movie extensions source: http://bit.ly/2wvYjyr
-        # movie_extensions = Extensions['movie']
-        #
-        # # text extensions source: http://bit.ly/2wwcfZs
-        # text_extensions = Extensions['text']
-        # D3_work = Extensions['D3work']
-        # programming_languages_extensions = Extensions['programming']
+        # # text extensions source:  http://bit.ly/2wwcfZs
         try:
 
             '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
