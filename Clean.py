@@ -7,6 +7,7 @@ import time
 import sys
 import json
 import os
+import undo
 
 if sys.version_info >= (3,):
     from tkinter import *
@@ -15,9 +16,11 @@ else:
     from tkinter import *
     import tkMessageBox
 
-import Globals
-
 Extensions = json.load(open('Extension.json'))
+
+
+folders = {x: True for x in Extensions}
+
 
 class App(Frame):
     def clean(self):
@@ -28,24 +31,10 @@ class App(Frame):
         sys.exit(0)
 
     def check(self, item):
-        if item == 0:
-            Globals.sc = not Globals.sc
-        elif item == 1:
-            Globals.zips = not Globals.zips
-        elif item == 2:
-            Globals.audio = not Globals.audio
-        elif item == 3:
-            Globals.img = not Globals.img
-        elif item == 4:
-            Globals.exes = not Globals.exes
-        elif item == 5:
-            Globals.mov = not Globals.mov
-        elif item == 6:
-            Globals.txt = not Globals.txt
-        elif item == 7:
-            Globals.cad = not Globals.cad
-        elif item == 8:
-            Globals.programming = not Globals.programming
+        folders[item] = not folders[item]
+
+    def undo_all(self):
+        undo.execute()
 
     def create(self):
         self.winfo_toplevel().title("Desktop Cleaner")
@@ -53,55 +42,55 @@ class App(Frame):
         self.shortcuts = Checkbutton(self)
         self.shortcuts["text"] = "Shortcuts"
         self.shortcuts.select()
-        self.shortcuts["command"] = lambda: self.check(0)
+        self.shortcuts["command"] = lambda: self.check('shortcut')
         self.shortcuts.pack({"side":"top"})
 
         self.zip = Checkbutton(self)
         self.zip["text"] = "Archives"
         self.zip.select()
-        self.zip["command"] = lambda: self.check(1)
+        self.zip["command"] = lambda: self.check('zip')
         self.zip.pack({"side": "top"})
 
         self.music = Checkbutton(self)
         self.music["text"] = "Music"
         self.music.select()
-        self.music["command"] = lambda: self.check(2)
+        self.music["command"] = lambda: self.check('music')
         self.music.pack({"side": "top"})
 
         self.images = Checkbutton(self)
         self.images["text"] = "Images"
         self.images.select()
-        self.images["command"] = lambda: self.check(3)
+        self.images["command"] = lambda: self.check('image')
         self.images.pack({"side": "top"})
 
         self.exe = Checkbutton(self)
         self.exe["text"] = "Executables"
         self.exe.select()
-        self.exe["command"] = lambda: self.check(4)
+        self.exe["command"] = lambda: self.check('executable')
         self.exe.pack({"side": "top"})
 
         self.movies = Checkbutton(self)
         self.movies["text"] = "Movies"
         self.movies.select()
-        self.movies["command"] = lambda: self.check(5)
+        self.movies["command"] = lambda: self.check('movie')
         self.movies.pack({"side": "top"})
 
         self.text = Checkbutton(self)
         self.text["text"] = "Text"
         self.text.select()
-        self.text["command"] = lambda: self.check(6)
+        self.text["command"] = lambda: self.check('text')
         self.text.pack({"side": "top"})
 
         self.d3 = Checkbutton(self)
         self.d3["text"] = "CAD Files"
         self.d3.select()
-        self.d3["command"] = lambda: self.check(7)
+        self.d3["command"] = lambda: self.check('d3work')
         self.d3.pack({"side": "top"})
 
         self.code = Checkbutton(self)
         self.code["text"] = "Code"
         self.code.select()
-        self.code["command"] = lambda: self.check(8)
+        self.code["command"] = lambda: self.check('programming')
         self.code.pack({"side": "top"})
 
         self.clean_button = Button(self)
@@ -113,6 +102,11 @@ class App(Frame):
         self.quit_button["text"] = "Exit"
         self.quit_button["command"] = self.quit_all
         self.quit_button.pack({"side":"left"})
+
+        self.undo_button = Button(self)
+        self.undo_button['text'] = 'Undo'
+        self.undo_button['command'] = self.undo_all
+        self.undo_button.pack({"side":"left"})
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -144,12 +138,13 @@ class OrganiseDesktop():
                 self.Alldesktopdir = path.join(environ['PUBLIC'],'Desktop')
 
             '''list of folders to be created'''
-            self.folder_names = ["Folders", "Shortcuts", "Zips", "Executables", "Pictures", "Music", "Movies", "Docs", "Code"]
             self.special_folders = []
         elif sys.platform == 'linux':
             self.desktopdir = path.join(environ['HOME'],'Desktop')
             self.Alldesktopdir = path.join(environ['HOME'],'Desktop')
-            self.folder_names = ["Folders", "Shortcuts", "Zips", "Executables", "Pictures", "Music", "Movies", "Docs", "Code"]
+        elif sys.platform == 'darwin':
+            self.desktopdir = path.join(environ['HOME'], 'Desktop')
+            self.Alldesktopdir = path.join(environ['HOME'], 'Desktop')
         else:
             print("{} version not implemented".format(sys.platform))
             raise NotImplementedError
@@ -163,17 +158,17 @@ class OrganiseDesktop():
                then create that folder.
             '''
             if sys.platform == 'win32':
-                for nam in range(0, len(self.folder_names)):
-                    if path.isdir(self.desktopdir+'\\'+self.folder_names[nam]) == False:
-                        mkdir(self.desktopdir+"\\"+self.folder_names[nam])
-                        print(self.folder_names[nam]+" has been created!")
+                for nam in Extensions:
+                    if path.isdir(self.desktopdir+'\\'+nam) is False:
+                        mkdir(self.desktopdir+"\\"+nam)
+                        print(nam+" has been created!")
                     else:
                         print("Folder already exists!")
-            elif sys.platform == 'linux':
-                for nam in range(0, len(self.folder_names)):
-                    if path.isdir(self.desktopdir+'/'+self.folder_names[nam]) == False:
-                        mkdir(self.desktopdir+"/"+self.folder_names[nam])
-                        print(self.folder_names[nam]+" has been created!")
+            elif sys.platform == 'linux' or 'darwin':
+                for nam in Extensions:
+                    if path.isdir(self.desktopdir+'/'+nam) is False:
+                        mkdir(self.desktopdir+"/"+nam)
+                        print(nam+" has been created!")
                     else:
                         print("Folder already exists!")
         except Exception as e:
@@ -187,6 +182,9 @@ class OrganiseDesktop():
         '''
         map = listdir(self.desktopdir)
         map2 = listdir(self.Alldesktopdir)
+        print(map)
+        print('\n\n')
+        print(map2)
         maps = [map, map2]
         return maps
 
@@ -201,162 +199,59 @@ class OrganiseDesktop():
         '''
         Extension Lists
         '''
-        shortcuts_extensions = Extensions['shortcut']
-        executable_extensions = Extensions['executable']
-
-        # zip extensions source: http://bit.ly/2fnWz4D
-        zip_extensions = Extensions['zip']
-
-        # image extensions source: https://fileinfo.com/filetypes/raster_image, https://fileinfo.com/filetypes/vector_image, and https://fileinfo.com/filetypes/camera_raw
-        images_extensions = Extensions['image']
-
-        # music extensions source: https://fileinfo.com/filetypes/audio
-        music_extensions = Extensions['music']
-
-        # movie extensions source: http://bit.ly/2wvYjyr
-        movie_extensions = Extensions['movie']
-
-        # text extensions source: http://bit.ly/2wwcfZs
-        text_extensions = Extensions['text']
-        D3_work = Extensions['D3work']
-        programming_languages_extensions = Extensions['programming']
+        # shortcuts_extensions = Extensions['shortcut']
+        # executable_extensions = Extensions['executable']
+        #
+        # # zip extensions source: http://bit.ly/2fnWz4D
+        # zip_extensions = Extensions['zip']
+        #
+        # # image extensions source: https://fileinfo.com/filetypes/raster_image, https://fileinfo.com/filetypes/vector_image, and https://fileinfo.com/filetypes/camera_raw
+        # images_extensions = Extensions['image']
+        #
+        # # music extensions source: https://fileinfo.com/filetypes/audio
+        # music_extensions = Extensions['music']
+        #
+        # # movie extensions source: http://bit.ly/2wvYjyr
+        # movie_extensions = Extensions['movie']
+        #
+        # # text extensions source: http://bit.ly/2wwcfZs
+        # text_extensions = Extensions['text']
+        # D3_work = Extensions['D3work']
+        # programming_languages_extensions = Extensions['programming']
         try:
 
             '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
             if separator != '/':
                 for item in map2:
                     '''This is a cmd command to move items from one folder to the other'''
-                    rename(self.Alldesktopdir + separator + item, self.desktopdir + separator + self.folder_names[1] + separator + item)
+                    rename(self.Alldesktopdir + separator + item, self.desktopdir + separator + 'zip' + separator + item)
 
-            for a in range(0, len(map)):
-                if Globals.sc:
-                    for b in shortcuts_extensions:
-                        if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
-                            rename(self.desktopdir + separator + map[a],
-                                   self.desktopdir + separator + self.folder_names[1] + separator + map[a])
-                            if separator == '/': os.system('cd ..')
-
-                if Globals.exes:
-                    for b in executable_extensions:
-                        if str(map[a].lower()).endswith(b) and str(map[a].lower()) != "Clean.exe":
-                            rename(self.desktopdir + separator + map[a],
-                                   self.desktopdir + separator + self.folder_names[3] + separator + map[a])
-                            if separator == '/': os.system('cd ..')
-
-                if Globals.zips:
-                    for b in zip_extensions:
-                        if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir + separator + map[a],
-                                   self.desktopdir + separator + self.folder_names[2] + separator + map[a])
-                            if separator == '/': os.system('cd ..')
-
-                if Globals.img:
-                    for b in images_extensions:
-                        if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir + separator + map[a],
-                                   self.desktopdir + separator + self.folder_names[4] + separator + map[a])
-                            if separator == '/': os.system('cd ..')
-
-                if Globals.audio:
-                    for b in music_extensions:
-                        if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir + separator + map[a],
-                                   self.desktopdir + separator + self.folder_names[5] + separator + map[a])
-                            if separator == '/': os.system('cd ..')
-
-                if Globals.mov:
-                    for b in movie_extensions:
-                        if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir + separator + map[a],
-                                   self.desktopdir + separator + self.folder_names[6] + separator + map[a])
-                            if separator == '/': os.system('cd ..')
-
-                if Globals.txt:
-                    for b in text_extensions:
-                        if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir + separator + map[a],
-                                   self.desktopdir + separator + self.folder_names[7] + separator + map[a])
-                            if separator == '/': os.system('cd ..')
-
-                if Globals.programming:
-                    for b in programming_languages_extensions:
-                        if str(map[a].lower()).endswith(b):
-                            rename(self.desktopdir + separator + map[a],
-                                   self.desktopdir + separator + self.folder_names[8] + separator + map[a])
-                            if separator == '/': os.system('cd ..')
-
-                for b in shortcuts_extensions:
-                    if str(map[a].lower()).endswith(b) and str(map[a]) != "Clean.lnk" and str(map[a]) != "Clean.exe.lnk":
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[1] + separator + map[a])
-                        if separator == '/': os.system('cd ..')
-
-                for b in executable_extensions:
-                    if str(map[a].lower()).endswith(b) and str(map[a].lower()) != "Clean.exe":
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[3] + separator + map[a])
-                        if separator == '/': os.system('cd ..')
-
-                for b in zip_extensions:
-                    if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[2] + separator + map[a])
-                        if separator == '/': os.system('cd ..')
-
-                for b in images_extensions:
-                    if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[4] + separator + map[a])
-                        if separator == '/': os.system('cd ..')
-
-                for b in music_extensions:
-                    if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[5] + separator + map[a])
-                        print(os.pwd())
-                        if separator == '/': os.system('cd ..')
-
-                for b in movie_extensions:
-                    if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[6] + separator + map[a])
-                        if separator == '/': os.system('cd ..')
-
-                for b in text_extensions:
-                    if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[7] + separator + map[a])
-                        if separator == '/': os.system('cd ..')
-
-                for b in D3_work:
-                    if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[8] + separator + map[a])
-                        if separator == '/': os.system('cd ..')
-
-                for b in programming_languages_extensions:
-                    if str(map[a].lower()).endswith(b):
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[8] + separator + map[a])
-                        if separator == '/': os.system('cd ..')
-
+            for file_or_folder in map:
+                for extension_type in Extensions:
+                    for extension in Extensions[extension_type]:
+                        if str(file_or_folder.lower()).endswith(extension) and str(file_or_folder) != "Clean.lnk" and \
+                           str(file_or_folder) != "Clean.exe.lnk":
+                            rename(self.desktopdir + separator + file_or_folder,
+                                   self.desktopdir + separator + extension_type + separator + file_or_folder)
+                            if separator == '/':
+                                os.system('cd ..')
 
                 '''This weird part looks for the ".", if its not there this must be a folder'''
                 if sys.platform != 'linux':
-                    if "." not in str(map[a]) and map[a] not in self.folder_names:
-                        rename(self.desktopdir + separator + map[a],
-                               self.desktopdir + separator + self.folder_names[0] + separator + map[a])
+                    if "." not in str(file_or_folder) and file_or_folder not in Extensions:
+                        rename(self.desktopdir + separator + file_or_folder,
+                               self.desktopdir + separator + 'zip' + separator +file_or_folder)
                     else:
                         '''Just some error handling here'''
-                        if map[a].lower() not in self.folder_names:
-                            print("I do not know what to do with "+map[a]+" please update me!")
-        except Exception as e:
+                        if file_or_folder.lower() not in Extensions:
+                            print("I do not know what to do with "+file_or_folder+" please update me!")
+        except () as e:
             print(e)
 
     def writter(self, maps):
         '''
         This function writes the two lists of all the items left on the desktop
-        just incase something isnt right and we need a log.
+        just incase something isn't right and we need a log.
         '''
         lists1 = maps[0]
         lists2 = maps[1]
@@ -374,6 +269,7 @@ class OrganiseDesktop():
             writeOB.write("\n")
         writeOB.close()
 
+
 def automate():
     '''
     * This function keeps the program running and scans the desktop and cleans it after a set time
@@ -381,6 +277,7 @@ def automate():
     Something isnt right here
     '''
     # os.system(SchTasks /Create /SC DAILY /TN “My Task” /TR “C:RunMe.bat” /ST 09:00)
+
 
 def run_at_time():
     while True:
@@ -390,6 +287,7 @@ def run_at_time():
             time.sleep(1)
             run_at_time()
 
+
 def main():
     ''' The oh so magnificent main function keeping shit in order '''
     projectOB = OrganiseDesktop()
@@ -397,7 +295,7 @@ def main():
     maps = projectOB.mapper()
     if sys.platform == 'win32':
         projectOB.mover(maps[0], maps[1], separator='\\')
-    elif sys.platform == 'linux':
+    elif sys.platform == 'linux' or 'darwin':
         projectOB.mover(maps[0], maps[1], separator='/')
     projectOB.writter(maps)
     tkMessageBox.showinfo("Complete", "Desktop clean finished.")
