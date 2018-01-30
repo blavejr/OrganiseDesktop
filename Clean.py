@@ -20,6 +20,7 @@ Extensions = json.load(open('Extension.json'))
 
 
 folders = {x: True for x in Extensions}
+print(folders)
 
 
 class App(Frame):
@@ -84,7 +85,7 @@ class App(Frame):
         self.d3 = Checkbutton(self)
         self.d3["text"] = "CAD Files"
         self.d3.select()
-        self.d3["command"] = lambda: self.check('d3work')
+        self.d3["command"] = lambda: self.check('D3work')
         self.d3.pack({"side": "top"})
 
         self.code = Checkbutton(self)
@@ -228,13 +229,14 @@ class OrganiseDesktop():
 
             for file_or_folder in map:
                 for extension_type in Extensions:
-                    for extension in Extensions[extension_type]:
-                        if str(file_or_folder.lower()).endswith(extension) and str(file_or_folder) != "Clean.lnk" and \
-                           str(file_or_folder) != "Clean.exe.lnk":
-                            rename(self.desktopdir + separator + file_or_folder,
-                                   self.desktopdir + separator + extension_type + separator + file_or_folder)
-                            if separator == '/':
-                                os.system('cd ..')
+                    if folders[extension_type] is True:
+                        for extension in Extensions[extension_type]:
+                            if str(file_or_folder.lower()).endswith(extension) and str(file_or_folder) != "Clean.lnk" and \
+                               str(file_or_folder) != "Clean.exe.lnk":
+                                rename(self.desktopdir + separator + file_or_folder,
+                                               self.desktopdir + separator + extension_type + separator + file_or_folder)
+                                if separator == '/':
+                                    os.system('cd ..')
 
                 '''This weird part looks for the ".", if its not there this must be a folder'''
                 if sys.platform != 'linux':

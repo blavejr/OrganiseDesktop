@@ -26,11 +26,8 @@ def execute():
 
     map = listdir(desktopdir)
 
-
     for folder in map:
-        print("Starting on "+folder)
         if folder in Extensions:
-            print("Grabbing contents:")
             contents = listdir(path.join(desktopdir, folder))
             for thing in contents:
                 rename(desktopdir+'/'+folder+'/'+thing, desktopdir+'/'+thing)
