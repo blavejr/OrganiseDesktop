@@ -3,6 +3,7 @@ import sys
 import json
 Extensions = json.load(open('Extension.json'))
 
+
 def execute():
     if sys.platform == 'win32':
         desktopdir = path.join(environ['USERPROFILE'], 'Desktop')
@@ -14,7 +15,6 @@ def execute():
             Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')
 
         '''list of folders to be created'''
-        special_folders = []
     elif sys.platform == 'linux':
         desktopdir = path.join(environ['HOME'], 'Desktop')
         Alldesktopdir = path.join(environ['HOME'], 'Desktop')

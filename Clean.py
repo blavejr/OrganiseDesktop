@@ -2,7 +2,6 @@ __author__ = "Remigius Kalimba"
 '''Add a timer so it does this automatically everyday at a set time'''
 
 from os import path, mkdir, listdir, rename, environ
-from getpass import getuser
 import time
 import sys
 import json
@@ -19,6 +18,7 @@ else:
 Extensions = json.load(open('Extension.json'))
 
 folders = {x: True for x in Extensions}
+
 
 class App(Frame):
     def clean(self):
@@ -120,29 +120,24 @@ class OrganiseDesktop():
         This is a smart way to get the username
         We could also have used os.environ, this brings a list and a lot of information we can manipulate.
         '''
-        user = getuser()
 
         #
         # References:   https://en.wikipedia.org/wiki/Environment_variable#Default_values
         #               https://en.wikipedia.org/wiki/Windows_NT#Releases
         #
         if sys.platform == 'win32':
-            self.desktopdir = path.join(environ['USERPROFILE'],'Desktop')
+            self.desktopdir = path.join(environ['USERPROFILE'], 'Desktop')
 
             # Determine Windows version; check if this is XP; accordingly, read target folders
             if sys.getwindowsversion().major < 6:
-                self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'],'Desktop')
+                self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
             else:
-                self.Alldesktopdir = path.join(environ['PUBLIC'],'Desktop')
+                self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')
 
             '''list of folders to be created'''
             self.special_folders = []
-        elif sys.platform == 'linux':
-            self.desktopdir = path.join(environ['HOME'],'Desktop')
-            self.Alldesktopdir = path.join(environ['HOME'],'Desktop')
-        elif sys.platform == 'darwin':
+        elif sys.platform == 'linux' or 'darwin':
             self.desktopdir = path.join(environ['HOME'], 'Desktop')
-            self.Alldesktopdir = path.join(environ['HOME'], 'Desktop')
         else:
             print("{} version not implemented".format(sys.platform))
             raise NotImplementedError
@@ -174,25 +169,21 @@ class OrganiseDesktop():
 
     def mapper(self):
         '''
-        This function checks the two folders (current user desktop and all user desktop)
+        This function checks the two folders (current user desktop and all user desktop),
+        if on windows, only checks one folder if on linux or macOS,
         it takes all the items there and puts them into two respective lists which are
         returned and used by the mover function
         '''
-        map = listdir(self.desktopdir)
-        map2 = listdir(self.Alldesktopdir)
-        print(map)
-        print('\n\n')
-        print(map2)
-        maps = [map, map2]
+        if sys.platform == 'linux' or 'darwin':
+            return [listdir(self.desktopdir)]
+        maps = [listdir(self.desktopdir), listdir(self.Alldesktopdir)]
         return maps
 
-    def mover(self, map, map2, separator):
+    def mover(self, maps, separator):
         '''
         This function gets two lists with all the things on the desktops
         and copies them into their respective folders, using a forloop and if statements
         '''
-        map = map
-        map2 = map2
 
         '''
         Extension Lists
@@ -203,30 +194,32 @@ class OrganiseDesktop():
         # # music extensions source: https://fileinfo.com/filetypes/audio
         # # movie extensions source: http://bit.ly/2wvYjyr
         # # text extensions source:  http://bit.ly/2wwcfZs
+        map1 = maps[0]
         try:
 
             '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
             if separator != '/':
+                map2 = maps[1]
                 for item in map2:
                     '''This is a cmd command to move items from one folder to the other'''
-                    rename(self.Alldesktopdir + separator + item, self.desktopdir + separator + 'zip' + separator + item)
+                    rename(self.Alldesktopdir + separator + item, self.desktopdir + separator + item)
 
-            for file_or_folder in map:
+            for file_or_folder in map1:
                 for extension_type in Extensions:
                     if folders[extension_type] is True:
                         for extension in Extensions[extension_type]:
-                            if str(file_or_folder.lower()).endswith(extension) and str(file_or_folder) != "Clean.lnk" and \
-                               str(file_or_folder) != "Clean.exe.lnk":
+                            if str(file_or_folder.lower()).endswith(extension) and str(file_or_folder) != "Clean.lnk" \
+                               and str(file_or_folder) != "Clean.exe.lnk":
                                 rename(self.desktopdir + separator + file_or_folder,
-                                               self.desktopdir + separator + extension_type + separator + file_or_folder)
+                                       self.desktopdir + separator + extension_type + separator + file_or_folder)
                                 if separator == '/':
                                     os.system('cd ..')
 
                 '''This weird part looks for the ".", if its not there this must be a folder'''
-                if sys.platform != 'linux':
+                if not sys.platform == 'linux':
                     if "." not in str(file_or_folder) and file_or_folder not in Extensions:
                         rename(self.desktopdir + separator + file_or_folder,
-                               self.desktopdir + separator + 'zip' + separator +file_or_folder)
+                               self.desktopdir + separator + 'zip' + separator + file_or_folder)
                     else:
                         '''Just some error handling here'''
                         if file_or_folder.lower() not in Extensions:
@@ -240,7 +233,7 @@ class OrganiseDesktop():
         just incase something isn't right and we need a log.
         '''
         lists1 = maps[0]
-        lists2 = maps[1]
+
         writeOB = open('Read_Me.txt', 'w')
         writeOB.write("This is a list of all the items on your desktop before it was cleaned.\n"
                       "Email this list to kalimbatech@gmail.com if anything is not working as planned, it will help with debugging\n"
@@ -250,9 +243,11 @@ class OrganiseDesktop():
             writeOB.write(i)
             writeOB.write("\n")
 
-        for i in lists2:
-            writeOB.write(i)
-            writeOB.write("\n")
+        if sys.platform == 'win32':
+            lists2 = maps[1]
+            for i in lists2:
+                writeOB.write(i)
+                writeOB.write("\n")
         writeOB.close()
 
 
@@ -280,9 +275,9 @@ def main():
     projectOB.makdir()
     maps = projectOB.mapper()
     if sys.platform == 'win32':
-        projectOB.mover(maps[0], maps[1], separator='\\')
+        projectOB.mover(maps, separator='\\')
     elif sys.platform == 'linux' or 'darwin':
-        projectOB.mover(maps[0], maps[1], separator='/')
+        projectOB.mover(maps, separator='/')
     projectOB.writter(maps)
     tkMessageBox.showinfo("Complete", "Desktop clean finished.")
 
