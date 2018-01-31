@@ -1,15 +1,15 @@
 {
-	"shortcut": 
+	"shortcuts":
 	[".kys",".lnk",".mat",".pif",".shb",".url","xnk"], 
 	
-	"executable": 
+	"executables":
 	[".action",".apk",".app",".bin",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"], 
-	
+
 	"malware":
 	[".APPLICATION",".GADGET",".CPL",".MSC",".JS",".JSE",".WS","WSF",".REG",".CSH"],
 	
 	
-	"zip": 
+	"zips":
 	[".0",".000",".7z",".7z.001",".7z.002",".a00",".a01",".a02",".ace",".agg",".ain",".alz",".apz",".ar",".arc",".archiver",".arduboy",".arh",
 	".ari",".arj",".ark",".asr",".b1",".b64",".ba",".bdoc",".bh",".bndl",".boo",".bundle",".bz",".bz2",".bza",".bzip",".bzip2",".c00",".c01",
 	".c02",".c10",".car",".cb7",".cba",".cbr",".cbt",".cbz",".cdz",".comppkg.hauptwerk.rar",".comppkg_hauptwerk_rar",".cp9",".cpgz",".cpt",
@@ -26,7 +26,7 @@
 	".xapk",".xar",".xef",".xez",".xip",".xmcdz",".xx",".xz",".xzm",".y",".yz",".yz1",".z",".z01",".z02",".z03",".z04",".zap",".zfsendtotarget",
 	".zi",".zip",".zipx",".zix",".zl",".zoo",".zpi",".zsplit",".zw",".zz"], 
 	
-	"image": 
+	"images":
 	[".3fr",".ai",".ari",".arr",".arw",".avatar",".awd",".bmp",".bpg",".cdmz",".cdr",".cr2",".crw",".ct",".dcr",".dds",
 	".ded",".djvu",".dng",".eip",".eps",".exr",".fff",".fpx",".gif",".hdr",".hpgl",".i3d",".ico",".icon",".itc2",".iwi",
 	".j2c",".j2k",".jbig2",".jfif",".jif",".jp2",".jpc",".jpe",".jpeg",".jpg",".jpg-large",".jpx",".jxr",".k25",".kdc",
@@ -44,7 +44,7 @@
 	".omf", ".rx2", ".flm", ".gp5", ".sdt", ".ac3", ".mid", ".xspf", ".nkm", ".nsa", ".ply", ".sbg", ".sdat", ".toc", ".tg",
 	".ogg", ".wma", ".amr", ".m3u8", ".5xe", ".aif", ".frg", ".minigsf", ".pcast", ".vyf"], 
 	
-	"movie": 
+	"movies":
 	[".264",".3g2",".3gp",".3gp2",".3gpp",".3gpp2",".3mm",".3p2",".60d",".787",".890",".aaf",".aec",".aecap",".aegraphic",".aep",
 	".aepx",".aet",".aetx",".ajp",".ale",".am",".amc",".amv",".amx",".anim",".anx",".aqt",".arcut",".arf",".asf",".asx",".avb",
 	".avc",".avchd",".avd",".avi",".avm",".avp",".avs",".avv",".awlive",".axm",".axv",".bdm",".bdmv",".bdt2",".bdt3",".bik",".bin",
