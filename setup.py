@@ -16,11 +16,11 @@ with open('README.rst') as f:
 setup(
     name='OrganiseDesktop',
     include_package_data=True,
-    packages=["os", "getpass", "time","sys","tkinter", "json"],
+    packages=["os", "getpass", "time", "sys", "tkinter", "json"],
     data_files=[('OrganiseDesktop', ['OrganiseDesktop/user_agents.txt'])],
     entry_points = {"console_scripts": ['socli = socli.socli:main']},
     install_requires=['BeautifulSoup4','requests','colorama','Py-stackExchange', 'urwid'],
-    requires=['os','getpass','time','sys','tkinter'],
+    requires=['os', 'getpass', 'time', 'sys', 'tkinter'],
     version='1.0',
     url='https://github.com/blavejr/OrganiseDesktop.git',
     keywords="Desktop Organiser",
