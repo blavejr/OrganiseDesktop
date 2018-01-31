@@ -3,7 +3,6 @@ import sys
 import json
 Extensions = json.load(open('Extension.json'))
 
-
 def execute():
     if sys.platform == 'win32':
         desktopdir = path.join(environ['USERPROFILE'], 'Desktop')

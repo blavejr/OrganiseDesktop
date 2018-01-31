@@ -6,10 +6,10 @@
 	[".action",".apk",".app",".bin",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"], 
 	
 	"_comment_for_malware":
-	["These files extensions are not usually found on the desktop thus is these files are found on desktop then they most porobably are viruses"]
+	["These files extensions are not usually found on the desktop thus is these files are found on desktop then they most porobably are viruses"],
 	
 	"malware":
-	[".APPLICATION",".GADGET",".CPL",".MSC",".JS",".JSE",".WS","WSF",".REG",".CSH"]
+	[".APPLICATION",".GADGET",".CPL",".MSC",".JS",".JSE",".WS","WSF",".REG",".CSH"],
 	
 	
 	"zip": 
