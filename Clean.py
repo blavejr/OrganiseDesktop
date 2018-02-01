@@ -17,7 +17,7 @@ else:
 
 Extensions = json.load(open('Extension.json'))
 
-folders = {x: True for x in Extensions}
+folders = [x for x in Extensions]
 
 
 class App(Frame):
@@ -29,7 +29,10 @@ class App(Frame):
         sys.exit(0)
 
     def check(self, item):
-        folders[item] = not folders[item]
+        if item in folders:
+            folders.remove(item)
+        else:
+            folders.append(item)
 
     def undo_all(self):
         undo.execute()
@@ -41,7 +44,13 @@ class App(Frame):
         self.shortcuts["text"] = "Shortcuts"
         self.shortcuts.select()
         self.shortcuts["command"] = lambda: self.check('shortcut')
-        self.shortcuts.pack({"side":"top"})
+        self.shortcuts.pack({"side": "top"})
+
+        self.malware = Checkbutton(self)
+        self.malware["text"] = "Malware"
+        self.malware.select()
+        self.malware["command"] = lambda: self.check('malware')
+        self.malware.pack({"side": "top"})
 
         self.zip = Checkbutton(self)
         self.zip["text"] = "Archives"
@@ -99,12 +108,12 @@ class App(Frame):
         self.quit_button = Button(self)
         self.quit_button["text"] = "Exit"
         self.quit_button["command"] = self.quit_all
-        self.quit_button.pack({"side":"left"})
+        self.quit_button.pack({"side": "left"})
 
         self.undo_button = Button(self)
         self.undo_button['text'] = 'Undo'
         self.undo_button['command'] = self.undo_all
-        self.undo_button.pack({"side":"left"})
+        self.undo_button.pack({"side": "left"})
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -151,17 +160,17 @@ class OrganiseDesktop():
                then create that folder.
             '''
             if sys.platform == 'win32':
-                for nam in Extensions:
-                    if path.isdir(self.desktopdir+'\\'+nam) is False:
-                        mkdir(self.desktopdir+"\\"+nam)
-                        print(nam+" has been created!")
+                for nam in folders:
+                    if path.isdir(self.desktopdir + '\\' + nam) is False:
+                        mkdir(self.desktopdir + "\\" + nam)
+                        print(nam + " has been created!")
                     else:
                         print("Folder already exists!")
             elif sys.platform == 'linux' or 'darwin':
-                for nam in Extensions:
-                    if path.isdir(self.desktopdir+'/'+nam) is False:
-                        mkdir(self.desktopdir+"/"+nam)
-                        print(nam+" has been created!")
+                for nam in folders:
+                    if path.isdir(self.desktopdir + '/' + nam) is False:
+                        mkdir(self.desktopdir + "/" + nam)
+                        print(nam + " has been created!")
                     else:
                         print("Folder already exists!")
         except Exception as e:
@@ -203,27 +212,27 @@ class OrganiseDesktop():
                 for item in map2:
                     '''This is a cmd command to move items from one folder to the other'''
                     rename(self.Alldesktopdir + separator + item, self.desktopdir + separator + item)
-
             for file_or_folder in map1:
-                for extension_type in Extensions:
-                    if folders[extension_type] is True:
-                        for extension in Extensions[extension_type]:
-                            if str(file_or_folder.lower()).endswith(extension) and str(file_or_folder) != "Clean.lnk" \
-                               and str(file_or_folder) != "Clean.exe.lnk":
+                if file_or_folder not in folders and not file_or_folder.startswith(".") and not file_or_folder.startswith(".."):
+                    found = False
+                    for sorting_folder in folders:
+                        if os.path.isdir(self.desktopdir + separator + file_or_folder):
+                            rename(self.desktopdir + separator + file_or_folder,
+                                   self.desktopdir + separator + 'zip' + separator + file_or_folder)
+                            found = True
+                            break
+                        for extension in Extensions[sorting_folder]:
+                            if str(file_or_folder.lower()).endswith(extension) and \
+                               str(file_or_folder) != "Clean.lnk" and \
+                               str(file_or_folder) != "Clean.exe.lnk":
                                 rename(self.desktopdir + separator + file_or_folder,
-                                       self.desktopdir + separator + extension_type + separator + file_or_folder)
+                                           self.desktopdir + separator + sorting_folder + separator + file_or_folder)
                                 if separator == '/':
                                     os.system('cd ..')
-
-                '''This weird part looks for the ".", if its not there this must be a folder'''
-                if not sys.platform == 'linux':
-                    if "." not in str(file_or_folder) and file_or_folder not in Extensions:
-                        rename(self.desktopdir + separator + file_or_folder,
-                               self.desktopdir + separator + 'zip' + separator + file_or_folder)
-                    else:
-                        '''Just some error handling here'''
-                        if file_or_folder.lower() not in Extensions:
-                            print("I do not know what to do with "+file_or_folder+" please update me!")
+                                found = True
+                                break
+                    if not found:
+                        print("I do not know what to do with " + file_or_folder + " please update me!")
         except () as e:
             print(e)
 
