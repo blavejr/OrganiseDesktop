@@ -218,7 +218,7 @@ class OrganiseDesktop():
                     for sorting_folder in folders:
                         if os.path.isdir(self.desktopdir + separator + file_or_folder):
                             rename(self.desktopdir + separator + file_or_folder,
-                                   self.desktopdir + separator + 'zip' + separator + file_or_folder)
+                                   self.desktopdir + separator + 'zips' + separator + file_or_folder)
                             found = True
                             break
                         for extension in Extensions[sorting_folder]:
@@ -292,6 +292,10 @@ def main():
 
 
 root = Tk()
+root.resizable = False
+root.minsize(width=190, height=270)
+root.maxsize(width=190, height=270)
 app = App(root)
+root.protocol('WM_DELETE_WINDOW', app.quit_all)
 app.mainloop()
 root.destroy()
