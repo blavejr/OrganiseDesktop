@@ -88,10 +88,9 @@ ENV/
 # Rope project settings
 .ropeproject
 
+#pycharm project settings
 .idea/workspace.xml
-
 .idea/OrganiseDesktop.iml
-
 .idea/misc.xml
 
 Read_Me.txt

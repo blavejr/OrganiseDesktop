@@ -2,11 +2,13 @@ __author__ = "Remigius Kalimba"
 '''Add a timer so it does this automatically everyday at a set time'''
 
 from os import path, mkdir, listdir, rename, environ
-import time
 import sys
 import json
 import os
 import undo
+from crontab import CronTab
+import getpass
+
 
 if sys.version_info >= (3,):
     from tkinter import *
@@ -15,14 +17,14 @@ else:
     from tkinter import *
     import tkMessageBox
 
-Extensions = json.load(open('Extension.json'))
+Extensions = json.load(open(os.path.dirname(os.path.abspath(__file__))+'/Extension.json'))
 
 folders = [x for x in Extensions]
-
 
 class App(Frame):
     def clean(self):
         main()
+        tkMessageBox.showinfo("Complete", "Desktop clean finished.")
 
     def quit_all(self):
         quit()
@@ -36,6 +38,18 @@ class App(Frame):
 
     def undo_all(self):
         undo.execute()
+
+    def schedule_start(self):
+        my_cron = CronTab(user=getpass.getuser())
+        job = my_cron.new(command=str(sys.executable+' '+os.path.dirname(os.path.abspath(__file__))+"/cronCleanUp.py"),
+                          comment="OrganiseDesktop")
+        job.day.every(1)
+        my_cron.write()
+
+    def schedule_end(self):
+        my_cron = CronTab(user=getpass.getuser())
+        my_cron.remove_all(comment="OrganiseDesktop")
+        my_cron.write()
 
     def create(self):
         self.winfo_toplevel().title("Desktop Cleaner")
@@ -115,6 +129,17 @@ class App(Frame):
         self.undo_button['command'] = self.undo_all
         self.undo_button.pack({"side": "left"})
 
+        if sys.platform == 'linux' or sys.platform == 'darwin':
+            self.schedule_button = Button(self)
+            self.schedule_button['text'] = 'Schedule'
+            self.schedule_button['command'] = self.schedule_start
+            self.schedule_button.pack({"side": "left"})
+
+            self.remove_schedule_button = Button(self)
+            self.remove_schedule_button['text'] = 'Remove \nSchedule'
+            self.remove_schedule_button['command'] = self.schedule_end
+            self.remove_schedule_button.pack({"side": "right"})
+
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.pack()
@@ -138,13 +163,14 @@ class OrganiseDesktop():
             self.desktopdir = path.join(environ['USERPROFILE'], 'Desktop')
 
             # Determine Windows version; check if this is XP; accordingly, read target folders
-            if sys.getwindowsversion().major < 6:
-                self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
-            else:
-                self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')
-
+            if not sys.getwindowsversion() == 10:
+                if sys.getwindowsversion().major < 6:
+                    self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
+                else:
+                    self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')
+            print(self.desktopdir)
+            print(self.Alldesktopdir)
             '''list of folders to be created'''
-            self.special_folders = []
         elif sys.platform == 'linux' or 'darwin':
             self.desktopdir = path.join(environ['HOME'], 'Desktop')
         else:
@@ -163,16 +189,10 @@ class OrganiseDesktop():
                 for nam in folders:
                     if path.isdir(self.desktopdir + '\\' + nam) is False:
                         mkdir(self.desktopdir + "\\" + nam)
-                        print(nam + " has been created!")
-                    else:
-                        print("Folder already exists!")
             elif sys.platform == 'linux' or 'darwin':
                 for nam in folders:
                     if path.isdir(self.desktopdir + '/' + nam) is False:
                         mkdir(self.desktopdir + "/" + nam)
-                        print(nam + " has been created!")
-                    else:
-                        print("Folder already exists!")
         except Exception as e:
             print(e)
 
@@ -183,7 +203,7 @@ class OrganiseDesktop():
         it takes all the items there and puts them into two respective lists which are
         returned and used by the mover function
         '''
-        if sys.platform == 'linux' or 'darwin':
+        if sys.platform == 'linux' or sys.platform == 'darwin' or sys.getwindowsversion()[0] == 10:
             return [listdir(self.desktopdir)]
         maps = [listdir(self.desktopdir), listdir(self.Alldesktopdir)]
         return maps
@@ -207,7 +227,7 @@ class OrganiseDesktop():
         try:
 
             '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
-            if separator != '/':
+            if separator != '/' and not sys.getwindowsversion()[0] == 10:
                 map2 = maps[1]
                 for item in map2:
                     '''This is a cmd command to move items from one folder to the other'''
@@ -252,7 +272,7 @@ class OrganiseDesktop():
             writeOB.write(i)
             writeOB.write("\n")
 
-        if sys.platform == 'win32':
+        if sys.platform == 'win32' and not sys.getwindowsversion()[0] == 10:
             lists2 = maps[1]
             for i in lists2:
                 writeOB.write(i)
@@ -260,25 +280,11 @@ class OrganiseDesktop():
         writeOB.close()
 
 
-def automate():
-    '''
-    * This function keeps the program running and scans the desktop and cleans it after a set time
-    * Link explains the syntax https://technet.microsoft.com/en-us/library/cc725744(v=ws.11).aspx
-    Something isnt right here
-    '''
-    # os.system(SchTasks /Create /SC DAILY /TN “My Task” /TR “C:RunMe.bat” /ST 09:00)
-
-
-def run_at_time():
-    while True:
-        tim = time.strftime('%X')
-        if str(tim).startswith('6:30:00'):
-            main()
-            time.sleep(1)
-            run_at_time()
-
-
 def main():
+    fh = open("hello.txt", "w")
+    lines_of_text = ["one"]
+    fh.writelines(lines_of_text)
+    fh.close()
     ''' The oh so magnificent main function keeping shit in order '''
     projectOB = OrganiseDesktop()
     projectOB.makdir()
@@ -288,14 +294,18 @@ def main():
     elif sys.platform == 'linux' or 'darwin':
         projectOB.mover(maps, separator='/')
     projectOB.writter(maps)
-    tkMessageBox.showinfo("Complete", "Desktop clean finished.")
+    fh = open("hello.txt", "w")
+    lines_of_text = ["two"]
+    fh.writelines(lines_of_text)
+    fh.close()
 
 
-root = Tk()
-root.resizable = False
-root.minsize(width=190, height=270)
-root.maxsize(width=190, height=270)
-app = App(root)
-root.protocol('WM_DELETE_WINDOW', app.quit_all)
-app.mainloop()
-root.destroy()
+if __name__ == "__main__":
+    root = Tk()
+    root.resizable = False
+    root.minsize(width=350, height=330)
+    root.maxsize(width=350, height=330)
+    app = App(root)
+    root.protocol('WM_DELETE_WINDOW', app.quit_all)
+    app.mainloop()
+    root.destroy()
