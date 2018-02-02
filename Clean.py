@@ -50,8 +50,9 @@ class App(Frame):
             job.day.every(1)
             my_cron.write()
         else:
-            print(pwd)
-            call("SCHTASKS /Create /SC DAILY /TN OrganiseDesktop /TR "+pwd+"\\cronCleanUp.py",
+            if not os.path.isfile(pwd+"\\cronCleanUp.pyw"):
+                call("copy "+pwd+"\\cronCleanUp.py "+pwd+"\\cronCleanUp.pyw", shell=True)
+            call("SCHTASKS /Create /SC DAILY /TN OrganiseDesktop /TR "+pwd+"\\cronCleanUp.pyw /F",
                  shell=True)
 
     def schedule_end(self):
@@ -149,7 +150,7 @@ class App(Frame):
         self.remove_schedule_button = Button(self)
         self.remove_schedule_button['text'] = 'Remove \nSchedule'
         self.remove_schedule_button['command'] = self.schedule_end
-        self.remove_schedule_button.pack({"side": "right"})
+        self.remove_schedule_button.pack({"side": "left"})
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -179,8 +180,6 @@ class OrganiseDesktop():
                     self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
                 else:
                     self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')
-            print(self.desktopdir)
-            print(self.Alldesktopdir)
             '''list of folders to be created'''
         elif sys.platform == 'linux' or 'darwin':
             self.desktopdir = path.join(environ['HOME'], 'Desktop')
