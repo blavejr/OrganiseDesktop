@@ -8,7 +8,7 @@ import os
 import undo
 from crontab import CronTab
 import getpass
-
+from subprocess import call
 
 if sys.version_info >= (3,):
     from tkinter import *
@@ -17,9 +17,12 @@ else:
     from tkinter import *
     import tkMessageBox
 
-Extensions = json.load(open(os.path.dirname(os.path.abspath(__file__))+'/Extension.json'))
+pwd = os.path.dirname(os.path.abspath(__file__))
+
+Extensions = json.load(open(pwd+'/Extension.json'))
 
 folders = [x for x in Extensions]
+
 
 class App(Frame):
     def clean(self):
@@ -40,16 +43,25 @@ class App(Frame):
         undo.execute()
 
     def schedule_start(self):
-        my_cron = CronTab(user=getpass.getuser())
-        job = my_cron.new(command=str(sys.executable+' '+os.path.dirname(os.path.abspath(__file__))+"/cronCleanUp.py"),
-                          comment="OrganiseDesktop")
-        job.day.every(1)
-        my_cron.write()
+        if sys.platform == 'darwin' or sys.platform == 'linux':
+            my_cron = CronTab(user=getpass.getuser())
+            job = my_cron.new(command=str(sys.executable+' '+pwd+"/cronCleanUp.py"),
+                              comment="OrganiseDesktop")
+            job.day.every(1)
+            my_cron.write()
+        else:
+            print(pwd)
+            call("SCHTASKS /Create /SC DAILY /TN OrganiseDesktop /TR "+pwd+"\\cronCleanUp.py",
+                 shell=True)
 
     def schedule_end(self):
-        my_cron = CronTab(user=getpass.getuser())
-        my_cron.remove_all(comment="OrganiseDesktop")
-        my_cron.write()
+        if sys.platform == 'darwin' or sys.platform == 'linux':
+            my_cron = CronTab(user=getpass.getuser())
+            my_cron.remove_all(comment="OrganiseDesktop")
+            my_cron.write()
+        else:
+            call("SCHTASKS /Delete /TN OrganiseDesktop /F",
+                 shell=True)
 
     def create(self):
         self.winfo_toplevel().title("Desktop Cleaner")
@@ -129,16 +141,15 @@ class App(Frame):
         self.undo_button['command'] = self.undo_all
         self.undo_button.pack({"side": "left"})
 
-        if sys.platform == 'linux' or sys.platform == 'darwin':
-            self.schedule_button = Button(self)
-            self.schedule_button['text'] = 'Schedule'
-            self.schedule_button['command'] = self.schedule_start
-            self.schedule_button.pack({"side": "left"})
+        self.schedule_button = Button(self)
+        self.schedule_button['text'] = 'Schedule'
+        self.schedule_button['command'] = self.schedule_start
+        self.schedule_button.pack({"side": "left"})
 
-            self.remove_schedule_button = Button(self)
-            self.remove_schedule_button['text'] = 'Remove \nSchedule'
-            self.remove_schedule_button['command'] = self.schedule_end
-            self.remove_schedule_button.pack({"side": "right"})
+        self.remove_schedule_button = Button(self)
+        self.remove_schedule_button['text'] = 'Remove \nSchedule'
+        self.remove_schedule_button['command'] = self.schedule_end
+        self.remove_schedule_button.pack({"side": "right"})
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -281,10 +292,6 @@ class OrganiseDesktop():
 
 
 def main():
-    fh = open("hello.txt", "w")
-    lines_of_text = ["one"]
-    fh.writelines(lines_of_text)
-    fh.close()
     ''' The oh so magnificent main function keeping shit in order '''
     projectOB = OrganiseDesktop()
     projectOB.makdir()
@@ -294,10 +301,6 @@ def main():
     elif sys.platform == 'linux' or 'darwin':
         projectOB.mover(maps, separator='/')
     projectOB.writter(maps)
-    fh = open("hello.txt", "w")
-    lines_of_text = ["two"]
-    fh.writelines(lines_of_text)
-    fh.close()
 
 
 if __name__ == "__main__":
