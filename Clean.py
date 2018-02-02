@@ -21,7 +21,6 @@ Extensions = json.load(open(os.path.dirname(os.path.abspath(__file__))+'/Extensi
 
 folders = [x for x in Extensions]
 
-
 class App(Frame):
     def clean(self):
         main()
@@ -41,15 +40,16 @@ class App(Frame):
         undo.execute()
 
     def schedule_start(self):
-        self.my_cron = CronTab(user=getpass.getuser())
-        job = self.my_cron.new(command=str('/usr/local/bin/python3.6 '+os.path.dirname(os.path.abspath(__file__))+"/cronCleanUp.py"),
-                               comment="OrganiseDesktop")
-        job.minute.every(1)
-        self.my_cron.write()
+        my_cron = CronTab(user=getpass.getuser())
+        job = my_cron.new(command=str(sys.executable+' '+os.path.dirname(os.path.abspath(__file__))+"/cronCleanUp.py"),
+                          comment="OrganiseDesktop")
+        job.day.every(1)
+        my_cron.write()
 
     def schedule_end(self):
-        self.my_cron.remove_all(comment="OrganiseDesktop")
-        self.my_cron.write()
+        my_cron = CronTab(user=getpass.getuser())
+        my_cron.remove_all(comment="OrganiseDesktop")
+        my_cron.write()
 
     def create(self):
         self.winfo_toplevel().title("Desktop Cleaner")
@@ -129,15 +129,16 @@ class App(Frame):
         self.undo_button['command'] = self.undo_all
         self.undo_button.pack({"side": "left"})
 
-        self.schedule_button = Button(self)
-        self.schedule_button['text'] = 'Schedule'
-        self.schedule_button['command'] = self.schedule_start
-        self.schedule_button.pack({"side": "left"})
+        if sys.platform == 'linux' or sys.platform == 'darwin':
+            self.schedule_button = Button(self)
+            self.schedule_button['text'] = 'Schedule'
+            self.schedule_button['command'] = self.schedule_start
+            self.schedule_button.pack({"side": "left"})
 
-        self.remove_schedule_button = Button(self)
-        self.remove_schedule_button['text'] = 'Remove \nSchedule'
-        self.remove_schedule_button['command'] = self.schedule_end
-        self.remove_schedule_button.pack({"side": "right"})
+            self.remove_schedule_button = Button(self)
+            self.remove_schedule_button['text'] = 'Remove \nSchedule'
+            self.remove_schedule_button['command'] = self.schedule_end
+            self.remove_schedule_button.pack({"side": "right"})
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -162,13 +163,14 @@ class OrganiseDesktop():
             self.desktopdir = path.join(environ['USERPROFILE'], 'Desktop')
 
             # Determine Windows version; check if this is XP; accordingly, read target folders
-            if sys.getwindowsversion().major < 6:
-                self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
-            else:
-                self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')
-
+            if not sys.getwindowsversion() == 10:
+                if sys.getwindowsversion().major < 6:
+                    self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
+                else:
+                    self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')
+            print(self.desktopdir)
+            print(self.Alldesktopdir)
             '''list of folders to be created'''
-            self.special_folders = []
         elif sys.platform == 'linux' or 'darwin':
             self.desktopdir = path.join(environ['HOME'], 'Desktop')
         else:
@@ -201,7 +203,7 @@ class OrganiseDesktop():
         it takes all the items there and puts them into two respective lists which are
         returned and used by the mover function
         '''
-        if sys.platform == 'linux' or 'darwin':
+        if sys.platform == 'linux' or sys.platform == 'darwin' or sys.getwindowsversion()[0] == 10:
             return [listdir(self.desktopdir)]
         maps = [listdir(self.desktopdir), listdir(self.Alldesktopdir)]
         return maps
@@ -225,7 +227,7 @@ class OrganiseDesktop():
         try:
 
             '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
-            if separator != '/':
+            if separator != '/' and not sys.getwindowsversion()[0] == 10:
                 map2 = maps[1]
                 for item in map2:
                     '''This is a cmd command to move items from one folder to the other'''
@@ -270,7 +272,7 @@ class OrganiseDesktop():
             writeOB.write(i)
             writeOB.write("\n")
 
-        if sys.platform == 'win32':
+        if sys.platform == 'win32' and not sys.getwindowsversion()[0] == 10:
             lists2 = maps[1]
             for i in lists2:
                 writeOB.write(i)
