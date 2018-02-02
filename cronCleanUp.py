@@ -1,0 +1,2 @@
+import Clean
+Clean.main()
