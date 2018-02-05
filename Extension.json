@@ -1,15 +1,15 @@
 {
-	"shortcuts":
+	"Shortcuts":
 	[".kys",".lnk",".mat",".pif",".shb",".url","xnk"], 
 	
-	"executables":
+	"Executables":
 	[".action",".apk",".app",".bin",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"], 
 
-	"malware":
+	"Malware":
 	[".APPLICATION",".GADGET",".CPL",".MSC",".JS",".JSE",".WS","WSF",".REG",".CSH"],
 	
 	
-	"zips":
+	"Folders":
 	[".0",".000",".7z",".7z.001",".7z.002",".a00",".a01",".a02",".ace",".agg",".ain",".alz",".apz",".ar",".arc",".archiver",".arduboy",".arh",
 	".ari",".arj",".ark",".asr",".b1",".b64",".ba",".bdoc",".bh",".bndl",".boo",".bundle",".bz",".bz2",".bza",".bzip",".bzip2",".c00",".c01",
 	".c02",".c10",".car",".cb7",".cba",".cbr",".cbt",".cbz",".cdz",".comppkg.hauptwerk.rar",".comppkg_hauptwerk_rar",".cp9",".cpgz",".cpt",
@@ -26,7 +26,7 @@
 	".xapk",".xar",".xef",".xez",".xip",".xmcdz",".xx",".xz",".xzm",".y",".yz",".yz1",".z",".z01",".z02",".z03",".z04",".zap",".zfsendtotarget",
 	".zi",".zip",".zipx",".zix",".zl",".zoo",".zpi",".zsplit",".zw",".zz"], 
 	
-	"images":
+	"Images":
 	[".3fr",".ai",".ari",".arr",".arw",".avatar",".awd",".bmp",".bpg",".cdmz",".cdr",".cr2",".crw",".ct",".dcr",".dds",
 	".ded",".djvu",".dng",".eip",".eps",".exr",".fff",".fpx",".gif",".hdr",".hpgl",".i3d",".ico",".icon",".itc2",".iwi",
 	".j2c",".j2k",".jbig2",".jfif",".jif",".jp2",".jpc",".jpe",".jpeg",".jpg",".jpg-large",".jpx",".jxr",".k25",".kdc",
@@ -34,7 +34,7 @@
 	".png",".ppf",".psb",".psd",".pspbrush",".pwp",".pxd",".pxr",".raf",".raw",".rw2",".rwz",".sai",".spr",".sprite",
 	".sprite2",".srf",".sumo",".svg",".tbn",".tga",".tif",".tiff",".tn",".tn3",".ufo",".vsdx",".webp",".x3f",".xcf",".xpm"], 
 	
-	"music": 
+	"Music":
 	[".aiff", ".aac", ".alac", ".flp", ".mp3", ".aimppl", ".aup", ".ang", ".mscz", ".vdj", ".ram", ".sf2", ".sfk", ".xfs",
 	".dff", ".als", ".bidule", ".bnk", ".bww", ".cgrp", ".csh", ".cwb", ".dfc", ".dig", ".dm", ".dmsa", ".dmse", ".dsf",
 	".dsm", ".dtm", ".f4a", ".fev", ".h5b", ".h5s", ".ins", ".isma", ".krz", ".kt3", ".mbr", ".mmlp", ".mtp", ".nbs", ".omg",
@@ -44,7 +44,7 @@
 	".omf", ".rx2", ".flm", ".gp5", ".sdt", ".ac3", ".mid", ".xspf", ".nkm", ".nsa", ".ply", ".sbg", ".sdat", ".toc", ".tg",
 	".ogg", ".wma", ".amr", ".m3u8", ".5xe", ".aif", ".frg", ".minigsf", ".pcast", ".vyf"], 
 	
-	"movies":
+	"Movies":
 	[".264",".3g2",".3gp",".3gp2",".3gpp",".3gpp2",".3mm",".3p2",".60d",".787",".890",".aaf",".aec",".aecap",".aegraphic",".aep",
 	".aepx",".aet",".aetx",".ajp",".ale",".am",".amc",".amv",".amx",".anim",".anx",".aqt",".arcut",".arf",".asf",".asx",".avb",
 	".avc",".avchd",".avd",".avi",".avm",".avp",".avs",".avv",".awlive",".axm",".axv",".bdm",".bdmv",".bdt2",".bdt3",".bik",".bin",
@@ -75,7 +75,7 @@
 	".wmv",".wmx",".wot",".wp3",".wpl",".wsve",".wtv",".wve",".wvm",".wvx",".wxp",".xej",".xel",".xesc",".xfl",".xlmv",".xml",".xmv",
 	".xvid",".y4m",".yog",".yuv",".zeg",".zm1",".zm2",".zm3",".zmv"], 
 	
-	"text": 
+	"Text":
 	[ ".1st",".abw",".accdb",".act",".adoc",".aim",".ans",".apkg",".apt",".arff",".asc",".ascii",".ase",".aty",".awp",".awt",".aww",".bad",
 	".bbs",".bdp",".bdr",".bean",".bib",".bibtex",".bml",".bna",".boc",".brx",".btd",".bzabw",".c",".calca",".cdz",".charset",".chart",
 	".chord",".cnm",".cod",".cpp",".crwl",".css",".csv",".cws",".cyi",".dca",".dfti",".dgs",".diz",".dne",".doc",".docm",".docx",".docxml",
@@ -94,11 +94,11 @@
 	".upd",".utf8",".utxt",".vct",".vnt",".vw",".wbk",".webdoc",".wn",".wp",".wp4",".wp5",".wp6",".wp7",".wpa",".wpd",".wpl",".wps",
 	".wpt",".wpw",".wri",".wsd",".wtt",".wtx",".xbdoc",".xbplate",".xdl",".xlsx",".xwp",".xy",".xy3",".xyp",".xyw",".zabw",".zrtf",".zw"], 
 	
-	"D3work": 
+	"CAD":
 	[".ma", ".dxe", ".gpw", ".mb", ".mnx", ".shx", ".dwk", ".apj", ".sld", ".hdi", ".dwg", ".lli", ".aws", ".dwz", ".slb", ".dxx", ".dw2l",
 		".dwt", ".dws", ".shp", ".dbt", ".dxf", ".schematic", ".pwt", ".mvi", ".blk", ".fbx", ".blend", ".chc"],
 	
-	"programming": 
+	"Programming":
 	[".gmo", ".dcu", ".wixmst", ".csproj", ".r", ".pjx", ".lgo", ".bcp", ".vbp", ".vdm", ".diff", ".mv", ".pyw", ".ilk", ".vdproj", ".mdzip",
 		".bpg", ".resx", ".agi", ".gmd", ".proto", ".resjson", ".pri", ".gorm", ".f", ".vtv", ".xcappdata", ".groupproj", ".mf", ".sln", ".ccn",
 		".sup", ".xquery", ".a", ".cob", ".java", ".wdgtproj", ".edml", ".py", ".ppc", ".scc", ".xap", ".rdlc", ".lnt", ".bluej", ".fgl", ".clw",

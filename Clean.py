@@ -9,6 +9,7 @@ import undo
 from crontab import CronTab
 import getpass
 from subprocess import call
+import pickle
 
 if sys.version_info >= (3,):
     from tkinter import *
@@ -26,7 +27,7 @@ folders = [x for x in Extensions]
 
 class App(Frame):
     def clean(self):
-        main()
+        main(folders)
         tkMessageBox.showinfo("Complete", "Desktop clean finished.")
 
     def quit_all(self):
@@ -43,6 +44,8 @@ class App(Frame):
         undo.execute()
 
     def schedule_start(self):
+        with open('./settings.txt', 'wb') as setting_file:
+            pickle.dump(folders, setting_file)
         if sys.platform == 'darwin' or sys.platform == 'linux':
             my_cron = CronTab(user=getpass.getuser())
             job = my_cron.new(command=str(sys.executable+' '+pwd+"/cronCleanUp.py"),
@@ -56,6 +59,7 @@ class App(Frame):
                  shell=True)
 
     def schedule_end(self):
+        os.remove("./settings.txt")
         if sys.platform == 'darwin' or sys.platform == 'linux':
             my_cron = CronTab(user=getpass.getuser())
             my_cron.remove_all(comment="OrganiseDesktop")
@@ -70,61 +74,61 @@ class App(Frame):
         self.shortcuts = Checkbutton(self)
         self.shortcuts["text"] = "Shortcuts"
         self.shortcuts.select()
-        self.shortcuts["command"] = lambda: self.check('shortcut')
+        self.shortcuts["command"] = lambda: self.check('Shortcuts')
         self.shortcuts.pack({"side": "top"})
 
         self.malware = Checkbutton(self)
         self.malware["text"] = "Malware"
         self.malware.select()
-        self.malware["command"] = lambda: self.check('malware')
+        self.malware["command"] = lambda: self.check('Malware')
         self.malware.pack({"side": "top"})
 
         self.zip = Checkbutton(self)
-        self.zip["text"] = "Archives"
+        self.zip["text"] = "Folders"
         self.zip.select()
-        self.zip["command"] = lambda: self.check('zip')
+        self.zip["command"] = lambda: self.check('Folders')
         self.zip.pack({"side": "top"})
 
         self.music = Checkbutton(self)
         self.music["text"] = "Music"
         self.music.select()
-        self.music["command"] = lambda: self.check('music')
+        self.music["command"] = lambda: self.check('Music')
         self.music.pack({"side": "top"})
 
         self.images = Checkbutton(self)
         self.images["text"] = "Images"
         self.images.select()
-        self.images["command"] = lambda: self.check('image')
+        self.images["command"] = lambda: self.check('Images')
         self.images.pack({"side": "top"})
 
         self.exe = Checkbutton(self)
         self.exe["text"] = "Executables"
         self.exe.select()
-        self.exe["command"] = lambda: self.check('executable')
+        self.exe["command"] = lambda: self.check('Executables')
         self.exe.pack({"side": "top"})
 
         self.movies = Checkbutton(self)
         self.movies["text"] = "Movies"
         self.movies.select()
-        self.movies["command"] = lambda: self.check('movie')
+        self.movies["command"] = lambda: self.check('Movies')
         self.movies.pack({"side": "top"})
 
         self.text = Checkbutton(self)
         self.text["text"] = "Text"
         self.text.select()
-        self.text["command"] = lambda: self.check('text')
+        self.text["command"] = lambda: self.check('Text')
         self.text.pack({"side": "top"})
 
         self.d3 = Checkbutton(self)
-        self.d3["text"] = "CAD Files"
+        self.d3["text"] = "CAD"
         self.d3.select()
-        self.d3["command"] = lambda: self.check('D3work')
+        self.d3["command"] = lambda: self.check('CAD')
         self.d3.pack({"side": "top"})
 
         self.code = Checkbutton(self)
-        self.code["text"] = "Code"
+        self.code["text"] = "Programming"
         self.code.select()
-        self.code["command"] = lambda: self.check('programming')
+        self.code["command"] = lambda: self.check('Programming')
         self.code.pack({"side": "top"})
 
         self.clean_button = Button(self)
@@ -187,7 +191,7 @@ class OrganiseDesktop():
             print("{} version not implemented".format(sys.platform))
             raise NotImplementedError
 
-    def makdir(self):
+    def makdir(self, folders_to_make):
         '''
         This function makes the needed folders if they are not already found.
         '''
@@ -196,11 +200,11 @@ class OrganiseDesktop():
                then create that folder.
             '''
             if sys.platform == 'win32':
-                for nam in folders:
+                for nam in folders_to_make:
                     if path.isdir(self.desktopdir + '\\' + nam) is False:
                         mkdir(self.desktopdir + "\\" + nam)
             elif sys.platform == 'linux' or 'darwin':
-                for nam in folders:
+                for nam in folders_to_make:
                     if path.isdir(self.desktopdir + '/' + nam) is False:
                         mkdir(self.desktopdir + "/" + nam)
         except Exception as e:
@@ -218,21 +222,18 @@ class OrganiseDesktop():
         maps = [listdir(self.desktopdir), listdir(self.Alldesktopdir)]
         return maps
 
-    def mover(self, maps, separator):
+    def mover(self, maps, folder_names, separator):
+        print('moving with : '+str(folder_names))
         '''
         This function gets two lists with all the things on the desktops
         and copies them into their respective folders, using a forloop and if statements
         '''
-
-        '''
-        Extension Lists
-        '''
-        # # image extensions source: https://fileinfo.com/filetypes/raster_image,
-        #                            https://fileinfo.com/filetypes/vector_image, and
-        #                            https://fileinfo.com/filetypes/camera_raw
-        # # music extensions source: https://fileinfo.com/filetypes/audio
-        # # movie extensions source: http://bit.ly/2wvYjyr
-        # # text extensions source:  http://bit.ly/2wwcfZs
+        # image extensions source: https://fileinfo.com/filetypes/raster_image,
+        #                          https://fileinfo.com/filetypes/vector_image, and
+        #                          https://fileinfo.com/filetypes/camera_raw
+        # music extensions source: https://fileinfo.com/filetypes/audio
+        # movie extensions source: http://bit.ly/2wvYjyr
+        # text extensions source:  http://bit.ly/2wwcfZs
         map1 = maps[0]
         try:
 
@@ -243,26 +244,26 @@ class OrganiseDesktop():
                     '''This is a cmd command to move items from one folder to the other'''
                     rename(self.Alldesktopdir + separator + item, self.desktopdir + separator + item)
             for file_or_folder in map1:
-                if file_or_folder not in folders and not file_or_folder.startswith(".") and not file_or_folder.startswith(".."):
+                if file_or_folder not in folder_names and not file_or_folder.startswith(".") and not file_or_folder.startswith(".."):
                     found = False
-                    for sorting_folder in folders:
-                        if os.path.isdir(self.desktopdir + separator + file_or_folder):
-                            rename(self.desktopdir + separator + file_or_folder,
-                                   self.desktopdir + separator + 'zips' + separator + file_or_folder)
+                    for sorting_folder in folder_names:
+                        if os.path.isdir(self.desktopdir + separator + file_or_folder) and file_or_folder not in Extensions and "Folders" in folder_names:
+                            rename(src=self.desktopdir + separator + file_or_folder,
+                                   dst=self.desktopdir + separator + app.zip['text'] + separator + file_or_folder)
                             found = True
                             break
                         for extension in Extensions[sorting_folder]:
                             if str(file_or_folder.lower()).endswith(extension) and \
                                str(file_or_folder) != "Clean.lnk" and \
                                str(file_or_folder) != "Clean.exe.lnk":
-                                rename(self.desktopdir + separator + file_or_folder,
-                                           self.desktopdir + separator + sorting_folder + separator + file_or_folder)
+                                rename(src=self.desktopdir + separator + file_or_folder,
+                                       dst=self.desktopdir + separator + sorting_folder + separator + file_or_folder)
                                 if separator == '/':
                                     os.system('cd ..')
                                 found = True
                                 break
                     if not found:
-                        print("I do not know what to do with " + file_or_folder + " please update me!")
+                        print("Did not sort " + file_or_folder)
         except () as e:
             print(e)
 
@@ -290,15 +291,15 @@ class OrganiseDesktop():
         writeOB.close()
 
 
-def main():
+def main(folder_names=Extensions):
     ''' The oh so magnificent main function keeping shit in order '''
     projectOB = OrganiseDesktop()
-    projectOB.makdir()
+    projectOB.makdir(folder_names)
     maps = projectOB.mapper()
     if sys.platform == 'win32':
-        projectOB.mover(maps, separator='\\')
+        projectOB.mover(maps, folder_names, separator='\\')
     elif sys.platform == 'linux' or 'darwin':
-        projectOB.mover(maps, separator='/')
+        projectOB.mover(maps, folder_names, separator='/')
     projectOB.writter(maps)
 
 
