@@ -96,7 +96,7 @@
 	
 	"D3work": 
 	[".ma", ".dxe", ".gpw", ".mb", ".mnx", ".shx", ".dwk", ".apj", ".sld", ".hdi", ".dwg", ".lli", ".aws", ".dwz", ".slb", ".dxx", ".dw2l",
-		".dwt", ".dws", ".shp", ".dbt", ".dxf", ".schematic", ".pwt", ".mvi", ".blk", ".fbx", ".blend"],
+		".dwt", ".dws", ".shp", ".dbt", ".dxf", ".schematic", ".pwt", ".mvi", ".blk", ".fbx", ".blend", ".chc"],
 	
 	"programming": 
 	[".gmo", ".dcu", ".wixmst", ".csproj", ".r", ".pjx", ".lgo", ".bcp", ".vbp", ".vdm", ".diff", ".mv", ".pyw", ".ilk", ".vdproj", ".mdzip",
@@ -132,5 +132,5 @@
 		".dbproj", ".fsx", ".pyx", ".tmproj", ".csi", ".brx", ".gld", ".wdw", ".4th", ".svn", ".xt", ".ahk", ".dgml", ".xojo_menu",
 		".gszip", ".odl", ".appx", ".fla", ".gameproj", ".fxml", ".so", ".csp", ".nupkg", ".bas", ".storyboard", ".owl", ".vssscc",
 		".erl", ".pch", ".rise", ".gitattributes", ".fs", ".autoplay", ".tt", ".hpf", ".dpl", ".po", ".b", ".ssi", ".dgsl",
-		".cvsrc", ".mshi", ".rc", ".vsps", ".kdevelop", ".vsmdi"]
+		".cvsrc", ".mshi", ".rc", ".vsps", ".kdevelop", ".vsmdi", ".json", ".brM"]
 }
