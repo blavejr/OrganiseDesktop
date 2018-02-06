@@ -35,7 +35,7 @@ def execute():
         if folder in Extensions:
             contents = listdir(path.join(desktopdir, folder))
             for thing in contents:
-                rename(desktopdir+separator+folder+separator+thing, desktopdir+separator+thing)
+                rename(src=desktopdir+separator+folder+separator+thing, dst=desktopdir+separator+thing)
             rmdir(desktopdir+separator+folder)
 
 
