@@ -13,13 +13,17 @@ The setup file isn't yet setup up properly (work in progress). To run the progra
 the repo and install the required packages then run the Clean.py file.
 
 # Prerequisites
+All the necessary packages are mentioned in requirements.txt. They can be installed by
+running `pip install -r requirements.txt`. For development purposes, I suggest you create a
+virtual environment to keep a clear state, separate from your own setup.
 
-os
-getpass
-time
-sys
-tkinter
+Python3 Instructions:
+`python -m venv organise_desktop`
+
+To activate it, run `source organise_desktop/bin/activate`
 
 ### Build from Source
 
 `$ git clone https://github.com/blavejr/OrganiseDesktop.git`
+Navigate to the repo and run the following command:
+`$ pip install -r requirements.txt`
