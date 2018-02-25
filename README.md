@@ -16,6 +16,9 @@ the repo and install the required packages then run the Clean.py file.
 All the necessary packages are mentioned in requirements.txt. They can be installed by
 running `pip install -r requirements.txt`. For development purposes, I suggest you create a
 virtual environment to keep a clear state, separate from your own setup.
+The activate.sh script has been provided to ensure a standard development environment. To create the environment if it doesn't already exist, or simply load it otherwise, run `source ./activate.sh`
+
+If you do not want to create a virtual environment, just run the pip command above and ignore the following. Otherwise, the activate.sh script will handle the creation and loading of the virtual environment with all the necessary dependencies. Furthermore, once a new dependency is established, remove requirements.txt and please run `pip freeze > requirements.txt` to generate a new file that should be commited to version control.
 
 Python3 Instructions:
 `python -m venv organise_desktop`
