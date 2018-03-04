@@ -5,7 +5,7 @@ import os
 
 
 Extensions = json.load(open(os.path.dirname(os.path.abspath(__file__))+'/Extension.json'))
-
+#TODO: Move this into the OrganiseDesktop class and add a flag for the CL tool
 
 def execute():
     if sys.platform == 'win32':
