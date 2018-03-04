@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 from os import path, mkdir, listdir, rename, environ
 
 class OrganiseDesktop():
@@ -139,4 +140,15 @@ class OrganiseDesktop():
         writeOB.close()
 
 if __name__ == '__main__':
-    print("Implement me, implement me!")
+    pwd = os.path.dirname(os.path.abspath(__file__))
+
+    Extensions = json.load(open(pwd+'/Extension.json'))
+
+    folders = [x for x in Extensions]
+
+    ''' The oh so magnificent main function keeping shit in order '''
+    projectOB = OrganiseDesktop(Extensions)
+    projectOB.makdir(Extensions)
+    maps = projectOB.list_directory_content()
+    projectOB.mover(maps, Extensions)
+    projectOB.writter(maps)
