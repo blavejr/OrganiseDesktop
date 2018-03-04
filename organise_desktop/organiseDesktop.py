@@ -114,8 +114,8 @@ class OrganiseDesktop():
                                    dst=self.desktopdir + self.separator + sorting_folder + self.separator + item)
                             found = True
                             break
-                    if not found:
-                        print("Did not sort " + item)
+                if not found:
+                    print("Did not sort " + item)
         except () as e:
             print(e)
 
@@ -137,3 +137,6 @@ class OrganiseDesktop():
                 writeOB.write("\n")
 
         writeOB.close()
+
+if __name__ == '__main__':
+    print("Implement me, implement me!")
