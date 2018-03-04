@@ -103,6 +103,9 @@ wheels/
 pip-log.txt
 pip-delete-this-directory.txt
 
+# Debugging logs
+log/modifications.log
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
@@ -166,6 +169,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# MacOs
+.DS_Store*
 
 
 # End of https://www.gitignore.io/api/python,intellij

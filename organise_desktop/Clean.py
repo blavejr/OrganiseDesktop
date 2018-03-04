@@ -166,11 +166,8 @@ def main(folder_names=Extensions):
     ''' The oh so magnificent main function keeping shit in order '''
     projectOB = OrganiseDesktop(Extensions)
     projectOB.makdir(folder_names)
-    maps = projectOB.mapper()
-    if sys.platform == 'win32':
-        projectOB.mover(maps, folder_names, separator='\\')
-    elif sys.platform == 'linux' or 'darwin':
-        projectOB.mover(maps, folder_names, separator='/')
+    maps = projectOB.list_directory_content()
+    projectOB.mover(maps, folder_names)
     projectOB.writter(maps)
 
 
