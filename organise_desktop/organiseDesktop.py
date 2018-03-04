@@ -72,8 +72,8 @@ class OrganiseDesktop():
         return content
 
 
-    def mover(self, content, folder_names):
-        print('moving with : ' + str(folder_names))
+    def mover(self, content):
+        print('moving with : ' + str(self.extensions))
         '''
         This function gets two lists with all the things on the desktops
         and copies them into their respective folders, using a forloop and if statements
@@ -87,38 +87,34 @@ class OrganiseDesktop():
 
         user_dir_content = content[0]
 
-        try:
+        '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
+        if self.separator != '/' and not sys.getwindowsversion()[0] == 10:
+            all_users_content = content[1]
+            for item in all_users_content2:
+                '''This is a cmd command to move items from one folder to the other'''
+                rename(self.Alldesktopdir + self.separator + item, self.desktopdir + self.separator + item)
 
-            '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
-            if self.separator != '/' and not sys.getwindowsversion()[0] == 10:
-                all_users_content = content[1]
-                for item in all_users_content2:
-                    '''This is a cmd command to move items from one folder to the other'''
-                    rename(self.Alldesktopdir + self.separator + item, self.desktopdir + self.separator + item)
+        to_be_cleaned = [entry for entry in user_dir_content
+                            if entry not in self.extensions and not (entry.startswith('.') or entry.startswith('..'))]
 
-            to_be_cleaned = [entry for entry in user_dir_content
-                                if entry not in folder_names and not (entry.startswith('.') or entry.startswith('..'))]
-
-            for item in to_be_cleaned:
-                found = False
-                for sorting_folder in folder_names:
-                    if os.path.isdir(self.desktopdir + self.separator + item) and item not in self.extensions and "Folders" in folder_names:
-                       rename(src=self.desktopdir + self.separator + item,
-                              dst=self.desktopdir + self.separator + 'Folders' + self.separator + item)
-                       found = True
-                       break
-                    for extension in self.extensions[sorting_folder]:
-                        if (str(item.lower()).endswith(extension) and
-                            str(item) != "Clean.lnk" and
-                            str(item) != "Clean.exe.lnk"):
-                            rename(src=self.desktopdir + self.separator + item,
-                                   dst=self.desktopdir + self.separator + sorting_folder + self.separator + item)
-                            found = True
-                            break
-                if not found:
-                    print("Did not sort " + item)
-        except () as e:
-            print(e)
+        for item in to_be_cleaned:
+            found = False
+            for sorting_folder in self.extensions:
+                if os.path.isdir(self.desktopdir + self.separator + item) and item not in self.extensions and "Folders" in self.extensions:
+                   rename(src=self.desktopdir + self.separator + item,
+                          dst=self.desktopdir + self.separator + 'Folders' + self.separator + item)
+                   found = True
+                   break
+                for extension in self.extensions[sorting_folder]:
+                    if (str(item.lower()).endswith(extension) and
+                        str(item) != "Clean.lnk" and
+                        str(item) != "Clean.exe.lnk"):
+                        rename(src=self.desktopdir + self.separator + item,
+                               dst=self.desktopdir + self.separator + sorting_folder + self.separator + item)
+                        found = True
+                        break
+            if not found:
+                print("Did not sort " + item)
 
     def writter(self, content):
         '''
@@ -142,13 +138,13 @@ class OrganiseDesktop():
 if __name__ == '__main__':
     pwd = os.path.dirname(os.path.abspath(__file__))
 
-    Extensions = json.load(open(pwd+'/Extension.json'))
+    extensions = json.load(open(pwd+'/Extension.json'))
 
-    folders = [x for x in Extensions]
+    folders = [x for x in extensions]
 
     ''' The oh so magnificent main function keeping shit in order '''
-    projectOB = OrganiseDesktop(Extensions)
-    projectOB.makdir(Extensions)
+    projectOB = OrganiseDesktop(extensions)
+    projectOB.makdir(extensions)
     maps = projectOB.list_directory_content()
-    projectOB.mover(maps, Extensions)
+    projectOB.mover(maps)
     projectOB.writter(maps)
