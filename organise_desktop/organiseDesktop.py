@@ -135,7 +135,7 @@ class OrganiseDesktop():
 
         writeOB.close()
 
-if __name__ == '__main__':
+def organise_desktop():
     pwd = os.path.dirname(os.path.abspath(__file__))
 
     extensions = json.load(open(pwd+'/Extension.json'))
@@ -148,3 +148,6 @@ if __name__ == '__main__':
     maps = projectOB.list_directory_content()
     projectOB.mover(maps)
     projectOB.writter(maps)
+
+if __name__ == '__main__':
+    organise_desktop()

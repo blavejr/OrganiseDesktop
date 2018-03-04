@@ -10,7 +10,7 @@ import getpass
 import pickle
 from crontab import CronTab
 from subprocess import call
-from organiseDesktop import OrganiseDesktop
+from organiseDesktop import OrganiseDesktop, organise_desktop
 
 if sys.version_info >= (3,):
     from tkinter import *
@@ -28,7 +28,7 @@ folders = [x for x in Extensions]
 
 class App(Frame):
     def clean(self):
-        main(folders)
+        organise_desktop()
         tkMessageBox.showinfo("Complete", "Desktop clean finished.")
 
     def quit_all(self):
@@ -161,15 +161,6 @@ class App(Frame):
         Frame.__init__(self, master)
         self.pack()
         self.create()
-
-def main(folder_names=Extensions):
-    ''' The oh so magnificent main function keeping shit in order '''
-    projectOB = OrganiseDesktop(Extensions)
-    projectOB.makdir(folder_names)
-    maps = projectOB.list_directory_content()
-    projectOB.mover(maps, folder_names)
-    projectOB.writter(maps)
-
 
 if __name__ == "__main__":
     root = Tk()
