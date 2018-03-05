@@ -1,0 +1,26 @@
+- Once upon a boot, UNIX ran init. As a result, the mighty Wizard of OS read
+    an ancient scroll of wisdom which told him how many magical terminals to
+    run and that he should split one process per terminal
+- Once the terminals were in position, the search for The One, the person of
+  the prophecy, destined to login into the machine, began.
+- Time passed, centuries and millennia washed over the wizard, turning his
+  beard white with CPU ticks of generations past, but faith smiled upon him,
+  as his quest came to an interrupt. The One came into being, and with the power
+  bestowed upon him, he executed a Shell to accept commands and carry his
+  will, and blessed it so that it can open more processes than the Law courts
+  of the world have seen.
+
+we went to him, twenty or so people,
+angry mob and all
+pitchforks in hand.
+'you're late' we shouted.
+women were screaming, children fleeing,
+the fires of our torches burned, fueled by our rage.
+without warning, we released the inferno.
+without warning, we knocked on the door.
+everything fell silent, not a creature was stirring.
+we held our breath, anxious, terrified, about facing the beast-man/
+suddenly, without apparent effort, the door was pulled off its hinges
+and there. it. stood.
+at first, he looked confused. then, perceiving that he was surrounded, he regained his composure and groaned to us: 'next week, i said next week'.
+so we left

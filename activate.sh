@@ -2,7 +2,7 @@
 
 load_env () {
   source organise_desktop_env/bin/activate
-  export TEST_DIR="virtual_desktop"
+  export TEST_DIR="$PWD/virtual_desktop"
 }
 
 if [ -d organise_desktop_env ]; then

@@ -5,7 +5,7 @@ import os
 
 
 Extensions = json.load(open(os.path.dirname(os.path.abspath(__file__))+'/Extension.json'))
-
+#TODO: Move this into the OrganiseDesktop class and add a flag for the CL tool
 
 def execute():
     if sys.platform == 'win32':
@@ -20,8 +20,10 @@ def execute():
 
         '''list of folders to be created'''
     elif sys.platform == 'linux' or sys.platform == 'darwin':
-        desktopdir = path.join(environ['HOME'], 'Desktop')
-
+        if environ['TEST_DIR'] != '':
+            desktopdir = environ['TEST_DIR']
+        else:
+            desktopdir = path.join(environ['HOME'], 'Desktop')
     else:
         print("{} version not implemented".format(sys.platform))
         raise NotImplementedError
@@ -37,5 +39,3 @@ def execute():
             for thing in contents:
                 rename(src=desktopdir+separator+folder+separator+thing, dst=desktopdir+separator+thing)
             rmdir(desktopdir+separator+folder)
-
-
