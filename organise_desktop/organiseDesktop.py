@@ -150,7 +150,6 @@ def organise_desktop():
     projectOB = OrganiseDesktop(extensions)
     projectOB.makdir(extensions)
     maps = projectOB.list_directory_content()
-    print(maps)
     projectOB.mover(maps)
     projectOB.writter(maps)
 
