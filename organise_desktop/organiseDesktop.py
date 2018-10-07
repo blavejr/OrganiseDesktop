@@ -1,10 +1,10 @@
 import sys
 import os
 import json
-from os import path, mkdir, listdir, rename, environ
+from os import path, mkdir, listdir, rename, environ, rmdir
+
 
 class OrganiseDesktop():
-
     extensions = {}
     separator = '/'
     desktopdir = ''
@@ -140,6 +140,9 @@ class OrganiseDesktop():
         writeOB.close()
 
 def organise_desktop():
+    '''
+    Cleans up the desktop
+    '''
     pwd = os.path.dirname(os.path.abspath(__file__))
 
     extensions = json.load(open(pwd+'/Extension.json'))
@@ -152,6 +155,45 @@ def organise_desktop():
     maps = projectOB.list_directory_content()
     projectOB.mover(maps)
     projectOB.writter(maps)
+
+def undo():
+    '''
+    restores the changes from organising your desktop
+    '''
+    Extensions = json.load(open(os.path.dirname(os.path.abspath(__file__)) + '/Extension.json'))
+
+    if sys.platform == 'win32':
+        desktopdir = path.join(environ['USERPROFILE'], 'Desktop')
+
+        # Determine Windows version; check if this is XP; accordingly, read target folders
+        if not sys.getwindowsversion()[0] == 10:
+            if sys.getwindowsversion().major < 6:
+                desktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
+            else:
+                desktopdir = path.join(environ['PUBLIC'], 'Desktop')
+
+        '''list of folders to be created'''
+    elif sys.platform == 'linux' or sys.platform == 'darwin':
+        if environ.get('TEST_DIR') != '':
+            desktopdir = environ.get('TEST_DIR')
+        else:
+            desktopdir = path.join(environ['HOME'], 'Desktop')
+    else:
+        print("{} version not implemented".format(sys.platform))
+        raise NotImplementedError
+
+    map1 = listdir(desktopdir)
+    if sys.platform == 'win32':
+        separator = '\\'
+    else:
+        separator = '/'
+    for folder in map1:
+        if folder in Extensions:
+            contents = listdir(path.join(desktopdir, folder))
+            for thing in contents:
+                rename(src=desktopdir+separator+folder+separator+thing, dst=desktopdir+separator+thing)
+            rmdir(desktopdir+separator+folder)
+
 
 if __name__ == '__main__':
     organise_desktop()
