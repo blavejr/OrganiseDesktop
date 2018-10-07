@@ -35,10 +35,11 @@ class OrganiseDesktop():
                     self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')
             '''list of folders to be created'''
         elif sys.platform in ['linux', 'darwin']:
-            if environ['TEST_DIR'] != '':
-                self.desktopdir = environ['TEST_DIR']
+            if environ.get("TEST_DIR"):
+                self.desktopdir = environ.get("TEST_DIR")
             else:
                 self.desktopdir = path.join(environ['HOME'], 'Desktop')
+                print(self.desktopdir)
         else:
             print("{} version not implemented".format(sys.platform))
             raise NotImplementedError
@@ -90,7 +91,7 @@ class OrganiseDesktop():
         '''Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)'''
         if self.separator != '/' and not sys.getwindowsversion()[0] == 10:
             all_users_content = content[1]
-            for item in all_users_content2:
+            for item in all_users_content:
                 '''This is a cmd command to move items from one folder to the other'''
                 rename(self.Alldesktopdir + self.separator + item, self.desktopdir + self.separator + item)
 
@@ -121,7 +122,10 @@ class OrganiseDesktop():
         This function writes the two lists of all the items left on the desktop
         just incase something isn't right and we need a log.
         '''
-        lists1 = content[0]
+
+        if not os.path.isdir(path.dirname(os.getcwd())+"/log"): #Create log folder if non exists
+            os.makedirs(path.dirname(os.getcwd())+"/log")
+
 
         writeOB = open(path.dirname(os.getcwd()) + '/log/modifications.log', 'w')
         writeOB.write("This is a list of all the items on your desktop before it was cleaned.\n"
