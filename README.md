@@ -1,3 +1,6 @@
+# Thank You
+I would like to thank all the contributers who are making this project better, I really appreciate your efforts, this project started when I was in college and I never thought it would turn out to anything but seeing all you guys add features and fix the errors I couldn't is really encouraging, thank you so much!
+
 # OrganiseDesktop
 
 Takes all the files on your desktop and put them in folders according to extensions. NO MORE MESSY DESKTOPS!
