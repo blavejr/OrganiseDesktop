@@ -34,15 +34,14 @@
 	".png",".ppf",".psb",".psd",".pspbrush",".pwp",".pxd",".pxr",".raf",".raw",".rw2",".rwz",".sai",".spr",".sprite",
 	".sprite2",".srf",".sumo",".svg",".tbn",".tga",".tif",".tiff",".tn",".tn3",".ufo",".vsdx",".webp",".x3f",".xcf",".xpm"],
 
-	"Music":
-	[".aiff", ".aac", ".alac", ".flp", ".mp3", ".aimppl", ".aup", ".ang", ".mscz", ".vdj", ".ram", ".sf2", ".sfk", ".xfs",
-	".dff", ".als", ".bidule", ".bnk", ".bww", ".cgrp", ".csh", ".cwb", ".dfc", ".dig", ".dm", ".dmsa", ".dmse", ".dsf",
-	".dsm", ".dtm", ".f4a", ".fev", ".h5b", ".h5s", ".ins", ".isma", ".krz", ".kt3", ".mbr", ".mmlp", ".mtp", ".nbs", ".omg",
-	".ovw", ".pca", ".pcg", ".ptxt", ".qcp", ".r1m", ".rip", ".rns", ".rol", ".rso", ".saf", ".sbi", ".sfpack", ".sgp", ".slp",
-	".sou", ".sprg", ".sseq", ".sxt", ".syn", ".syw", ".trak", ".ust", ".vsqx", ".w64", ".wus", ".zpa", ".zvd", ".flac", ".afc",
-	".mui", ".abm", ".pla", ".vag", ".act", ".wav", ".bun", ".gsm", ".midi", ".m3u", ".mmm", ".pkf", ".sng", ".m4r", ".mpga",
-	".omf", ".rx2", ".flm", ".gp5", ".sdt", ".ac3", ".mid", ".xspf", ".nkm", ".nsa", ".ply", ".sbg", ".sdat", ".toc", ".tg",
-	".ogg", ".wma", ".amr", ".m3u8", ".5xe", ".aif", ".frg", ".minigsf", ".pcast", ".vyf"],
+        "Music":
+        [".5xe",".aac",".abm",".ac3",".act",".afc",".aif",".aiff",".aimppl",".alac",".als",".amr",".ang",".aup",".bidule",".bnk",
+        ".bun",".bww",".cgrp",".csh",".cwb",".dfc",".dff",".dig",".dm",".dmsa",".dmse",".dsf",".dsm",".dtm",".f4a",".fev",".flac",
+        ".flm",".flp",".frg",".gp5",".gsm",".h5b",".h5s",".ins",".isma",".krz",".kt3",".m3u",".m3u8",".m4r",".mbr",".mid",".midi",
+        ".minigsf",".mmlp",".mmm",".mtp",".mp3",".mpga",".mscz",".mui",".nbs","nkm",".nsa",".ogg",".omf",".omg",".ovw",".pca",
+        ".pcast",".pcg",".pkf",".pla",".ply",".ptxt",".qcp",".r1m",".ram",".rip",".rns",".rol",".rso",".rx2",".saf",".sbi",".sbg",
+        ".sdat",".sdt",".sf2",".sfk",".sfpack",".sgp",".slp",".sng",".sou",".sprg",".sseq",".sxt",".syn",".syw",".tg",".toc",".trak",
+        ".ust",".vag",".vsqx",".vdj",".vyf",".w64",".wav",".wma",".wus",".xfs",".xspf",".zpa",".zvd"]
 
 	"Movies":
 	[".264",".3g2",".3gp",".3gp2",".3gpp",".3gpp2",".3mm",".3p2",".60d",".787",".890",".aaf",".aec",".aecap",".aegraphic",".aep",
