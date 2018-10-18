@@ -21,10 +21,9 @@ folders = [x for x in Extensions]
 class App(Frame):
     def clean(self):
         organise_desktop()
-        tkMessageBox.showinfo("Complete", "Desktop clean finished.")
+        tkMessageBox.showinfo("Complete", "Desktop cleaning finished.")
 
     def quit_all(self):
-        quit()
         sys.exit(0)
 
     def check(self, item):
