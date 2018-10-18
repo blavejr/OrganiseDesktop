@@ -13,12 +13,14 @@ class OrganiseDesktop():
     Alldesktopdir = None
 
     def __init__(self, extensions):
+      
         """
         This is an initialization function, I do not wish to explain this.
 
         This is a smart way to get the username
         We could also have used os.environ, this brings a list and a lot of information we can manipulate.
         """
+
 
         #
         # References:   https://en.wikipedia.org/wiki/Environment_variable#Default_values
@@ -29,7 +31,7 @@ class OrganiseDesktop():
             self.desktopdir = path.join(environ['USERPROFILE'], 'Desktop')
             # TODO: Set desktopdir to Virtual Directory for testing on Windows too.
 
-            # Determine Windows version; check if this is XP; accordingly, read target folders
+            # Determine Windows version; check if this is XP; read target folders accordingly
             if not sys.getwindowsversion() == 10:
                 if sys.getwindowsversion().major < 6:
                     self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
@@ -97,7 +99,6 @@ class OrganiseDesktop():
         user_dir_content = content[0]
 
         # Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)
-
         if self.separator != '/' and not sys.getwindowsversion()[0] == 10:
             all_users_content = content[1]
             for item in all_users_content:
