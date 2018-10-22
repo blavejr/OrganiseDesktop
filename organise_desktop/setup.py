@@ -18,9 +18,9 @@ setup(
     packages = find_packages(),
     # data_files = [('OrganiseDesktop', ['OrganiseDesktop/user_agents.txt'])],
     data_files = [],
-    entry_points = { "console_scripts": ['socli = socli.socli:main'] },
-    install_requires = [ 'BeautifulSoup4','requests','colorama','Py-stackExchange', 'urwid' ],
-    requires = [ 'os', 'getpass', 'time', 'sys', 'tkinter' ],
+    entry_points = {'console_scripts': ['socli = socli.socli:main']},
+    install_requires = [ 'BeautifulSoup4', 'requests','colorama', 'Py-stackExchange', 'urwid', ],
+    requires = ['os', 'getpass', 'time', 'sys', 'tkinter', ],
     version = '1.0',
     url = 'https://github.com/blavejr/OrganiseDesktop.git',
     keywords = "Desktop Organiser",
@@ -28,5 +28,5 @@ setup(
     author = 'Remigius Kalimba',
     author_email = 'kalimbatech@gmail.com',
     description = 'Organise your desktop with one click.',
-    long_description = "\n\n{}".format(longd)
+    long_description = '\n\n{}'.format(longd)
     )
