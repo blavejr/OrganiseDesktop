@@ -13,7 +13,7 @@ else:
 
 pwd = os.path.dirname(os.path.abspath(__file__))
 
-Extensions = json.load(open(pwd+'/Extension.json'))
+Extensions = json.load(open(pwd+'/Extension.json', 'r'))
 
 folders = [x for x in Extensions]
 
