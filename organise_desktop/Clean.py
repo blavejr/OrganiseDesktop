@@ -21,13 +21,17 @@ folders = [x for x in Extensions]
 class App(Frame):
     """define the GUI"""
     def clean(self):
-        organise_desktop()
+        checked_extensions = {}
+        for x in folders:
+            checked_extensions[x] = Extensions[x]
+        organise_desktop(checked_extensions)
         tkMessageBox.showinfo('Complete', 'Desktop clean finished.')
         
     def quit_all(self):
         sys.exit(0)
 
     def check(self, item):
+        global folders
         if item in folders:
             folders.remove(item)
         else:

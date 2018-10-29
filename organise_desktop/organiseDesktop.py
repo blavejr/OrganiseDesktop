@@ -88,7 +88,7 @@ class OrganiseDesktop():
         and copies them into their respective folders, using a forloop and if statements
         """
 
-        print('moving with : ' + str(self.extensions))
+        
         # image extensions source: https://fileinfo.com/filetypes/raster_image,
         #                          https://fileinfo.com/filetypes/vector_image, and
         #                          https://fileinfo.com/filetypes/camera_raw
@@ -152,17 +152,13 @@ class OrganiseDesktop():
 
         writeOB.close()
 
-def organise_desktop():
+def organise_desktop(extensions):
 
     """
     Cleans up the desktop
     """
 
     pwd = os.path.dirname(os.path.abspath(__file__))
-
-    extensions = json.load(open(pwd+'/Extension.json'))
-
-    folders = [x for x in extensions]
 
     # The oh so magnificent main function keeping the stuff in order
     projectOB = OrganiseDesktop(extensions)
