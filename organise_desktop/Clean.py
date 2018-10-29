@@ -115,7 +115,7 @@ class App(Frame):
 
         self.undo_button = Button(self)
         self.undo_button['text'] = 'Undo'
-        self.undo_button['command'] = undo()
+        self.undo_button['command'] = undo
         self.undo_button.pack({'side': 'left'})
 
         self.schedule_button = Button(self)
