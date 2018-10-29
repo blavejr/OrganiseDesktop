@@ -113,10 +113,13 @@ class OrganiseDesktop():
             for sorting_folder in self.extensions:
                 # TODO: please short this 'if' statement
                 if os.path.isdir(self.desktopdir + self.separator + item) and item not in self.extensions and "Folders" in self.extensions:
-                   rename(src=self.desktopdir + self.separator + item,
-                          dst=self.desktopdir + self.separator + 'Folders' + self.separator + item)
-                   found = True
-                   break
+                   try:
+                       rename(src=self.desktopdir + self.separator + item,
+                              dst=self.desktopdir + self.separator + 'Folders' + self.separator + item)
+                       found = True
+                       break
+                   except PermissionError:
+                       print("File is being used by some other process")    
                 for extension in self.extensions[sorting_folder]:
                     if (str(item.lower()).endswith(extension) and
                         str(item) != 'Clean.lnk' and
@@ -204,7 +207,10 @@ def undo():
         if folder in Extensions:
             contents = listdir(path.join(desk_to_dir, folder))
             for thing in contents:
-                rename(src=desk_to_dir+separator+folder+separator+thing, dst=desk_to_dir+separator+thing)
+                try:
+                    rename(src=desk_to_dir+separator+folder+separator+thing, dst=desk_to_dir+separator+thing)
+                except:
+                    print('File is being used by some other process')
             rmdir(desk_to_dir+separator+folder)
 
 
