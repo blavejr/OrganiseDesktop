@@ -16,7 +16,8 @@ def print_usage():
     print("Usage: " + sys.argv[0] + " <argument>")
     print("-h                                 -- Display help message.")
     print("-u                                 -- Undo")
-    print("-c --all                           -- Clean. If given all then cleans all otherwise prompts")
+    print("-c --all                           -- Clean. If given --all then cleans all otherwise prompts")
+    print("-s --r                             -- start a schedule. removes a schedule if --r given")
 
 if __name__ == '__main__':
     
@@ -54,10 +55,22 @@ if __name__ == '__main__':
                     to_clean[folders[i]] = Extensions[folders[i]]
             organise_desktop(to_clean)
             sys.exit()
-
+        
         else:
             print("Invalid Input")
             sys.exit()
+
+    elif sys.argv[1] == "-s":
+        if len(sys.argv) == 2:
+            print("Starting schedule..")
+            schedule_start(folders)
+        elif sys.argv[2] == '--r':
+            print("Removing schedule..")
+            schedule_end()
+        else:
+            print("Invalid Input")
+            sys.exit()    
+
     else:
         print("Invalid Input")
         sys.exit()            
