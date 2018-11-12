@@ -19,6 +19,7 @@ the repo and install the required packages then run the Clean.py file.
 # Demo
 ![Screenshot](demo1.png)
 
+The buttons are `Clean`, `Exit`, `Undo`, `Schedule`, `Remove Schedule` and do exactly as they are implied.
 
 # Prerequisites
 
