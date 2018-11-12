@@ -17,7 +17,7 @@ The setup file isn't yet setup up properly (work in progress). To run the progra
 the repo and install the required packages then run the Clean.py file.
 
 # Demo
-
+![Screenshot](demo1.png)
 
 
 # Prerequisites
