@@ -1,4 +1,5 @@
 # Thank You
+
 I would like to thank all the contributers who are making this project better, I really appreciate your efforts, this project started when I was in college and I never thought it would turn out to anything but seeing all you guys add features and fix the errors I couldn't is really encouraging, thank you so much!
 
 # OrganiseDesktop
@@ -7,6 +8,7 @@ Takes all the files on your desktop and put them in folders according to extensi
 At least not on the outside :)
 
 # Slack Channel invite link
+
 Feel free to join the channel and contribute, if you have already had a PR merged please join the [channel](https://join.slack.com/t/organisedesktop/shared_invite/enQtMzA2NTI2MTI0MzY4LWRlOWRjOGM0YTJmYjFiZGU3ZTUzM2M0MTA2N2U3MzljMmFhNGIyODlmZDg2N2E1Y2EwOWFiZjcxMzYzYjcyMTk).
 
 # Getting Started
@@ -14,9 +16,14 @@ Feel free to join the channel and contribute, if you have already had a PR merge
 The setup file isn't yet setup up properly (work in progress). To run the program download
 the repo and install the required packages then run the Clean.py file.
 
+# Demo
+
+
+
 # Prerequisites
+
 All the necessary packages are mentioned in requirements.txt. They can be installed by
-running `pip install -r requirements.txt` or using ``pipenv install`` and it will be automatically detect the `requirements.txt` and setup an enviroment for you. For development purposes, I suggest you create a
+running `pip install -r requirements.txt` or using `pipenv install` and it will be automatically detect the `requirements.txt` and setup an enviroment for you. For development purposes, I suggest you create a
 virtual environment ore use a dependency manager like [pipenv](https://github.com/pypa/pipenv)
  to keep a clear state, separate from your own setup.
 The activate.sh script has been provided to ensure a standard development environment. To create the environment if it doesn't already exist, or simply load it otherwise, run `source ./activate.sh`
