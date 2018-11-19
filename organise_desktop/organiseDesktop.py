@@ -13,30 +13,30 @@ class OrganiseDesktop():
     Alldesktopdir = None
 
     def __init__(self, extensions):
-      
+
         """
         This is an initialization function, I do not wish to explain this.
 
         This is a smart way to get the username
-        We could also have used os.environ, this brings a list and a lot of information we can manipulate.
+        We could also have used os.environ, this brings a list and
+        a lot of information we can manipulate.
         """
 
-
-        #
-        # References:   https://en.wikipedia.org/wiki/Environment_variable#Default_values
+        # References:   https://en.wikipedia.org/wiki/Environment_variable
+        # Default_values
         #               https://en.wikipedia.org/wiki/Windows_NT#Releases
-        #
         self.extensions = extensions
         if sys.platform == 'win32':
             self.desktopdir = path.join(environ['USERPROFILE'], 'Desktop')
-            # TODO: Set desktopdir to Virtual Directory for testing on Windows too.
+            # TODO: Set desktopdir to Virtual Directory for testing on Windows
 
-            # Determine Windows version; check if this is XP; read target folders accordingly
+            # Determine Windows version; check if this is XP;
+            # read target folders accordingly
             if not sys.getwindowsversion() == 10:
                 if sys.getwindowsversion().major < 6:
-                    self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
+                    self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')  # noqa
                 else:
-                    self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')
+                    self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')  # noqa
             '''list of folders to be created'''
         elif sys.platform in ['linux', 'darwin']:
             if environ.get('TEST_DIR'):
@@ -56,11 +56,11 @@ class OrganiseDesktop():
         """
         This function makes the needed folders if they are not already found.
 
-        For all the folders in the folder_name list, if that folder is not(False) on the main_desktop
-        then create that folder.
+        For all the folders in the folder_name list, if that folder is
+        not(False) on the main_desktop then create that folder.
         """
 
-        directories = [self._create_dir_path(dir) for dir in folders_to_make ]
+        directories = [self._create_dir_path(dir) for dir in folders_to_make]
         for dir in directories:
             if not path.isdir(dir):
                 mkdir(dir)
@@ -68,10 +68,11 @@ class OrganiseDesktop():
     def list_directory_content(self):
 
         """
-        This function checks the two folders (current user desktop and all user desktop),
+        This function checks the two folders
+        (current user desktop and all user desktop),
         if on windows, only checks one folder if on linux or macOS,
-        it takes all the items there and puts them into two respective lists which are
-        returned and used by the mover function
+        it takes all the items there and puts them into two respective
+        lists which are returned and used by the mover function
         """
 
         # TODO: Is this really necessary? To be removed at PR stage
@@ -80,17 +81,16 @@ class OrganiseDesktop():
             content += [listdir(self.Alldesktopdir)]
         return content
 
-
     def mover(self, content):
 
         """
         This function gets two lists with all the things on the desktops
-        and copies them into their respective folders, using a forloop and if statements
+        and copies them into their respective folders, using a forloop and
+        if statements
         """
 
-        
         # image extensions source: https://fileinfo.com/filetypes/raster_image,
-        #                          https://fileinfo.com/filetypes/vector_image, and
+        #                          https://fileinfo.com/filetypes/vector_image,
         #                          https://fileinfo.com/filetypes/camera_raw
         # music extensions source: https://fileinfo.com/filetypes/audio
         # movie extensions source: http://bit.ly/2wvYjyr
@@ -98,34 +98,34 @@ class OrganiseDesktop():
 
         user_dir_content = content[0]
 
-        # Anything from the All_users_desktop goes to shortcuts, mainly because that's all that's ever there (i think)
+        # Anything from the All_users_desktop goes to shortcuts, mainly because
+        # that's all that's ever there (i think)
         if self.separator != '/' and not sys.getwindowsversion()[0] == 10:
             all_users_content = content[1]
             for item in all_users_content:
-                # This is a cmd command to move items from one folder to the other
-                rename(self.Alldesktopdir + self.separator + item, self.desktopdir + self.separator + item)
+                # This is a cmd command to move items from one folder to other
+                rename(self.Alldesktopdir + self.separator + item, self.desktopdir + self.separator + item)  # noqa
 
         to_be_cleaned = [entry for entry in user_dir_content
-                            if entry not in self.extensions and not (entry.startswith('.') or entry.startswith('..'))]
+                            if entry not in self.extensions and not (entry.startswith('.') or entry.startswith('..'))]  # noqa
 
         for item in to_be_cleaned:
             found = False
             for sorting_folder in self.extensions:
-                # TODO: please short this 'if' statement
-                if os.path.isdir(self.desktopdir + self.separator + item) and item not in self.extensions and "Folders" in self.extensions:
-                   try:
-                       rename(src=self.desktopdir + self.separator + item,
-                              dst=self.desktopdir + self.separator + 'Folders' + self.separator + item)
-                       found = True
-                       break
-                   except PermissionError:
-                       print("File is being used by some other process")    
+                folder = self.desktopdir + self.separator + item
+                if os.path.isdir(folder) and item not in self.extensions and "Folders" in self.extensions:  # noqa
+                    try:
+                        rename(src=self.desktopdir + self.separator + item,
+                            dst=self.desktopdir + self.separator + 'Folders' + self.separator + item)  # noqa
+                        found = True
+                        break
+                    except PermissionError:
+                        print("File is being used by some other process")
                 for extension in self.extensions[sorting_folder]:
                     if (str(item.lower()).endswith(extension) and
-                        str(item) != 'Clean.lnk' and
-                        str(item) != 'Clean.exe.lnk'):
+                        str(item) != 'Clean.lnk' and str(item) != 'Clean.exe.lnk'):  # noqa
                         rename(src=self.desktopdir + self.separator + item,
-                               dst=self.desktopdir + self.separator + sorting_folder + self.separator + item)
+                               dst=self.desktopdir + self.separator + sorting_folder + self.separator + item)  # noqa
                         found = True
                         break
             if not found:
@@ -138,15 +138,12 @@ class OrganiseDesktop():
         just incase something isn't right and we need a log.
         """
 
-        if not os.path.isdir(path.dirname(os.getcwd())+'/log'):  # Create log folder if non exists
+        if not os.path.isdir(path.dirname(os.getcwd())+'/log'):  # Create log folder if non exists  # noqa
             os.makedirs(path.dirname(os.getcwd())+'/log')
-
-
-        writeOB = open(path.dirname(os.getcwd()) + '/log/modifications.log', 'w')
-        writeOB.write('This is a list of all the items on your desktop before it was cleaned.\n'
-                      # This message is to long. PEP8 says 120. This is 133 characters long. 
-                      'Email this list to kalimbatech@gmail.com if anything is not working as planned, it will help with debugging\n'
-                      'Together we can make a better app\n\n')
+        writeOB = open(path.dirname(os.getcwd()) + '/log/modifications.log', 'w')  # noqa
+        writeOB.write('This is a list of all items on your desktop before it was cleaned.\n'  # noqa
+                      'Email this list to kalimbatech@gmail.com if anything is not working as planned, it will help with debugging\n'  # noqa
+                      'Together we can make a better app\n\n')  # noqa
 
         for desktop_entry in content:
             for i in desktop_entry:
@@ -154,6 +151,7 @@ class OrganiseDesktop():
                 writeOB.write('\n')
 
         writeOB.close()
+
 
 def organise_desktop(extensions):
 
@@ -170,18 +168,20 @@ def organise_desktop(extensions):
     projectOB.mover(maps)
     projectOB.writter(maps)
 
+
 def undo():
 
     """
     restores the changes from organising your desktop
     """
 
-    Extensions = json.load(open(os.path.dirname(os.path.abspath(__file__)) + '/Extension.json'))
+    Extensions = json.load(open(os.path.dirname(os.path.abspath(__file__)) + '/Extension.json'))  # noqa
 
     if sys.platform == 'win32':
         desk_to_dir = path.join(environ['USERPROFILE'], 'Desktop')
 
-        # Determine Windows version; check if this is XP; accordingly, read target folders
+        # Determine Windows version; check if this is XP; accordingly,
+        # read target folders
         if not sys.getwindowsversion()[0] == 10:
             if sys.getwindowsversion().major < 6:
                 desk_to_dir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
@@ -208,7 +208,8 @@ def undo():
             contents = listdir(path.join(desk_to_dir, folder))
             for thing in contents:
                 try:
-                    rename(src=desk_to_dir+separator+folder+separator+thing, dst=desk_to_dir+separator+thing)
+                    rename(src=desk_to_dir+separator+folder+separator+thing,
+                           dst=desk_to_dir+separator+thing)
                 except:
                     print('File is being used by some other process')
             rmdir(desk_to_dir+separator+folder)
