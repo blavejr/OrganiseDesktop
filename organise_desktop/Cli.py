@@ -1,31 +1,77 @@
-import argparse
 from organiseDesktop import organise_desktop
 from organiseDesktop import undo
 from cronController import schedule_start, schedule_end
 import os
+import sys
 import json
 
 pwd = os.path.dirname(os.path.abspath(__file__))
 Extensions = json.load(open(pwd+'/Extension.json'))
 folders = [x for x in Extensions]
 
-# Define command line options
-parser = argparse.ArgumentParser(description='Provides a command line tool to organise your desktop')
-sp = parser.add_subparsers()
-sp_organize = sp.add_parser('clean', help='Organises your desktop')
-sp_undo = sp.add_parser('undo', help='Restores your desktop to its previous state')
-sp_schedule = sp.add_parser('schedule', help='Schedules time to organise your desktop once a day')
-sp_remove_schedule = sp.add_parser('remove-schedule', help='Removes scheduled time to organise')
+def print_usage():
+    """
+        prints usage of the Command Line interface
+    """
+    print("Usage: " + sys.argv[0] + " <argument>")
+    print("-h                                 -- Display help message.")
+    print("-u                                 -- Undo")
+    print("-c --all                           -- Clean. If given --all then cleans all otherwise prompts")
+    print("-s --r                             -- start a schedule. removes a schedule if --r given")
 
-# Schedule command only works with all extension atm
-def schedule():
-    schedule_start(folders)
+if __name__ == '__main__':
+    
+    if len(sys.argv) <= 1:
+        print_usage()
 
-# Define the function of the command line option
-sp_organize.set_defaults(func=organise_desktop)
-sp_undo.set_defaults(func=undo)
-sp_schedule.set_defaults(func=schedule)
-sp_remove_schedule.set_defaults(func=schedule_end)
+    elif sys.argv[1] == '-h':
+        print_usage()
 
-args = parser.parse_args()
-args.func()
+    elif sys.argv[1] == '-u':
+        undo()
+        sys.exit()
+
+    elif sys.argv[1] == '-c':
+        if len(sys.argv) == 3:
+            if sys.argv[2] == '--all':
+                organise_desktop(Extensions)
+                sys.exit()
+            else:
+                print("Invalid input")
+                sys.exit()    
+            
+        elif len(sys.argv) == 2:
+            for x in enumerate(folders):
+                print('{} - {}'.format(x[0], x[1]))
+            try:    
+                exclude = input("Enter indexes of types to EXCLUDE\nEnter multiple by separating by a ,:\n")
+            except KeyboardInterrupt:
+                sys.exit()
+
+            exclude_list = [int(i) for i in exclude.split(',')]
+            to_clean = {}
+            for i in range(len(folders)):
+                if i not in exclude_list:
+                    to_clean[folders[i]] = Extensions[folders[i]]
+            organise_desktop(to_clean)
+            sys.exit()
+        
+        else:
+            print("Invalid Input")
+            sys.exit()
+
+    elif sys.argv[1] == "-s":
+        if len(sys.argv) == 2:
+            print("Starting schedule..")
+            schedule_start(folders)
+        elif sys.argv[2] == '--r':
+            print("Removing schedule..")
+            schedule_end()
+        else:
+            print("Invalid Input")
+            sys.exit()    
+
+    else:
+        print("Invalid Input")
+        sys.exit()            
+        
