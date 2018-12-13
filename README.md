@@ -25,7 +25,7 @@ The buttons are `Clean`, `Exit`, `Undo`, `Schedule`, `Remove Schedule` and do ex
 
 All the necessary packages are mentioned in requirements.txt. They can be installed by
 
-running `pip install -r requirements.txt` or using ``pipenv install`` and it will be automatically detect the `requirements.txt` and setup an enviroment for you. For development purposes, I suggest you create a
+running `pip install -r requirements.txt` or using ``pipenv install`` and it will automatically detect the `requirements.txt` and setup an enviroment for you. For development purposes, I suggest you create a
 virtual environment or use a dependency manager like [pipenv](https://github.com/pypa/pipenv) to keep a clear state, separate from your own setup.
 
 The activate.sh script has been provided to ensure a standard development environment. To create the environment if it doesn't already exist, or simply load it otherwise, run `source ./activate.sh`
