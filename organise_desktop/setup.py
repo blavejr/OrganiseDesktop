@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
-
 from codecs import open
 from sys import exit, version
 import sys
+
 
 if version < '1.0.0':
     print("Python 1 is not supported...")
