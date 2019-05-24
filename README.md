@@ -45,5 +45,5 @@ To activate it, run `source organise_desktop/bin/activate`
 Navigate to the repo and run the following command:
 `$ pip install -r requirements.txt`
 
-### Contributing
+# Contributing
 Please read the [Contributing Guidlines](https://github.com/blavejr/OrganiseDesktop/blob/master/CONTRIBUTING.md) for details about pull requests, bug reports or opening an issue. 
