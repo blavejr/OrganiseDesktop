@@ -8,7 +8,6 @@
 	"Malware":
 	[".APPLICATION",".GADGET",".CPL",".MSC",".JS",".JSE",".WS","WSF",".REG",".CSH"],
 
-
 	"Folders":
 	[".0",".000",".7z",".7z.001",".7z.002",".a00",".a01",".a02",".ace",".agg",".ain",".alz",".apz",".ar",".arc",".archiver",".arduboy",".arh",
 	".ari",".arj",".ark",".asr",".b1",".b64",".ba",".bdoc",".bh",".bndl",".boo",".bundle",".bz",".bz2",".bza",".bzip",".bzip2",".c00",".c01",
@@ -131,5 +130,23 @@
 		".dbproj", ".fsx", ".pyx", ".tmproj", ".csi", ".brx", ".gld", ".wdw", ".4th", ".svn", ".xt", ".ahk", ".dgml", ".xojo_menu",
 		".gszip", ".odl", ".appx", ".fla", ".gameproj", ".fxml", ".so", ".csp", ".nupkg", ".bas", ".storyboard", ".owl", ".vssscc",
 		".erl", ".pch", ".rise", ".gitattributes", ".fs", ".autoplay", ".tt", ".hpf", ".dpl", ".po", ".b", ".ssi", ".dgsl",
-		".cvsrc", ".mshi", ".rc", ".vsps", ".kdevelop", ".vsmdi", ".json", ".brM"]
+		".cvsrc", ".mshi", ".rc", ".vsps", ".kdevelop", ".vsmdi", ".json", ".brM"],
+	
+	"Misc":
+	[".crx", ".jar", ".mht", ".tar", ".3ga", ".aa", ".aax", ".aifc", ".ape", ".au", ".awb", ".cda", ".iff", ".kar", ".koz", ".m4a", ".m4p", 
+		".mmf", ".mp2", ".mpa", ".mpc", ".nfa", ".oma", ".opus", ".ra", ".rta", ".Format", ".3dm", ".3ds", ".max", ".obj", ".aae", ".adt", 
+		".clp", ".cma", ".efx", ".fcpevent", ".flo", ".gbr", ".gcw", ".gms", ".i5z", ".ip", ".itl", ".mtw", ".nfi", ".nfs", ".one", ".qb2011", 
+		".quickendata", ".sdf", ".tax2012", ".tax2014", ".tax2016", ".vcf", ".vcs", ".bup", ".crypt", ".db", ".dbf", ".mdb", ".pdb", ".sql", ".kv", 
+		".Xib", ".chm", ".csk", ".dot", ".dotx", ".oxps", ".pmd", ".shs", ".vmg", ".xps", ".acsm", ".apnx", ".azw", ".azw3", ".epub", ".fb2", ".lrf", 
+		".mbp", ".mobi", ".opf", ".prc", ".tcr", ".vbk", ".air", ".bat", ".cgi", ".cmd", ".com", ".ds", ".gadget", ".ipa", ".wsf", ".8bi", ".bak", ".bfc", 
+		".cmf", ".crdownload", ".cue", ".dao", ".dbx", ".dem", ".dic", ".epc", ".flt", ".fnt", ".fon", ".gam", ".gho", ".gpx", ".grp", ".hex", ".hqx", 
+		".ics", ".img", ".iso", ".jad", ".kml", ".kmz", ".map", ".mdf", ".mim", ".mtb", ".nes", ".ori", ".otf", ".part", ".pes", ".plugin", ".ps", ".qxp", 
+		".rem", ".rom", ".sav", ".t65", ".tec", ".tmp", ".toast", ".torrent", ".ttf", ".uue", ".vcd", ".xll", ".dtp", ".indd", ".mdi", ".p65", ".qxd", ".rels", 
+		".flipchart", ".odp", ".pps", ".ppsx", ".ppt", ".pptm", ".art", ".dcm", ".flif", ".heic", ".ithmb", ".mac", ".pct", ".pef", ".pgm", ".pict", ".plist", 
+		".pspimage", ".rwl", ".sfw", ".sr2", ".thm", ".wbmp", ".api", ".cdt", ".cfg", ".dun", ".fm3", ".gid", ".ht", ".icm", ".inf", ".prf", ".ods", ".wk3", 
+		".wks", ".xlr", ".xls", ".xlsb", ".xlsm", ".ani", ".bashrc", ".bash_history", ".bash_profile", ".bud", ".cab", ".cat", ".cpl", ".cur", ".deskthemepack", 
+		".dev", ".dit", ".dll", ".dmp", ".drv", ".dvd", ".ebd", ".ffl", ".ffo", ".fota", ".hiv", ".hlp", ".htt", ".icl", ".icns", ".iconpackage", ".ion", 
+		".iptheme", ".mlc", ".nb0", ".nt", ".pck", ".pnf", ".pol", ".prop", ".qvm", ".reg", ".sys", ".cvs", ".emz", ".mix", ".odg", ".pd", ".vsd", ".wmf", 
+		".wpg", ".dvsd", ".esp3", ".mepx", ".vproj", ".asp", ".aspx", ".cer", ".cfm", ".cfml", ".csr", ".do", ".htm", ".js", ".jsp", ".nzb", ".php", ".webloc", 
+		".xfdl", ".xhtml"]
 }
