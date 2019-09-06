@@ -44,3 +44,6 @@ To activate it, run `source organise_desktop/bin/activate`
 `$ git clone https://github.com/blavejr/OrganiseDesktop.git`
 Navigate to the repo and run the following command:
 `$ pip install -r requirements.txt`
+
+# Contributing
+Please read the [Contributing Guidlines](https://github.com/blavejr/OrganiseDesktop/blob/master/CONTRIBUTING.md) for details about pull requests, bug reports or opening an issue. 
