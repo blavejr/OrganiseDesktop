@@ -12,9 +12,7 @@ else:
     import tkMessageBox
 
 pwd = os.path.dirname(os.path.abspath(__file__))
-
 Extensions = json.load(open(pwd+'/Extension.json', 'r'))
-
 folders = [x for x in Extensions]
 
 class App(Frame):
@@ -71,7 +69,6 @@ class App(Frame):
         Frame.__init__(self, master)
         self.pack()
         self.create()
-
 
 if __name__ == '__main__':
     root = Tk()
