@@ -75,8 +75,8 @@
 
 	"Text":
 	[ ".1st",".abw",".accdb",".act",".adoc",".aim",".ans",".apkg",".apt",".arff",".asc",".ascii",".ase",".aty",".awp",".awt",".aww",".bad",
-	".bbs",".bdp",".bdr",".bean",".bib",".bibtex",".bml",".bna",".boc",".brx",".btd",".bzabw",".c",".calca",".cdz",".charset",".chart",
-	".chord",".cnm",".cod",".cpp",".crwl",".css",".csv",".cws",".cyi",".dca",".dfti",".dgs",".diz",".dne",".doc",".docm",".docx",".docxml",
+	".bbs",".bdp",".bdr",".bean",".bib",".bibtex",".bml",".bna",".boc",".brx",".btd",".bzabw",".calca",".cdz",".charset",".chart",
+	".chord",".cnm",".cod",".crwl",".css",".csv",".cws",".cyi",".dca",".dfti",".dgs",".diz",".dne",".doc",".docm",".docx",".docxml",
 	".docz",".dox",".dropbox",".dsc",".dvi",".dwd",".dx",".dxb",".dxp",".eio",".eit",".emf",".eml",".emlx",".emulecollection",".epp",".err",
 	".etf",".etx",".euc",".fadein.template",".faq",".fbl",".fcf",".fdf",".fdr",".fds",".fdt",".fdx",".fdxt",".fft",".fgs",".flr",".fodt",
 	".fountain",".fpt",".frt",".fwd",".fwdn",".gmd",".gpd",".gpn",".gsd",".gthr",".gv",".hbk",".hht",".hs",".html",".hwp",".hz",".idx",
@@ -130,7 +130,7 @@
 		".dbproj", ".fsx", ".pyx", ".tmproj", ".csi", ".brx", ".gld", ".wdw", ".4th", ".svn", ".xt", ".ahk", ".dgml", ".xojo_menu",
 		".gszip", ".odl", ".appx", ".fla", ".gameproj", ".fxml", ".so", ".csp", ".nupkg", ".bas", ".storyboard", ".owl", ".vssscc",
 		".erl", ".pch", ".rise", ".gitattributes", ".fs", ".autoplay", ".tt", ".hpf", ".dpl", ".po", ".b", ".ssi", ".dgsl",
-		".cvsrc", ".mshi", ".rc", ".vsps", ".kdevelop", ".vsmdi", ".json", ".brM"],
+		".cvsrc", ".mshi", ".rc", ".vsps", ".kdevelop", ".vsmdi", ".json", ".brM", ".c"],
 	
 	"Misc":
 	[".crx", ".jar", ".mht", ".tar", ".3ga", ".aa", ".aax", ".aifc", ".ape", ".au", ".awb", ".cda", ".iff", ".kar", ".koz", ".m4a", ".m4p", 
@@ -148,5 +148,5 @@
 		".dev", ".dit", ".dll", ".dmp", ".drv", ".dvd", ".ebd", ".ffl", ".ffo", ".fota", ".hiv", ".hlp", ".htt", ".icl", ".icns", ".iconpackage", ".ion", 
 		".iptheme", ".mlc", ".nb0", ".nt", ".pck", ".pnf", ".pol", ".prop", ".qvm", ".reg", ".sys", ".cvs", ".emz", ".mix", ".odg", ".pd", ".vsd", ".wmf", 
 		".wpg", ".dvsd", ".esp3", ".mepx", ".vproj", ".asp", ".aspx", ".cer", ".cfm", ".cfml", ".csr", ".do", ".htm", ".js", ".jsp", ".nzb", ".php", ".webloc", 
-		".xfdl", ".xhtml"]
+		".xfdl", ".xhtml", ".!BT", ".UT", ".1", ".ADADOWNLOAD"]
 }
