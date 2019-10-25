@@ -82,9 +82,7 @@ if __name__ == '__main__':
     positionDown = int(root.winfo_screenheight() / 2 - 350 / 2) #considering height=350
     root.geometry("+{}+{}".format(positionRight, positionDown))
     '''Logic to lunch the app in center - end'''
-
-
-
+    
     app = App(root)
     root.protocol('WM_DELETE_WINDOW', app.quit_all)
     app.mainloop()
