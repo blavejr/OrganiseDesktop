@@ -72,9 +72,17 @@ class App(Frame):
 
 if __name__ == '__main__':
     root = Tk()
-    root.resizable = False
+    # root.resizable = False            # commenting this approach and applying the below one.
+    root.resizable(FALSE,FALSE)         # To make the application's size constant and restore button in windows as greyed out(with width=350 and height=330 as mentioned below)
     root.minsize(width=350, height=330)
     root.maxsize(width=350, height=330)
+
+    '''Logic to launch the app in center - start'''
+    positionRight = int(root.winfo_screenwidth() / 2 - 330 / 2) #considering width=330
+    positionDown = int(root.winfo_screenheight() / 2 - 350 / 2) #considering height=350
+    root.geometry("+{}+{}".format(positionRight, positionDown))
+    '''Logic to launch the app in center - end'''
+
     app = App(root)
     root.protocol('WM_DELETE_WINDOW', app.quit_all)
     app.mainloop()
