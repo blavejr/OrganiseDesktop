@@ -1,6 +1,6 @@
 {
 	"Shortcuts":
-	[".kys",".lnk",".mat",".pif",".shb",".url",".xnk"],
+	[".kys",".lnk",".mat",".pif",".shb",".url",".xnk", ".desktop"],
 
 	"Executables":
 	[".action",".apk",".app",".bin",".dmg",".eham",".exe",".ham",".msi",".osx",".out",".pex",".plx",".prg",".run",".scr",".upx"],
