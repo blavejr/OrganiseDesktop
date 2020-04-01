@@ -75,6 +75,23 @@ class OrganiseDesktop():
             if not path.isdir(dir):
                 mkdir(dir)
 
+    def removedir(self, folders_i_made):
+
+        """
+        This function will check folders that this program made.
+        If the folder is empty, it will delete that folder. simple job.
+        """
+
+        directories = [self._create_dir_path(dir) for dir in folders_i_made]
+
+        for dir in directories:
+            if not listdir(dir):
+                rmdir(dir)
+
+
+
+            
+    
     def list_directory_content(self):
 
         """
@@ -194,9 +211,14 @@ def organise_desktop(extensions):
     
     #Move the files to their appropriate locations
     projectOB.mover(maps)
+
+    #Remove directories created by this program but empty
+    projectOB.removedir(extensions)
     
+
     #Log the original files
     projectOB.writter(maps)
+
 
 
 def undo():
@@ -221,7 +243,7 @@ def undo():
 
     # list of folders to be created
     elif sys.platform == 'linux' or sys.platform == 'darwin':
-        if environ.get('TEST_DIR') != '':
+        if environ.get('TEST_DIR'):
             desk_to_dir = environ.get('TEST_DIR')
             
         else:

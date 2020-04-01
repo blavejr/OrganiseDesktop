@@ -3,6 +3,7 @@ import json
 import os
 from cronController import  schedule_end, schedule_start
 from organiseDesktop import undo, organise_desktop
+from os import path, mkdir, listdir, rename, environ, rmdir
 
 if sys.version_info >= (3,):
     from tkinter import *
@@ -23,6 +24,49 @@ class App(Frame):
             checked_extensions[x] = Extensions[x]
         organise_desktop(checked_extensions)
         tkMessageBox.showinfo('Complete', 'Desktop clean finished.')
+
+    def remove_empty_folder(self):    
+        if sys.platform == 'win32':
+            desk_to_dir = path.join( environ['USERPROFILE'], 'Desktop' )
+
+            # Determine Windows version; check if this is XP; accordingly,
+            # read target folders
+            if not sys.getwindowsversion()[0] == 10:
+
+                if sys.getwindowsversion().major < 6:
+                    desk_to_dir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
+                else:
+                    desk_to_dir = path.join(environ['PUBLIC'], 'Desktop')
+
+        # list of folders to be created
+        elif sys.platform == 'linux' or sys.platform == 'darwin':
+            if environ.get('TEST_DIR'):
+                desk_to_dir = environ.get('TEST_DIR')
+
+            else:
+                desk_to_dir = path.join(environ['HOME'], 'Desktop')
+        else:
+            print('{} version not implemented'.format(sys.platform))
+            raise NotImplementedError
+
+        mapped_files_dirs = listdir(desk_to_dir)
+
+        if sys.platform == 'win32':
+            separator = '\\'
+        else:
+            separator = '/'
+
+        folders_list = []
+        for any_file_folder in mapped_files_dirs:
+            folder =  path.join(desk_to_dir, any_file_folder)
+            if os.path.isdir(folder):
+                folders_list.append(folder)
+        for folder in folders_list:
+            if not os.listdir(folder):
+                os.rmdir(folder) #Removes all empty folder on the desktop
+        
+        tkMessageBox.showinfo('Completed', 'Empty folders removed')
+
 
     def quit_all(self):
         sys.exit(0)
@@ -58,6 +102,7 @@ class App(Frame):
         buttons = {'Clean': self.clean,
                    'Exit': self.quit_all,
                    'Undo': undo,
+                   'Remove Empty\nFolder': self.remove_empty_folder,                   
                    'Schedule': self.on_schedule_start,
                    'Remove\nSchedule': schedule_end
                    }
