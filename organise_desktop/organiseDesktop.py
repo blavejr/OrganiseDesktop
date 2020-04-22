@@ -88,10 +88,6 @@ class OrganiseDesktop():
             if not listdir(dir):
                 rmdir(dir)
 
-
-
-            
-    
     def list_directory_content(self):
 
         """
@@ -243,10 +239,8 @@ def undo():
 
     # list of folders to be created
     elif sys.platform == 'linux' or sys.platform == 'darwin':
-        # if environ.get('TEST_DIR') != '':
-        if environ.get('TEST_DIR'):
-            desk_to_dir = environ.get('TEST_DIR')
-            
+        if environ.get('TEST_DIR') is not None:
+            desk_to_dir = environ.get('TEST_DIR')  
         else:
             desk_to_dir = path.join(environ['HOME'], 'Desktop')
     else:
