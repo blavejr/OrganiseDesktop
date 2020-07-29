@@ -14,7 +14,7 @@ folders = [x for x in Extensions]
 
 @click.command()
 @click.option(
-    "--undosched",
+    "--undosort",
     "-u",
     is_flag=True,
     help="Undo changes that were made.",
@@ -47,7 +47,7 @@ def cli(
     """
     This is used to call a command line interface.
     """
-    if undosched:
+    if undosort:
         undo()
 
     elif sched:
