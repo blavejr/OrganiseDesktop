@@ -56,7 +56,7 @@ class OrganiseDesktop():
             
             
     def _create_dir_path(self, directory):
-        return self.desktopdir + self.separator + directory
+        return os.path.join(self.desktopdir, directory)
     
     
 
@@ -127,7 +127,7 @@ class OrganiseDesktop():
             
             for item in all_users_content:
                 # This is a cmd command to move items from one folder to other
-                rename(self.Alldesktopdir + self.separator + item, self.desktopdir + self.separator + item)  # noqa
+                rename( os.path.join(self.Alldesktopdir, item), os.path.join(self.desktopdir, item))  # noqa
 
         to_be_cleaned = [entry for entry in user_dir_content
                             if entry not in self.extensions and not (entry.startswith('.') or entry.startswith('..'))]  # noqa
@@ -136,12 +136,12 @@ class OrganiseDesktop():
             found = False
             
             for sorting_folder in self.extensions:
-                folder = self.desktopdir + self.separator + item
+                folder = os.path.join(self.desktopdir, item)
                 
                 if os.path.isdir(folder) and item not in self.extensions and "Folders" in self.extensions:  # noqa
                     try:
-                        rename(src=self.desktopdir + self.separator + item,
-                            dst=self.desktopdir + self.separator + 'Folders' + self.separator + item)  # noqa
+                        rename(src= os.path.join(self.desktopdir, item),
+                            dst=os.path.join(self.desktopdir, 'Folders', item))  # noqa
                         
                         found = True
                         break
@@ -154,8 +154,8 @@ class OrganiseDesktop():
                     if (str(item.lower()).endswith(extension) and
                         str(item) != 'Clean.lnk' and str(item) != 'Clean.exe.lnk'):  # noqa
                         
-                        rename(src=self.desktopdir + self.separator + item,
-                               dst=self.desktopdir + self.separator + sorting_folder + self.separator + item)  # noqa
+                        rename(src=os.path.join(self.desktopdir, item),
+                               dst=os.path.join(self.desktopdir, sorting_folder, item))  # noqa
                         
                         found = True
                         break
@@ -259,12 +259,12 @@ def undo():
             
             for thing in contents:
                 try:
-                    rename(src=desk_to_dir+separator+folder+separator+thing,
-                           dst=desk_to_dir+separator+thing)
+                    rename(src=os.path.join(desk_to_dir, folder, thing),
+                           dst=os.path.join(desk_to_dir, thing))
                 except:
                     print('File is being used by some other process')
                     
-            rmdir(desk_to_dir+separator+folder)
+            rmdir(os.path.join(desk_to_dir, folder))
 
 
 #Run the app
