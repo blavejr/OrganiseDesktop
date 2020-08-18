@@ -82,11 +82,11 @@ class OrganiseDesktop():
         If the folder is empty, it will delete that folder. simple job.
         """
 
-        directories = [self._create_dir_path(dir) for dir in folders_i_made]
+        directories = [self._create_dir_path(directory) for directory in folders_i_made]
 
-        for dir in directories:
-            if not listdir(dir):
-                rmdir(dir)
+        for directory in directories:
+            if not listdir(directory):
+                rmdir(directory)
 
     def list_directory_content(self):
 
