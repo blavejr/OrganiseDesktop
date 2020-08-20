@@ -1,13 +1,13 @@
-from organiseDesktop import organise_desktop
-from organiseDesktop import undo
-from cronController import schedule_start, schedule_end
+from .organiseDesktop import organise_desktop
+from .organiseDesktop import undo
+from .cronController import schedule_start, schedule_end
 import os
 import sys
 import json
 
 pwd = os.path.dirname(os.path.abspath(__file__))
 
-Extensions = json.load(open(pwd+'/Extension.json'))
+Extensions = json.load(open(os.path.join(pwd, 'Extension.json')))
 
 folders = [x for x in Extensions]
 
@@ -21,8 +21,7 @@ def print_usage():
     print("-c --all                           -- Clean. If given --all then cleans all otherwise prompts")
     print("-s --r                             -- start a schedule. removes a schedule if --r given")
 
-if __name__ == '__main__':
-    
+def main():
     if len(sys.argv) <= 1:
         print_usage()
 
@@ -88,3 +87,5 @@ if __name__ == '__main__':
         print("Invalid Input")
         sys.exit()            
         
+if __name__ == '__main__':
+    main()
