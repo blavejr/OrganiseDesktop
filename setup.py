@@ -18,7 +18,7 @@ setup(
     packages = find_packages(),
     data_files = [('OrganiseDesktop', ['organise_desktop/Extension.json'])],
     entry_points = {'console_scripts': ['organise_desktop = organise_desktop.Cli:main']},
-    install_requires = [ 'BeautifulSoup4', 'requests','colorama', 'Py-stackExchange', 'urwid', ],
+    install_requires = [ 'BeautifulSoup4', 'requests','colorama', 'Py-stackExchange', 'urwid', 'crontab'],
     requires = ['os', 'getpass', 'time', 'sys', 'tkinter', ],
     version = '1.0',
     url = 'https://github.com/blavejr/OrganiseDesktop.git',
