@@ -1,8 +1,8 @@
 import sys
 import json
 import os
-from cronController import  schedule_end, schedule_start
-from organiseDesktop import undo, organise_desktop
+from .cronController import  schedule_end, schedule_start
+from .organiseDesktop import undo, organise_desktop
 
 if sys.version_info >= (3,):
     from tkinter import *
