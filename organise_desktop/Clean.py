@@ -70,7 +70,7 @@ class App(Frame):
         self.pack()
         self.create()
 
-if __name__ == '__main__':
+def main():
     root = Tk()
     # root.resizable = False            # commenting this approach and applying the below one.
     root.resizable(FALSE,FALSE)         # To make the application's size constant and restore button in windows as greyed out(with width=350 and height=330 as mentioned below)
@@ -87,3 +87,6 @@ if __name__ == '__main__':
     root.protocol('WM_DELETE_WINDOW', app.quit_all)
     app.mainloop()
     root.destroy()
+
+if __name__ == '__main__':
+    main()
