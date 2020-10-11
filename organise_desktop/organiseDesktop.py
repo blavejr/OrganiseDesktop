@@ -69,11 +69,11 @@ class OrganiseDesktop():
         exist on the main_desktop, create that folder.
         """
 
-        directories = [self._create_dir_path(dir) for dir in folders_to_make]
+        directories = [self._create_dir_path(directory) for directory in folders_to_make]
 
-        for dir in directories:
-            if not path.isdir(dir):
-                mkdir(dir)
+        for directory in directories:
+            if not path.isdir(directory):
+                mkdir(directory)
 
     def removedir(self, folders_i_made):
 
@@ -82,11 +82,11 @@ class OrganiseDesktop():
         If the folder is empty, it will delete that folder. simple job.
         """
 
-        directories = [self._create_dir_path(dir) for dir in folders_i_made]
+        directories = [self._create_dir_path(directory) for directory in folders_i_made]
 
-        for dir in directories:
-            if not listdir(dir):
-                rmdir(dir)
+        for directory in directories:
+            if not listdir(directory):
+                rmdir(directory)
 
     def list_directory_content(self):
 
