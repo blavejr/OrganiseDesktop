@@ -46,4 +46,12 @@ Navigate to the repo and run the following command:
 `$ pip install -r requirements.txt`
 
 # Contributing
-Please read the [Contributing Guidlines](https://github.com/blavejr/OrganiseDesktop/blob/master/CONTRIBUTING.md) for details about pull requests, bug reports or opening an issue. 
+Please read the [Contributing Guidlines](https://github.com/blavejr/OrganiseDesktop/blob/master/CONTRIBUTING.md) for details about pull requests, bug reports or opening an issue.
+
+Believe in the tech, use the tech, buy a dev coffee.
+Btc: 3GiHDAed4UFcE9itaVxQnTrKbW4Uw2kq3o
+Ether: 0x14fe9256e1a0d35AB57FdE974E44C1Eaee8005d6
+Ltc:MJNKM9SYannnrFuAcMubzEvKBgVPFeBaKm
+Bat:0x744de3A9b1882C44dCB3AFD1e6f2dB459b64c45c
+USDC:0x8EC9ae0DC0147422c1e9e46124d0BfeE7d16a3e7 
+USDC:0x8EC9ae0DC0147422c1e9e46124d0BfeE7d16a3e7
