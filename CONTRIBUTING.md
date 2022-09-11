@@ -21,6 +21,13 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 5. Make sure your code lints.
 6. Issue that pull request!
 
+### How to Clone the Repository (using JetBrains IDE - Pycharm) ###
+1. Fork the repo and create a branch from master
+2. Copy the Github URL made from the fork
+3. Open PyCharm and go to VCS on the top menu bar
+4. Click on VCS -> Get From Version Control and insert the url into the space
+5. Clone the Repo!
+
 ## Any contributions you make will be under the MIT Software License
 In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
 
@@ -33,6 +40,8 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
 **Great Bug Reports** tend to have:
 
 - A quick summary and/or background
+- What OS you were running on
+- What Python version you were running
 - Steps to reproduce
   - Be specific!
   - Give sample code if you can.
