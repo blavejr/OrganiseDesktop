@@ -4,19 +4,25 @@ import os
 from .cronController import  schedule_end, schedule_start
 from .organiseDesktop import undo, organise_desktop
 
-if sys.version_info >= (3,):
+try:  # This will throw an error in python 2.x
     from tkinter import *
     from tkinter import messagebox as tkMessageBox
-else:
-    from tkinter import *
+except ImportError:
+    from Tkinter import *
     import tkMessageBox
 
 pwd = os.path.dirname(os.path.abspath(__file__))
 Extensions = json.load(open(pwd+'/Extension.json', 'r'))
-folders = [x for x in Extensions]
 
 class App(Frame):
     """define the GUI"""
+
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        self.pack()
+        self.create()
+        self.folders = [x for x in Extensions]
+
     def clean(self):
         checked_extensions = {}
         for x in folders:
@@ -64,11 +70,6 @@ class App(Frame):
 
         for key in buttons:
             self.make_button(key, buttons[key])
-
-    def __init__(self, master=None):
-        Frame.__init__(self, master)
-        self.pack()
-        self.create()
 
 def main():
     root = Tk()
