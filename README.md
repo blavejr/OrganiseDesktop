@@ -1,6 +1,6 @@
 # Thank You
 
-I would like to thank all of the contributors who are improving this project. I really appreciate your efforts. This project started when I was in college and I never thought it would turn into anything. Seeing all you guys add features and fix the errors that I couldn't is really encouraging. Thank you so much!
+I would like to thank all of the contributors who are improving this project. I appreciate your efforts. This project started when I was in college and I never thought it would turn into anything. Seeing all you guys add features and fix the errors that I couldn't is encouraging. Thank you so much!
 
 # OrganiseDesktop
 
@@ -26,23 +26,23 @@ six - 1.11.0 | urllib3 - 1.22 | urwid - 2.0.1
 # Demo
 ![Screenshot](demo1.png)
 
-The buttons are `Clean`, `Exit`, `Undo`, `Schedule`, `Remove Schedule` and do exactly as they are implied.
+The buttons are `Clean`, `Exit`, `Undo`, `Schedule`, and `Remove Schedule` and do exactly as they are implied.
 
-`Clean` - will move the files to the correct folder based on extension. If the folder does not exist, it will create one.  
+`Clean` - will move the files to the correct folder based on the extension. If the folder does not exist, it will create one.  
 `Exit` - will close out of the program  
-`Undo` - undos where the files were placed in the folders when `Clean`  was used  
-`Schedule` - schedules when the program will run every day in the users command line/ terminal  
+`Undo` - undo where the files were placed in the folders when `Clean`  was used  
+`Schedule` - schedules when the program will run every day in the user command line/ terminal  
 `Remove Schedule` - removes the previously established schedule
 
 # Prerequisites
 ### Running a Virtual Environment ###
-All the necessary packages are mentioned in `requirements.txt`. They can be installed by running `pip install -r requirements.txt` or using ``pipenv install`` and it will automatically detect the `requirements.txt` and setup an enviroment for you. For development purposes, I suggest you create a
-virtual environment or use a dependency manager like [pipenv](https://github.com/pypa/pipenv) to keep a clear state, separate from your own setup.    
+All the necessary packages are mentioned in `requirements.txt`. They can be installed by running `pip install -r requirements.txt` or using ``pipenv install`` and it will automatically detect the `requirements.txt` and set up an environment for you. For development purposes, I suggest you create a
+virtual environment or use a dependency manager like [pipenv](https://github.com/pypa/pipenv) to keep a clear state, separate from your setup.    
 
-To create a virual environment yourself in pipenv, follow the steps below:  
+To create a virtual environment yourself in pipenv, follow the steps below:  
 1. Make a project directory `mkdir project && cd project` where "project" would be the name of the project
 2. Initiate the virtual environment `pipenv --three`
-3. Start the virtual enviroment `pipenv shell`  
+3. Start the virtual environment `pipenv shell`  
 If the `pipenv install` does not work, insert the following `pipenv install -r requirements.txt`  
 4. To exit the virtual environment run `exit`
 
@@ -64,7 +64,7 @@ Navigate to the repo and run the following command:
 `$ pip install -r requirements.txt`
 
 # Contributing
-Please read the [Contributing Guidlines](https://github.com/blavejr/OrganiseDesktop/blob/master/CONTRIBUTING.md) for details about pull requests, bug reports or opening an issue.
+Please read the [Contributing Guidlines](https://github.com/blavejr/OrganiseDesktop/blob/master/CONTRIBUTING.md) for details about pull requests, bug reports, or opening an issue.
 
 Believe in the tech, use the tech, buy a dev coffee.
 Btc: 3GiHDAed4UFcE9itaVxQnTrKbW4Uw2kq3o
