@@ -1,15 +1,15 @@
 # Thank You
 
-I would like to thank all of the contributors who are improving this project. I really appreciate your efforts. This project started when I was in college and I never thought it would turn into anything. Seeing all you guys add features and fix the errors that I couldn't is really encouraging. Thank you so much!
+I would like to thank all of the contributors who are improvising this project. I highly appreciate your efforts. This project has stayed with me through college and has been growing ever since. Seeing all of you add new features and fix the errors (that I couldn't) is really encouraging. Thank you so much!
 
 # OrganiseDesktop
 
-Takes all the files on your desktop and put them in folders according to extensions. NO MORE MESSY DESKTOPS!
+Takes all the files on your desktop and puts them in folders according to extensions. NO MORE MESSY DESKTOPS!
 At least not on the outside :)
 
 # Slack Channel invite link
 
-Feel free to join the channel and contribute. If you have already had a PR merged, please join the [channel](https://join.slack.com/t/organisedesktop/shared_invite/enQtMzA2NTI2MTI0MzY4LWRlOWRjOGM0YTJmYjFiZGU3ZTUzM2M0MTA2N2U3MzljMmFhNGIyODlmZDg2N2E1Y2EwOWFiZjcxMzYzYjcyMTk).
+Feel free to join the channel and contribute. If you already have a PR merged, please join the [channel](https://join.slack.com/t/organisedesktop/shared_invite/enQtMzA2NTI2MTI0MzY4LWRlOWRjOGM0YTJmYjFiZGU3ZTUzM2M0MTA2N2U3MzljMmFhNGIyODlmZDg2N2E1Y2EwOWFiZjcxMzYzYjcyMTk).
 
 # Getting Started
 
@@ -28,9 +28,9 @@ six - 1.11.0 | urllib3 - 1.22 | urwid - 2.0.1
 
 The buttons are `Clean`, `Exit`, `Undo`, `Schedule`, `Remove Schedule` and do exactly as they are implied.
 
-`Clean` - will move the files to the correct folder based on extension. If the folder does not exist, it will create one.  
-`Exit` - will close out of the program  
-`Undo` - undos where the files were placed in the folders when `Clean`  was used  
+`Clean` - will move the files to the correct folder based on the extension. If the folder does not exist, it will create a new one.  
+`Exit` - will close the program  
+`Undo` - will undo where the files were placed in the folders when `Clean`  was used  
 `Schedule` - schedules when the program will run every day in the users command line/ terminal  
 `Remove Schedule` - removes the previously established schedule
 
@@ -40,10 +40,10 @@ All the necessary packages are mentioned in `requirements.txt`. They can be inst
 virtual environment or use a dependency manager like [pipenv](https://github.com/pypa/pipenv) to keep a clear state, separate from your own setup.    
 
 To create a virual environment yourself in pipenv, follow the steps below:  
-1. Make a project directory `mkdir project && cd project` where "project" would be the name of the project
+1. Make a project directory `mkdir project && cd project` where "project" would be in the name of the project
 2. Initiate the virtual environment `pipenv --three`
 3. Start the virtual enviroment `pipenv shell`  
-If the `pipenv install` does not work, insert the following `pipenv install -r requirements.txt`  
+Note: If the `pipenv install` does not work, insert the following `pipenv install -r requirements.txt`  
 4. To exit the virtual environment run `exit`
 
 The `activate.sh` script has been provided to ensure a standard development environment. To create the environment if it doesn't already exist, or simply load it otherwise, run `source ./activate.sh`
