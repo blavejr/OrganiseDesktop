@@ -3,7 +3,7 @@ import json
 import os
 from .cronController import  schedule_end, schedule_start
 from .organiseDesktop import undo, organise_desktop
-
+from tkinter import ttk
 if sys.version_info >= (3,):
     from tkinter import *
     from tkinter import messagebox as tkMessageBox
@@ -38,14 +38,15 @@ class App(Frame):
         schedule_start(folders)
 
     def make_checkbutton(self, text):
-        cb = Checkbutton(self, text=text, command=lambda: self.check(text))
-        cb.select()
-        cb.pack({'side': 'top'})
+        cb = ttk.Checkbutton(self, text=text, command=lambda: self.check(text))
+        cb.state(['!alternate'])
+        cb.state(['selected'])
+        cb.pack(side='top', fill='x')
         return cb
 
     def make_button(self, text, command):
-        btn = Button(self, text=text, command=command)
-        btn.pack({'side': 'left'})
+        btn = ttk.Button(self, text=text, command=command)
+        btn.pack(side='left')
         return btn
 
     def create(self):
