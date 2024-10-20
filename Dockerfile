@@ -4,19 +4,22 @@ FROM python:3
 # Set the working directory to /code
 WORKDIR /code
 
-# Copy the current directory content into the container at /code
-ADD . /code
+# Copy the Pipfile and Pipfile.lock first to leverage Docker cache
+COPY Pipfile Pipfile.lock /code/
 
-# Udate and install all in the container
-RUN apt-get update && \
-    apt-get install -y
-
-# Install pipenv and install all dependency
+# Install pipenv and dependencies
 RUN pip install --upgrade pip
 RUN pip install pipenv
-COPY ./Pipfile /code/Pipfile
+
+# Install the dependencies in the system (not in a virtualenv, since you're using --system)
 RUN pipenv install --deploy --system --skip-lock --dev
 
-# Set enviroment variables
+# Copy the rest of the application code
+COPY . /code
+
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
+# Run your application (replace 'your_app.py' with your entry point file)
+CMD ["python", "."]
