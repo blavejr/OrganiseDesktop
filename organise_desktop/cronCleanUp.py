@@ -1,14 +1,8 @@
-import Clean
-import pickle
-import os
-import sys
+import Clean, pickle, os
 
-separator = ""
-if sys.platform == 'win32':
-    separator = '\\'
-else:
-    separator = '/'
-with open(os.path.dirname(os.path.join(os.path.abspath(__file__), 'settings.txt'), 'rb') as setting_file:
+settings_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "settings.txt")
+
+with open(settings_path, "rb") as setting_file:
     folders = pickle.load(setting_file)
 
 Clean.main(folders)

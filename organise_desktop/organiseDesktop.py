@@ -1,272 +1,235 @@
-import sys
-import os
-import json
+import sys, os, json
 from os import path, mkdir, listdir, rename, environ, rmdir
 
 
-class OrganiseDesktop():
+def get_desktop_path():
+    if sys.platform == "win32":
+        return path.join(environ["USERPROFILE"], "Desktop")
+
+    elif sys.platform in ["linux", "darwin"]:
+        return environ.get("TEST_DIR") or path.join(environ["HOME"], "Desktop")
+    raise NotImplementedError(f"{sys.platform} not supported")
+
+
+class OrganiseDesktop:
     """
-    
     Contains desktop organisation helper functions
-    
     """
+
+    pattern_rules = {}  # filename keyword → category overrides
     extensions = {}
-    separator = '/'
-    desktopdir = ''
+    separator = "/"
+    desktopdir = ""
     Alldesktopdir = None
 
     def __init__(self, extensions):
-
-        """
-        Obtains various localised information about the platform and user, and performs system checks upon initialization.
-        """
-
-        # References:   https://en.wikipedia.org/wiki/Environment_variable
-        # Default_values
-        #               https://en.wikipedia.org/wiki/Windows_NT#Releases
+        self.desktopdir = get_desktop_path()
+        # Pull out _PatternRules before passing to extension logic
+        self.pattern_rules = extensions.pop("_PatternRules", {})
         self.extensions = extensions
-        
-        
-        if sys.platform == 'win32':
-            self.desktopdir = path.join(environ['USERPROFILE'], 'Desktop')
-            # TODO: Set desktopdir to Virtual Directory for testing on Windows
 
-            # Determine Windows version; check if this is XP;
-            # read target folders accordingly
-            if not sys.getwindowsversion() == 10:
-                if sys.getwindowsversion().major < 6:
-                    self.Alldesktopdir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')  # noqa
-                else:
-                    self.Alldesktopdir = path.join(environ['PUBLIC'], 'Desktop')  # noqa
-            '''list of folders to be created'''
-            
-            
-        elif sys.platform in ['linux', 'darwin']:
-            
-            if environ.get('TEST_DIR'):
-                self.desktopdir = environ.get('TEST_DIR')
-                
-            else:
-                self.desktopdir = path.join(environ['HOME'], 'Desktop')
-                
-        else:
-            print("{} version not implemented".format(sys.platform))
-            raise NotImplementedError
-
-            
-            
-    def _create_dir_path(self, directory):
+    def create_dir_path(self, directory):
         return os.path.join(self.desktopdir, directory)
-    
-    
 
     def makedir(self, folders_to_make):
-
         """
         This function makes the needed folders if they are not already found.
-
         For all the folders in the folder_to_make list, if that folder does not
         exist on the main_desktop, create that folder.
         """
-
-        directories = [self._create_dir_path(directory) for directory in folders_to_make]
-
+        directories = [self.create_dir_path(directory) for directory in folders_to_make]
         for directory in directories:
             if not path.isdir(directory):
                 mkdir(directory)
 
     def removedir(self, folders_i_made):
-
         """
         This function will check folders that this program made.
         If the folder is empty, it will delete that folder. simple job.
         """
-
-        directories = [self._create_dir_path(directory) for directory in folders_i_made]
+        directories = [self.create_dir_path(directory) for directory in folders_i_made]
 
         for directory in directories:
             if not listdir(directory):
                 rmdir(directory)
 
-    def list_directory_content(self):
-
+    def match_by_pattern(self, filename):
         """
-        This function checks the two folders
-        (current user desktop and all user desktop),
-        if on windows, only checks one folder if on linux or macOS,
-        it takes all the items there and puts them into two respective
-        lists which are returned and used by the mover function
+        Check filename (case-insensitive) against PatternRules keywords.
+        Returns the matching category name, or None if no match found.
+        Runs BEFORE extension matching, so game/IDE/tool shortcuts are
+        routed correctly instead of falling into generic Shortcuts/.
         """
+        name_lower = filename.lower()
+        for category, keywords in self.pattern_rules.items():
+            # Only match if this category folder actually exists in extensions
+            if category not in self.extensions:
+                continue
+            for keyword in keywords:
+                if keyword.lower() in name_lower:
+                    return category
+        return None
 
-        # TODO: Is this really necessary? To be removed at PR stage
-        content = [listdir(self.desktopdir)]
-        if self.Alldesktopdir:
-            content += [listdir(self.Alldesktopdir)]
-        return content
-
-    def mover(self, content):
-
+    def mover(self):
         """
-        This function gets two lists with all the things on the desktops
-        and copies them into their respective folders
+        Moves desktop files into their sorted folders.
+
+        Priority:
+          1. Skip this program's own shortcuts
+          2. PatternRules keyword match  (Games, Dev Tools, System Tools)
+          3. Extension match             (Images, Music, Text, etc.)
+          4. Folder catch-all            (unrecognised directories → Folders/)
+          5. Log anything that didn't sort
         """
+        content = listdir(self.desktopdir)
 
-        # image extensions source: https://fileinfo.com/filetypes/raster_image,
-        #                          https://fileinfo.com/filetypes/vector_image,
-        #                          https://fileinfo.com/filetypes/camera_raw
-        # music extensions source: https://fileinfo.com/filetypes/audio
-        # movie extensions source: http://bit.ly/2wvYjyr
-        # text extensions source:  http://bit.ly/2wwcfZs
+        # On older Windows, merge All Users desktop first
+        if sys.platform == "win32" and self.Alldesktopdir:
+            try:
+                if sys.getwindowsversion().major < 10:
+                    for item in listdir(self.Alldesktopdir):
+                        rename(
+                            os.path.join(self.Alldesktopdir, item),
+                            os.path.join(self.desktopdir, item),
+                        )
+            except AttributeError:
+                pass
 
-        user_dir_content = content[0]
-
-        # Anything from the All_users_desktop goes to shortcuts, mainly because
-        # that's all that's ever there (I think)
-        if self.separator != '/' and not sys.getwindowsversion()[0] == 10:
-            all_users_content = content[1]
-            
-            for item in all_users_content:
-                # This is a cmd command to move items from one folder to other
-                rename( os.path.join(self.Alldesktopdir, item), os.path.join(self.desktopdir, item))  # noqa
-
-        to_be_cleaned = [entry for entry in user_dir_content
-                            if entry not in self.extensions and not (entry.startswith('.') or entry.startswith('..'))]  # noqa
+        # Only process items that aren't already category folders
+        to_be_cleaned = [
+            entry
+            for entry in content
+            if entry not in self.extensions and not entry.startswith(".")
+        ]
 
         for item in to_be_cleaned:
+            # Skip this program's own shortcuts
+            if item in ("Clean.lnk", "Clean.exe.lnk"):
+                continue
+
+            src = os.path.join(self.desktopdir, item)
             found = False
-            
-            for sorting_folder in self.extensions:
-                folder = os.path.join(self.desktopdir, item)
-                
-                if os.path.isdir(folder) and item not in self.extensions and "Folders" in self.extensions:  # noqa
-                    try:
-                        rename(src= os.path.join(self.desktopdir, item),
-                            dst=os.path.join(self.desktopdir, 'Folders', item))  # noqa
-                        
-                        found = True
-                        break
-                        
-                    except PermissionError:
-                        print("File is being used by some other process")
-                        
-                for extension in self.extensions[sorting_folder]:
-                    
-                    if (str(item.lower()).endswith(extension) and
-                        str(item) != 'Clean.lnk' and str(item) != 'Clean.exe.lnk'):  # noqa
-                        
-                        rename(src=os.path.join(self.desktopdir, item),
-                               dst=os.path.join(self.desktopdir, sorting_folder, item))  # noqa
-                        
-                        found = True
-                        break
+
+            # ── Priority 1: Pattern match (keyword in filename) ──────────────
+            pattern_category = self.match_by_pattern(item)
+            if pattern_category:
+                dst = os.path.join(self.desktopdir, pattern_category, item)
+                try:
+                    rename(src=src, dst=dst)
+                    found = True
+                    print(f"[Pattern] {item!r}  →  {pattern_category}/")
+                except PermissionError:
+                    print(f"[Locked]  {item!r}  (file in use)")
+                except Exception as e:
+                    print(f"[Error]   {item!r}  {e}")
+
+            # ── Priority 2: Extension match ───────────────────────────────────
             if not found:
-                print('Did not sort ' + item)
+                item_lower = item.lower()
+                for sorting_folder, ext_list in self.extensions.items():
+                    for extension in ext_list:
+                        if item_lower.endswith(extension):
+                            dst = os.path.join(self.desktopdir, sorting_folder, item)
+                            try:
+                                rename(src=src, dst=dst)
+                                found = True
+                            except PermissionError:
+                                print(f"[Locked]  {item!r}  (file in use)")
+                            except Exception as e:
+                                print(f"[Error]   {item!r}  {e}")
+                            break  # stop checking extensions for this folder
+                    if found:
+                        break  # stop checking sorting folders
 
-    def writter(self, content):
+            # ── Priority 3: Folder catch-all ──────────────────────────────────
+            if not found and os.path.isdir(src) and "Folders" in self.extensions:
+                dst = os.path.join(self.desktopdir, "Folders", item)
+                try:
+                    rename(src=src, dst=dst)
+                    found = True
+                except PermissionError:
+                    print(f"[Locked]  {item!r}  (folder in use)")
+                except Exception as e:
+                    print(f"[Error]   {item!r}  {e}")
 
+            if not found:
+                print(f"Did not sort: {item!r}")
+
+    def write_log(self, content):
         """
         This function writes the two lists of all the items left on the desktop
         just in case something isn't right and we need a log.
         """
+        log_dir = path.dirname(os.getcwd()) + "/log"
+        if not os.path.isdir(log_dir):
+            os.makedirs(log_dir)
 
-        if not os.path.isdir(path.dirname(os.getcwd())+'/log'):  # Create log folder if non exists  # noqa
-            os.makedirs(path.dirname(os.getcwd())+'/log')
-            
-        writeOB = open(path.dirname(os.getcwd()) + '/log/modifications.log', 'w')  # noqa
-        
-        writeOB.write('This is a list of all items on your desktop before it was cleaned.\n'  # noqa
-                      'Email this list to kalimbatech@gmail.com if anything is not working as planned, it will help with debugging\n'  # noqa
-                      'Together we can make a better app\n\n')  # noqa
-
-        for desktop_entry in content:
-            for i in desktop_entry:
-                writeOB.write(i)
-                writeOB.write('\n')
-
-        writeOB.close()
+        with open(log_dir + "/modifications.log", "w") as f:
+            f.write(
+                "This is a list of all items on your desktop before it was cleaned.\n"
+                "Email this list to kalimbatech@gmail.com if anything is not working as planned.\n\n"
+            )
+            for desktop_entry in content:
+                for i in desktop_entry:
+                    f.write(i + "\n")
 
 
 def organise_desktop(extensions):
-
     """
     Cleans up the desktop
     """
-    #Find working directory
+    # Find working directory
     pwd = os.path.dirname(os.path.abspath(__file__))
 
     # The oh-so-magnificent main function keeping the stuff in order
-    
-    #Initialize the OrganiseDesktop class
-    projectOB = OrganiseDesktop(extensions)
-    
-    #Make the directories
-    projectOB.makedir(extensions)
-    
-    #Get the maps of the directories
-    maps = projectOB.list_directory_content()
-    
-    #Move the files to their appropriate locations
-    projectOB.mover(maps)
 
-    #Remove directories created by this program but empty
-    projectOB.removedir(extensions)
-    
-    #Log the original files
-    projectOB.writter(maps)
+    # Initialize the OrganiseDesktop class
+    organizer = OrganiseDesktop(extensions)
+
+    # Make the directories
+    organizer.makedir(organizer.extensions)
+
+    # Move the files to their appropriate locations
+    organizer.mover()
+
+    # Remove directories created by this program but empty
+    organizer.removedir(organizer.extensions)
+
+    # Get the maps of the directories
+    maps = organizer.list_directory_content()
+
+    # Log the original files
+    organizer.write_log(maps)
 
 
 def undo():
-
     """
     Restores the changes from organising your desktop
     """
 
-    Extensions = json.load( open( os.path.dirname( os.path.abspath(__file__) ) + '/Extension.json') )  # noqa
+    Extensions = json.load(
+        open(os.path.dirname(os.path.abspath(__file__)) + "/Extension.json")
+    )  # noqa
 
-    if sys.platform == 'win32':
-        desk_to_dir = path.join( environ['USERPROFILE'], 'Desktop' )
+    desk_to_dir = get_desktop_path()
+    desktop_items = listdir(desk_to_dir)
 
-        # Determine Windows version; check if this is XP; accordingly,
-        # read target folders
-        if not sys.getwindowsversion()[0] == 10:
-            
-            if sys.getwindowsversion().major < 6:
-                desk_to_dir = path.join(environ['ALLUSERSPROFILE'], 'Desktop')
-            else:
-                desk_to_dir = path.join(environ['PUBLIC'], 'Desktop')
-
-    # list of folders to be created
-    elif sys.platform == 'linux' or sys.platform == 'darwin':
-        if environ.get('TEST_DIR') is not None:
-            desk_to_dir = environ.get('TEST_DIR')
-            
-        else:
-            desk_to_dir = path.join(environ['HOME'], 'Desktop')
-    else:
-        print('{} version not implemented'.format(sys.platform))
-        raise NotImplementedError
-
-    map1 = listdir(desk_to_dir)
-    
-    if sys.platform == 'win32':
-        separator = '\\'
-    else:
-        separator = '/'
-        
-    for folder in map1:
+    for folder in desktop_items:
         if folder in Extensions:
-            contents = listdir( path.join(desk_to_dir, folder) )
-            
-            for thing in contents:
+            contents = listdir(path.join(desk_to_dir, folder))
+            for file_name in contents:
                 try:
-                    rename(src=os.path.join(desk_to_dir, folder, thing),
-                           dst=os.path.join(desk_to_dir, thing))
-                except:
-                    print('File is being used by some other process')
-                    
-            rmdir(os.path.join(desk_to_dir, folder))
+                    rename(
+                        src=os.path.join(desk_to_dir, folder, file_name),
+                        dst=os.path.join(desk_to_dir, file_name),
+                    )
+                except Exception:
+                    print(f"File is being used by another process: {file_name}")
+            try:
+                rmdir(os.path.join(desk_to_dir, folder))
+            except Exception:
+                pass
 
 
-#Run the app
-if __name__ == '__main__':
+if __name__ == "__main__":
     organise_desktop()
